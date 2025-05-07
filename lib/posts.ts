@@ -25,12 +25,18 @@ export function getAllPosts() {
             authorImage?: string;
             tags?: string[];
             excerpt?: string;
+            video?: string;
             [key: string]: unknown;
           },
         };
       });
-    // Sort by date descending
-    return posts.sort((a, b) => (b.metadata.date && a.metadata.date && b.metadata.date > a.metadata.date ? 1 : -1));
+    // Sort by date descending, posts with no date go to the end
+    return posts.sort((a, b) => {
+      if (!a.metadata.date && !b.metadata.date) return 0; // both dates undefined, keep order
+      if (!a.metadata.date) return 1; // a is undefined, b comes first
+      if (!b.metadata.date) return -1; // b is undefined, a comes first
+      return b.metadata.date.localeCompare(a.metadata.date); // both defined, compare
+    });
   } catch (error) {
     console.error('Error reading posts directory:', error);
     return [];
@@ -66,12 +72,13 @@ export async function getPostData(slug: string) {
     // Combine the data with the slug and content
     return {
       slug,
-      metadata: matterResult.data as { // Add type assertion for metadata
+      metadata: matterResult.data as { 
         title?: string;
         date?: string;
         author?: string;
         authorImage?: string;
         tags?: string[];
+        video?: string;
         [key: string]: unknown; // Allow other frontmatter fields, but avoid 'any'
       },
       content: matterResult.content,

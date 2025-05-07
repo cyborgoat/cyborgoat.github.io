@@ -60,4 +60,3 @@ export default function RealTimeClient() {
 1. Production-grade scaling with Redis Pub/Sub
 2. Connection health monitoring
 3. Security with JWT authentication
-

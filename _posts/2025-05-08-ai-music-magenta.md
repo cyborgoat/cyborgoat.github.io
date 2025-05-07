@@ -12,6 +12,38 @@ Combining music theory with ML models opens new creative possibilities. Magenta 
 
 ## Melody Generation
 
+*AI-powered music can be both creative and unpredictable.*
+
+### Features
+
+- Melody generation
+- Style transfer
+- Drum patterns
+- Groove variations
+- Interpolation
+
+### How to Use
+
+1. Install Magenta Studio.
+2. Load your MIDI file.
+3. Select the desired model.
+4. Click **Generate**.
+5. Export your result.
+
+### Comparison Table
+
+| Feature         | Supported | Notes                     |
+|----------------|-----------|---------------------------|
+| Melody         | Yes       | RNN-based                 |
+| Drums          | Yes       | Groove & interpolation    |
+| Chords         | No        | Planned for future        |
+
+### Example Output
+
+> "Magenta Studio helped me create a unique melody in minutes!" — *Producer X*
+
+[![Try Magenta Studio](https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4)](https://magenta.tensorflow.org/studio)
+
 ```python
 from magenta.models.melody_rnn import melody_rnn_sequence_generator
 

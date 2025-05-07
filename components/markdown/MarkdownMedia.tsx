@@ -51,11 +51,13 @@ export default function MarkdownMedia({ src = "", alt = "" }: { src?: string; al
   } else if (isGif || src.startsWith("http")) {
     // GIFs or remote images
     return (
-      <img
+      <Image
         src={src}
         alt={alt}
+        width={800}
+        height={600}
         className="rounded-lg my-6 mx-auto max-w-full"
-        style={{ maxHeight: 400 }}
+        style={{ maxHeight: 400, objectFit: 'contain' }}
       />
     );
   } else {

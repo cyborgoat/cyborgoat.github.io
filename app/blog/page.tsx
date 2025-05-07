@@ -9,7 +9,7 @@ export default async function BlogMainPage() {
     <section className="container max-w-3xl py-8 mx-auto">
       <h1 className="text-3xl font-bold mb-8 text-center">Blog</h1>
       <ul className="space-y-8">
-        {posts.sort((a, b) => (b.metadata.date > a.metadata.date ? 1 : -1)).map(post => (
+        {posts.map(post => (
           <li key={post.slug} className="border rounded-lg p-6 hover:shadow-lg transition">
             <div className="flex items-center justify-between mb-2">
               <Link href={`/blog/${post.slug}`} className="text-xl font-semibold hover:underline">
