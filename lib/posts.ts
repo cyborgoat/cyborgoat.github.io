@@ -40,7 +40,7 @@ export async function getPostData(slug: string) {
         author?: string;
         authorImage?: string;
         tags?: string[];
-        [key: string]: any; // Allow other frontmatter fields
+        [key: string]: unknown; // Allow other frontmatter fields, but avoid 'any'
       },
       content: matterResult.content,
     };
