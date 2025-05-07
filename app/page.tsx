@@ -1,103 +1,169 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Hero from '@/components/layout/Hero'; // Using the centered Hero from previous step
+import { BrainCircuit, Code, GraduationCap, Bike, Music, Target, Cloud, Database, Trophy } from 'lucide-react'; // Added more icons
+import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button"; // Import shadcn Button
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"; // Import shadcn Card components
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"; // Import shadcn Avatar components
 
-export default function Home() {
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="flex-1">
+      <Hero /> {/* Assumes the vertically centered Hero */}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* About Me Section - Remains largely the same, could wrap in Card if desired */}
+      <section id="about" className="w-full py-12 md:py-24 lg:py-32 border-t">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary">About Me</h2>
+              <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
+                I'm Cyborgoat, an AI Engineer and Fullstack Enthusiast with over 7 years of experience
+                bringing cutting-edge AI concepts to life. My current focus is on developing advanced
+                Large Language Models (LLMs) and intelligent AI Agents.
+              </p>
+              <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
+                With a background bridging Physics and Electrical & Computer Engineering, I approach
+                problems with a unique analytical perspective, always eager to learn and build robust,
+                scalable solutions across the full stack.
+              </p>
+            </div>
+            {/* Optional Avatar */}
+            <div className="flex items-center justify-center">
+              <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border-2 border-primary/20">
+                {/* Add your image source here */}
+                <AvatarImage src="https://github.com/shadcn.png" alt="@cyborgoat" />
+                {/* Fallback initials */}
+                <AvatarFallback className="text-4xl">CG</AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Skills & Expertise Section - Using shadcn Card */}
+      <section id="skills" className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t">
+        <div className="container px-4 md:px-6 mx-auto">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12 text-primary">Skills & Expertise</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Skill Card 1: AI/ML */}
+            <Card className="flex flex-col">
+              <CardHeader className="items-center pb-4">
+                <BrainCircuit className="w-10 h-10 mb-4 text-primary" />
+                <CardTitle>AI & Machine Learning</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center">
+                  Deep Learning, LLMs (Large Language Models), AI Agents, Natural Language Processing (NLP), Computer Vision basics. 7+ years experience building and deploying AI solutions.
+                </p>
+                {/* Optional: Add specific tech badges/list here */}
+              </CardContent>
+            </Card>
+
+            {/* Skill Card 2: Fullstack Dev */}
+            <Card className="flex flex-col">
+              <CardHeader className="items-center pb-4">
+                <Code className="w-10 h-10 mb-4 text-primary" />
+                <CardTitle>Fullstack Development</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center">
+                  Building complete web applications with modern stacks. Proficient in React, Next.js, TypeScript, Node.js, Python (Flask/Django), Tailwind CSS, SQL/NoSQL databases.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Skill Card 3: Cloud & Tools */}
+            <Card className="flex flex-col">
+               <CardHeader className="items-center pb-4">
+                 <Cloud className="w-10 h-10 mb-4 text-primary" />
+                 <CardTitle>Cloud & DevOps</CardTitle>
+               </CardHeader>
+               <CardContent>
+                 <p className="text-sm text-muted-foreground text-center">
+                   Deploying and managing applications on cloud platforms (AWS, GCP, Azure). Experience with Docker, Kubernetes basics, CI/CD pipelines (GitHub Actions/GitLab CI), Terraform.
+                 </p>
+               </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Education & Hobbies Section */}
+       <section id="background" className="w-full py-12 md:py-24 lg:py-32 border-t">
+        <div className="container px-4 md:px-6 mx-auto grid md:grid-cols-2 gap-12">
+           {/* Education - Using Card */}
+          <div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-8 text-primary">Education</h2>
+            <div className="space-y-6">
+              <Card>
+                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+                    <Avatar>
+                      {/* <AvatarImage src="/cmu-logo.png" alt="CMU Logo" /> */}
+                      <AvatarFallback><GraduationCap /></AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                       <CardTitle className="text-base font-semibold">Carnegie Mellon University (CMU)</CardTitle>
+                       <CardDescription>Master of Science (2020)</CardDescription>
+                    </div>
+                 </CardHeader>
+                 <CardContent>
+                   <p className="text-sm text-muted-foreground">Electrical & Computer Engineering</p>
+                   {/* Optional: Add relevant coursework or thesis title */}
+                 </CardContent>
+              </Card>
+              <Card>
+                 <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+                   <Avatar>
+                      {/* <AvatarImage src="/drexel-logo.png" alt="Drexel Logo" /> */}
+                      <AvatarFallback><GraduationCap /></AvatarFallback>
+                   </Avatar>
+                   <div className="flex-1">
+                       <CardTitle className="text-base font-semibold">Drexel University</CardTitle>
+                       <CardDescription>Bachelor of Science (2017)</CardDescription>
+                   </div>
+                 </CardHeader>
+                 <CardContent>
+                   <p className="text-sm text-muted-foreground">Physics</p>
+                 </CardContent>
+              </Card>
+            </div>
+          </div>
+
+           {/* Hobbies - Keeping simple list */}
+           <div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-8 text-primary">Hobbies</h2>
+             <div className="space-y-4">
+               <div className="flex items-center gap-4">
+                 <Bike className="w-6 h-6 text-primary flex-shrink-0" />
+                 <p className="text-foreground/80">Cycling - Exploring trails and roads for fitness and fun.</p>
+               </div>
+                <div className="flex items-center gap-4">
+                 <Music className="w-6 h-6 text-primary flex-shrink-0" />
+                 <p className="text-foreground/80">Music Production - Creating beats and exploring sound design.</p>
+               </div>
+                <div className="flex items-center gap-4">
+                 <Trophy className="w-6 h-6 text-primary flex-shrink-0" />
+                 <p className="text-foreground/80">Golfing - Enjoying the challenge and outdoors on the course.</p>
+               </div>
+             </div>
+          </div>
+        </div>
+       </section>
+
+      {/* Placeholder for Project/Blog Previews - Still recommend adding later */}
+
+    </main>
   );
 }
