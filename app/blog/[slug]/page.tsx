@@ -1,63 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { notFound } from "next/navigation";
-import ReactMarkdown from 'react-markdown';
 import { getAllPostSlugs, getPostData } from "@/lib/posts";
-import Link from "next/link"; 
-import Image from "next/image"; 
-
-const customRenderers = {
-  // Render Next.js Image for better optimization
-  img: ({ src, alt }: { src?: string | Blob; alt?: string }) => {
-    if (!src) return null;
-    let imageUrl: string;
-    if (typeof src === "string") {
-      // For string URLs, add / prefix if needed
-      imageUrl = src.startsWith("/") ? src : `/${src}`;
-    } else {
-      // For Blob, convert to URL - only works in client-side rendering
-      if (typeof window !== "undefined") {
-        imageUrl = URL.createObjectURL(src);
-      } else {
-        // During server-side rendering, fall back to empty string
-        imageUrl = "";
-      }
-    }
-    return (
-      <span className="block my-6">
-        {" "}
-        {/* Add some margin */}
-        <Image
-          src={imageUrl}
-          alt={alt ?? "Blog post image"}
-          width={700} // Adjust default width
-          height={400} // Adjust default height
-          className="rounded-md object-contain mx-auto" // Style as needed
-        />
-        {alt && (
-          <figcaption className="text-center text-sm text-muted-foreground mt-2">
-            {alt}
-          </figcaption>
-        )}
-      </span>
-    );
-  },
-  // Ensure links open in new tabs if they are external
-  a: ({ href, children }: { href?: string; children?: React.ReactNode }) => {
-    if (!href) return <>{children}</>;
-    if (href.startsWith("http") || href.startsWith("//")) {
-      return (
-        <a href={href} target="_blank" rel="noopener noreferrer">
-          {children}
-        </a>
-      );
-    }
-    // Use Next.js Link for internal links if needed (optional)
-    return <Link href={href} legacyBehavior>{children}</Link>;
-  },
-  // Add more custom renderers if needed (e.g., for videos)
-};
-// --- End Custom Renderers ---
+import MarkdownRender from "@/components/markdown/MarkdownRender";
+import MarkdownVideo from "@/components/markdown/MarkdownVideo";
 
 // Mark the component as async
 export default async function BlogDetailPage({
@@ -123,11 +69,8 @@ export default async function BlogDetailPage({
 
       {/* Post Content */}
       <div className="prose prose-stone dark:prose-invert max-w-none">
-        <ReactMarkdown
-          components={customRenderers} // Add custom renderers here
-        >
-          {post.content}
-        </ReactMarkdown>
+        {post.metadata.video && <MarkdownVideo url={post.metadata.video} />}
+        <MarkdownRender content={post.content} />
       </div>
     </article>
   );
