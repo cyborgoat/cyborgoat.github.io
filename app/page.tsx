@@ -1,20 +1,8 @@
-import Link from 'next/link';
 import Hero from '@/components/layout/Hero'; // Using the centered Hero from previous step
-import { BrainCircuit, Code, GraduationCap, Bike, Music, Target, Cloud, Database, Trophy } from 'lucide-react'; // Added more icons
-import { cn } from '@/lib/utils';
-import { Button } from "@/components/ui/button"; // Import shadcn Button
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"; // Import shadcn Card components
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"; // Import shadcn Avatar components
+import {Bike, BrainCircuit, Cloud, Code, GraduationCap, Music, Trophy} from 'lucide-react'; // Added more icons
+import {cn} from '@/lib/utils';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"; // Import shadcn Card components
+import {Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar"; // Import shadcn Avatar components
 
 
 export default function HomePage() {
@@ -29,7 +17,7 @@ export default function HomePage() {
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary">About Me</h2>
               <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
-                I'm Cyborgoat, an AI Engineer and Fullstack Enthusiast with over 7 years of experience
+                I am Cyborgoat, an AI Engineer and Fullstack Enthusiast with over 7 years of experience
                 bringing cutting-edge AI concepts to life. My current focus is on developing advanced
                 Large Language Models (LLMs) and intelligent AI Agents.
               </p>
