@@ -1,3 +1,5 @@
+# .github/workflows/deploy.yml
+
 name: Deploy Next.js site to Pages
 
 on:
@@ -27,51 +29,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Detect package manager
-        id: detect-pm
-        run: |
-          # Defaults to pnpm since pnpm-lock.yaml exists
-          echo "manager=pnpm" >> $GITHUB_OUTPUT
-          echo "command=install" >> $GITHUB_OUTPUT
-          echo "runner=pnpm" >> $GITHUB_OUTPUT
-          exit 0
+      # --- Setup PNPM ---
+      # Setup Node first
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Use Node.js 20.x LTS
-          cache: ${{ steps.detect-pm.outputs.manager }}
-      # -------- Add this step to setup pnpm --------
+          node-version: "20"
+          cache: 'pnpm' # Specify pnpm for caching
+      # Then setup pnpm itself
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-           version: latest # Or specify a version like 8
-           run_install: false
-      # ----------------------------------------------
+          version: latest # Or specify a version like 8
+          run_install: false # We run install in the next step
+      # --- PNPM Steps ---
       - name: Install dependencies
-        run: ${{ steps.detect-pm.outputs.manager }} ${{ steps.detect-pm.outputs.command }}
-      - name: Build with Next.js
-        # Use pnpm build, which maps to "next build" in your package.json
-        run: ${{ steps.detect-pm.outputs.runner }} run build
-      - name: Setup Pages
-        # This action automatically detects Next.js and configures output
-        uses: actions/configure-pages@v5
-        # No need to specify static_site_generator_options for standard next build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Uploads the /.next directory (standard Next.js build output)
-          # configure-pages action sets the correct path automatically
-          # If you were using static export (next export), path would be './out'
-          path: './.next'
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        run: pnpm install # Explicitly use pnpm
+      - name: Build with Next
