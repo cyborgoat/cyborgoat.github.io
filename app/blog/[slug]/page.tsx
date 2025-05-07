@@ -61,7 +61,7 @@ const customRenderers = {
       );
     }
     // Use Next.js Link for internal links if needed (optional)
-    return <Link href={href}>{children}</Link>;
+    return <Link href={href} legacyBehavior>{children}</Link>;
   },
    // Add more custom renderers if needed (e.g., for videos)
 };
