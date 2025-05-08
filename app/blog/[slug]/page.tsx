@@ -7,8 +7,8 @@ import MarkdownVideo from "@/components/markdown/MarkdownVideo";
 
 // Mark the component as async
 export default async function BlogDetailPage({
-                                                 params,
-                                             }: {
+    params,
+}: {
     params: Promise<{ slug: string }>;
 }) {
     const {slug} = await params;
@@ -49,7 +49,7 @@ export default async function BlogDetailPage({
                     <div className="flex items-center space-x-2">
                         <Avatar className="h-6 w-6">
                             <AvatarImage
-                                src={post.metadata.authorImage}
+                                src={post.metadata.authorImage ?? "/images/authors/cyborgoat-avatar.png"}
                                 alt={post.metadata.author ?? "Author"}
                             />
                             <AvatarFallback>
