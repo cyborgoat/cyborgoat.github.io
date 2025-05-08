@@ -8,13 +8,14 @@ excerpt: "An overview of large language models and their applications in NLP."
 video: "https://www.youtube.com/watch?v=wDchsz8nmbo"
 ---
 
-LLMs are foundational models trained on vast amounts of text data. They excel at understanding and generating human-like text.
+LLMs are foundational models trained on vast amounts of text data. They excel at understanding and generating human-like
+text.
 
 ## Key Concepts
 
--   Transformers
--   Attention Mechanisms
--   Pre-training & Fine-tuning
+- Transformers
+- Attention Mechanisms
+- Pre-training & Fine-tuning
 
 ## Code Example
 

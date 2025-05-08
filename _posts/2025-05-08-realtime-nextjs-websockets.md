@@ -8,7 +8,8 @@ excerpt: "Learn how to build scalable real-time applications using Next.js and W
 video: "https://www.youtube.com/watch?v=wDchsz8nmbo"
 ---
 
-Real-time features like chat, notifications, and live updates require persistent connections. Here's how to implement them:
+Real-time features like chat, notifications, and live updates require persistent connections. Here's how to implement
+them:
 
 ## WebSocket Server Setup
 

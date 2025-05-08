@@ -8,7 +8,8 @@ excerpt: "Explore how AI and Magenta Studio can be used for creative music compo
 video: "https://www.youtube.com/watch?v=wDchsz8nmbo"
 ---
 
-Combining music theory with ML models opens new creative possibilities. Magenta Studio provides five AI-powered tools for Ableton Live integration.
+Combining music theory with ML models opens new creative possibilities. Magenta Studio provides five AI-powered tools
+for Ableton Live integration.
 
 ## Melody Generation
 
@@ -32,11 +33,11 @@ Combining music theory with ML models opens new creative possibilities. Magenta 
 
 ### Comparison Table
 
-| Feature         | Supported | Notes                     |
-|----------------|-----------|---------------------------|
-| Melody         | Yes       | RNN-based                 |
-| Drums          | Yes       | Groove & interpolation    |
-| Chords         | No        | Planned for future        |
+| Feature | Supported | Notes                  |
+|---------|-----------|------------------------|
+| Melody  | Yes       | RNN-based              |
+| Drums   | Yes       | Groove & interpolation |
+| Chords  | No        | Planned for future     |
 
 ### Example Output
 
@@ -59,6 +60,7 @@ generated_midi = generator.generate(
 ```
 
 ## Drum Pattern Interpolation
+
 ```javascript
 // Interactive pattern blending
 const blendPatterns = (patternA, patternB, ratio) => {
@@ -71,6 +73,7 @@ const blendPatterns = (patternA, patternB, ratio) => {
 ```
 
 **Workflow Tips**:
+
 1. Use AI-generated MIDI as starting points
 2. Apply humanization to quantized outputs
 3. Combine multiple model outputs layer-wise
