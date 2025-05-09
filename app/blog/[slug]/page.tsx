@@ -4,6 +4,8 @@ import {notFound} from "next/navigation";
 import {getAllPostSlugs, getPostData} from "@/lib/posts";
 import MarkdownRender from "@/components/markdown/MarkdownRender";
 import MarkdownVideo from "@/components/markdown/MarkdownVideo";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 // Mark the component as async
 export default async function BlogDetailPage({
@@ -71,6 +73,11 @@ export default async function BlogDetailPage({
             <div className="prose prose-stone dark:prose-invert max-w-none">
                 {post.metadata.video && <MarkdownVideo url={post.metadata.video}/>}
                 <MarkdownRender content={post.content}/>
+            </div>
+            <div className="mt-8 flex justify-center">
+                <Button asChild variant="link">
+                    <Link href="/blog">← Back to all blogs</Link>
+                </Button>
             </div>
         </article>
     );
