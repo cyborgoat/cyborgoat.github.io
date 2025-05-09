@@ -173,8 +173,7 @@ const TextPressure = ({
 
       <h1
         ref={titleRef}
-        className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''
-          } ${stroke ? 'stroke' : ''} uppercase text-center`}
+        className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''} ${stroke ? 'stroke' : ''} uppercase text-center ${!stroke ? 'text-stone-800 dark:text-white' : ''}`}
         style={{
           fontFamily,
           fontSize: fontSize,
@@ -183,7 +182,6 @@ const TextPressure = ({
           transformOrigin: 'center top',
           margin: 0,
           fontWeight: 100,
-          color: stroke ? undefined : textColor,
         }}
       >
         {chars.map((char, i) => (
