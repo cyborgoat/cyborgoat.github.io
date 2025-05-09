@@ -6,6 +6,7 @@ export interface PostMetadata {
   tags?: string[];
   excerpt?: string;
   video?: string;
+  thumbnail?: string;
   slug: string;
   [key: string]: unknown;
 }

@@ -1,11 +1,12 @@
 ---
-title: "Building Real-time Applications with Next.js and WebSockets"
+title: "Real-time Web Applications with Next.js and WebSockets"
 date: "2025-05-08"
 author: "Cyborgoat"
 authorImage: "/images/authors/cyborgoat-avatar.png"
-tags: ["Real-time", "Next.js", "WebSockets"]
-excerpt: "Learn how to build scalable real-time applications using Next.js and WebSockets."
-video: "https://www.youtube.com/watch?v=wDchsz8nmbo"
+tags: ["Next.js", "WebSockets", "Real-time", "Web Development"]
+excerpt: "Building real-time web applications using Next.js and WebSocket technology."
+video: "https://www.youtube.com/watch?v=J0ZM8QzgYwA"
+thumbnail: "https://images.unsplash.com/photo-1525338078858-d762b5e32f2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wyMDg4MDd8MHwxfHNlYXJjaHwyfHxhaXxlbnwwfHx8fDE3NDY4MDQwNDN8MA&ixlib=rb-4.1.0&q=80&w=1080"
 ---
 
 Real-time features like chat, notifications, and live updates require persistent connections. Here's how to implement
