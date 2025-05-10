@@ -51,7 +51,7 @@ export default function HomePage() {
                             <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border-2 border-primary/20">
                                 {/* Add your image source here */}
                                 <AvatarImage
-                                    src="https://github.com/shadcn.png"
+                                    src="./images/ghibli_selfie.png"
                                     alt="@cyborgoat"
                                 />
                                 {/* Fallback initials */}
