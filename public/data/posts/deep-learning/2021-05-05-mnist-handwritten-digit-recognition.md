@@ -4,8 +4,8 @@ date: '2021-05-05'
 author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
-  - deep-learning
-  - computer-vision
+  - Deep Leraning
+  - Computer Vision
 excerpt: >-
   Hands on small project to build a neural net to recognize hand written digits
   from MNIST dataset with PyTorch.

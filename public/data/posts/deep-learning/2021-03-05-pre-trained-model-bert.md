@@ -6,7 +6,6 @@ authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - Deep Learning
   - Language Model
-  - deep-learning
 excerpt: An introduction to BERT algorithm and a simple example to use this model
 ---
 

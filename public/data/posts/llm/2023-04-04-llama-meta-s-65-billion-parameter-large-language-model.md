@@ -7,7 +7,6 @@ tags:
   - LLM
   - NLP
   - Deep Learning
-  - llm
 excerpt: >-
   A collection of language models ranging from 7B to 65B parameters trained from
   trillions of tokens.

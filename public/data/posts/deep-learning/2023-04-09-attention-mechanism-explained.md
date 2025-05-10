@@ -4,8 +4,8 @@ date: '2023-04-09'
 author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
-  - nlp
-  - deep-learning
+  - Deep Learning
+  - NLP
 excerpt: In this article we will explain different types of attention mechanism
 ---
 

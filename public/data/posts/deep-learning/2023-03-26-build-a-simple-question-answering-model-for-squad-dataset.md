@@ -6,7 +6,6 @@ authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - NLP
   - Deep Learning
-  - deep-learning
 excerpt: >-
   This article introduces SQuAD dataset and how to use this dataset to perform a
   simple question answering system with BERT.
