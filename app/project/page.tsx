@@ -1,5 +1,7 @@
 import React from "react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
+import fs from 'fs';
+import path from 'path';
 
 type Project = {
   title: string;
@@ -8,28 +10,12 @@ type Project = {
   link: string;
 };
 
-const projects: Project[] = [
-  {
-    title: "Nebula Notes",
-    excerpt: "A sleek note-taking app with real-time collaboration and markdown support.",
-    thumbnail: "/images/projects/nebula-notes.jpg",
-    link: "https://github.com/correctpoding/nebula-notes"
-  },
-  {
-    title: "Pixel Pal",
-    excerpt: "An AI-powered image enhancer that transforms your photos with style.",
-    thumbnail: "/images/projects/pixel-pal.jpg",
-    link: "https://github.com/correctpoding/pixel-pal"
-  },
-  {
-    title: "EcoTrack",
-    excerpt: "Track your carbon footprint and discover sustainable habits in an interactive dashboard.",
-    thumbnail: "/images/projects/eco-track.jpg",
-    link: "https://github.com/correctpoding/eco-track"
-  }
-];
+export default async function ProjectMainPage() {
+  // Load projects data from public folder
+  const filePath = path.join(process.cwd(), 'public', 'data', 'projects.json');
+  const json = fs.readFileSync(filePath, 'utf8');
+  const projects: Project[] = JSON.parse(json);
 
-export default function ProjectMainPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Projects</h1>
@@ -58,7 +44,7 @@ export default function ProjectMainPage() {
                 translateZ={20}
                 className="mt-4 inline-block text-blue-600 hover:underline"
               >
-                View on GitHub
+                Go to project
               </CardItem>
             </CardBody>
           </CardContainer>

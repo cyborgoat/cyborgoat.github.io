@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Nebula Notes",
+    "excerpt": "A sleek note-taking app with real-time collaboration and markdown support.",
+    "thumbnail": "/images/projects/nebula-notes.jpg",
+    "link": "https://github.com/correctpoding/nebula-notes"
+  },
+  {
+    "title": "Pixel Pal",
+    "excerpt": "An AI-powered image enhancer that transforms your photos with style.",
+    "thumbnail": "/images/projects/pixel-pal.jpg",
+    "link": "https://github.com/correctpoding/pixel-pal"
+  },
+  {
+    "title": "EcoTrack",
+    "excerpt": "Track your carbon footprint and discover sustainable habits in an interactive dashboard.",
+    "thumbnail": "/images/projects/eco-track.jpg",
+    "link": "https://github.com/correctpoding/eco-track"
+  },
+  {
+    "title": "Company Website Template",
+    "excerpt": "A template for building a modern company website using Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui. It includes features for managing content like blogs and news articles via Markdown files.",
+    "thumbnail": "https://images.unsplash.com/photo-1726064855836-6042eb0bc5da?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    "link": "https://cyborgoat.github.io/company-website-template/"
+  }
+]
