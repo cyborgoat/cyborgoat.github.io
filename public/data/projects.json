@@ -1,13 +1,7 @@
 [
   {
-    "title": "Company Website Template",
-    "excerpt": "A template for building a modern company website using Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui. It includes features for managing content like blogs and news articles via Markdown files.",
-    "thumbnail": "https://images.unsplash.com/photo-1726064855836-6042eb0bc5da?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
-    "link": "https://cyborgoat.github.io/company-website-template/"
-  },
-  {
-    "title": "Company Website Template",
-    "excerpt": "A template for building a modern company website using Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui. It includes features for managing content like blogs and news articles via Markdown files.",
+    "title": "LLM Agent Webapp",
+    "excerpt": " A minimal agentic LLM web app built with Next.js 15 (App Router), featuring a chat interface and a visual workflow editor for AI agent flows.",
     "thumbnail": "https://images.unsplash.com/photo-1726064855836-6042eb0bc5da?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
     "link": "https://cyborgoat.github.io/company-website-template/"
   },
