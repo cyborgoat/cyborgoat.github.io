@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 const TextPressure = ({
   text = 'Compressa',
@@ -71,7 +71,7 @@ const TextPressure = ({
     };
   }, []);
 
-  const setSize = () => {
+  const setSize = useCallback(() => {
     if (!containerRef.current || !titleRef.current) return;
 
     const { width: containerW, height: containerH } = containerRef.current.getBoundingClientRect();
@@ -93,13 +93,13 @@ const TextPressure = ({
         setLineHeight(yRatio);
       }
     });
-  };
+  }, [scale, chars.length, minFontSize]);
 
   useEffect(() => {
     setSize();
     window.addEventListener('resize', setSize);
     return () => window.removeEventListener('resize', setSize);
-  }, [scale, text, setSize]);
+  }, [setSize]);
 
   useEffect(() => {
     let rafId: number;
