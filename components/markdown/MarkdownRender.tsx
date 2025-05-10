@@ -2,6 +2,9 @@
 import React from "react";
 import ReactMarkdown, {Components} from "react-markdown";
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import MarkdownCodeBlock from "@/components/markdown/MarkdownCodeBlock";
 import MarkdownMedia from "@/components/markdown/MarkdownMedia";
 
@@ -110,7 +113,8 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
     return (
         <div className={`prose max-w-none ${className || ''}`}>
             <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
                 components={components}
             >
                 {content}

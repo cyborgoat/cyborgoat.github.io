@@ -43,8 +43,8 @@ export default function Hero() {
                         </Button>
                         {/* Example Secondary Button */}
                         <Button variant="secondary" size="lg" asChild>
-                            <Link href="/contact" prefetch={false}>
-                                Contact Me
+                            <Link href="/blog" prefetch={false}>
+                                View Blogs
                             </Link>
                         </Button>
                     </div>
