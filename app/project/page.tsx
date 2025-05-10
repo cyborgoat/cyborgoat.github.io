@@ -2,6 +2,7 @@ import React from "react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import fs from 'fs';
 import path from 'path';
+import { CircleArrowOutUpLeft } from "lucide-react";
 
 type Project = {
   title: string;
@@ -21,14 +22,14 @@ export default async function ProjectMainPage() {
       <h1 className="text-3xl font-bold mb-8">Projects</h1>
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, idx) => (
-          <CardContainer key={idx} className="w-full h-full cursor-pointer">
+          <CardContainer key={idx} className="group w-full h-full cursor-pointer">
             <CardBody>
               <CardItem
                 as="img"
                 src={project.thumbnail}
                 alt={project.title}
                 translateZ={50}
-                className="w-full h-48 object-cover rounded-md"
+                className="w-full h-48 object-cover rounded-md transform transition-transform duration-300 ease-out group-hover:scale-105"
               />
               <CardItem as="h3" translateY={20} className="mt-4 text-xl font-semibold">
                 {project.title}
@@ -41,10 +42,10 @@ export default async function ProjectMainPage() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                translateZ={20}
-                className="mt-4 inline-block text-blue-600 hover:underline"
+                className="mt-8 inline-flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:underline hover:text-bold transition-colors duration-200"
               >
-                Go to project
+                <CircleArrowOutUpLeft size={14}  />
+                <span>Go to project</span>
               </CardItem>
             </CardBody>
           </CardContainer>
