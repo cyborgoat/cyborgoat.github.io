@@ -2,7 +2,7 @@
 title: AI-assisted Music Composition with Magenta Studio
 date: '2025-05-08'
 author: Cyborgoat
-authorImage: /images/authors/cyborgoat-avatar.png
+authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - AI Music
 excerpt: >-

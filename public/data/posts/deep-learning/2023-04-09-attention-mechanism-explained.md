@@ -1,7 +1,7 @@
 ---
 title: Attention Mechanism Explained
 date: '2023-04-09'
-author: Junxiao Guo
+author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - nlp

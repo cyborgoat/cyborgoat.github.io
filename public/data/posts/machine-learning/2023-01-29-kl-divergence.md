@@ -1,10 +1,11 @@
 ---
 title: KL Divergence
 date: '2023-01-29'
-author: Junxiao Guo
+author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - Machine Learning
+  - machine-learning
 excerpt: >-
   KL divergence or relative entropy is a measure of how one probability
   distribution is different from a reference probability distribution.

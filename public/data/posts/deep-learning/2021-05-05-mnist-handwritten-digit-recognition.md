@@ -1,7 +1,7 @@
 ---
 title: MNIST Handwritten Digit Recognition
 date: '2021-05-05'
-author: Junxiao Guo
+author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - deep-learning

@@ -46,6 +46,9 @@ function renamePosts() {
     const dirTags = relDir.split(path.sep).filter(Boolean);
     const existingTags = Array.isArray(data.tags) ? data.tags : [];
     data.tags = Array.from(new Set([...existingTags, ...dirTags]));
+    // Override author and authorImage globally
+    data.author = 'Cyborgoat';
+    data.authorImage = 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64';
 
     // rewrite frontmatter with ordered keys
     const keys = ['title','date','author','authorImage','tags','excerpt','video'];

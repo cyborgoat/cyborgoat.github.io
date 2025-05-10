@@ -1,11 +1,12 @@
 ---
 title: Self-organizing Map Network
 date: '2022-05-10'
-author: Junxiao Guo
+author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - Machine Learning
   - Clustering
+  - machine-learning
 excerpt: >-
   SOM (Self-Origanizing Maps), or SOFM (Self-Origanizing Feature Maps), is a
   clustering algorithm based on neural networks, which is an unsupervised

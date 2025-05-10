@@ -2,7 +2,7 @@
 title: Real-time Web Applications with Next.js and WebSockets
 date: '2025-05-08'
 author: Cyborgoat
-authorImage: /images/authors/cyborgoat-avatar.png
+authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - Web Development
 excerpt: Building real-time web applications using Next.js and WebSocket technology.

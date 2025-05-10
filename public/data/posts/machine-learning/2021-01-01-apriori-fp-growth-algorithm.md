@@ -1,11 +1,12 @@
 ---
 title: Apriori & FP-growth Algorithm
 date: '2021-01-01'
-author: Junxiao Guo
+author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - Machine Learning
   - Data Mining
+  - machine-learning
 excerpt: A brief summary of commands to install postgres database
 ---
 

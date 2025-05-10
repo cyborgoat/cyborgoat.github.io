@@ -2,7 +2,7 @@
 title: Fine-tuning Large Language Models
 date: '2025-05-08'
 author: Cyborgoat
-authorImage: /images/authors/cyborgoat-avatar.png
+authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - LLM
   - NLP

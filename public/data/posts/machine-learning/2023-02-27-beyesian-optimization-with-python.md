@@ -1,10 +1,11 @@
 ---
 title: Beyesian Optimization with Python
 date: '2023-02-27'
-author: Junxiao Guo
+author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags:
   - Machine Learning
+  - machine-learning
 excerpt: Beyesian optimization explained in detail with python implementation.
 ---
 
