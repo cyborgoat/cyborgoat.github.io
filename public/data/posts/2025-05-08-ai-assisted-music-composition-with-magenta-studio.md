@@ -1,11 +1,14 @@
 ---
-title: "AI-assisted Music Composition with Magenta Studio"
-date: "2025-05-08"
-author: "Cyborgoat"
-authorImage: "/images/authors/cyborgoat-avatar.png"
-tags: ["AI Music", "Magenta", "Production"]
-excerpt: "Explore how AI and Magenta Studio can be used for creative music composition and production, with practical code examples."
-video: "https://www.youtube.com/watch?v=wDchsz8nmbo"
+title: AI-assisted Music Composition with Magenta Studio
+date: '2025-05-08'
+author: Cyborgoat
+authorImage: /images/authors/cyborgoat-avatar.png
+tags:
+  - AI Music
+excerpt: >-
+  Explore how AI and Magenta Studio can be used for creative music composition
+  and production, with practical code examples.
+video: 'https://www.youtube.com/watch?v=wDchsz8nmbo'
 ---
 
 Combining music theory with ML models opens new creative possibilities. Magenta Studio provides five AI-powered tools

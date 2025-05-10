@@ -6,16 +6,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { Post } from "@/types/post";
 import TextPressure from "@/components/animation/TextPressure";
+import { Button } from "@/components/ui/button";
 
 export default function BlogList({ posts }: { posts: Post[] }) {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    const postsPerPage = 2;
+    const [selectedTag, setSelectedTag] = useState("");
+    const postsPerPage = 5;
+
+    const tagsList = useMemo(() => {
+        const setTags = new Set<string>();
+        posts.forEach(p => p.metadata.tags?.forEach(tag => setTags.add(tag)));
+        return Array.from(setTags).sort();
+    }, [posts]);
 
     const filteredPosts = useMemo(() => {
+        let filtered = posts;
+        if (selectedTag) {
+            filtered = filtered.filter(post => post.metadata.tags?.includes(selectedTag));
+        }
         const q = search.trim().toLowerCase();
-        if (!q) return posts;
-        return posts.filter((post) => {
+        if (!q) return filtered;
+        return filtered.filter((post) => {
             const { title = "", excerpt = "", tags = [] } = post.metadata || {};
             return (
                 title.toLowerCase().includes(q) ||
@@ -24,7 +36,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                     tags.some((tag: string) => tag.toLowerCase().includes(q)))
             );
         });
-    }, [search, posts]);
+    }, [search, selectedTag, posts]);
 
     const pageCount = Math.ceil(filteredPosts.length / postsPerPage);
     const paginatedPosts = useMemo(
@@ -53,7 +65,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                     minFontSize={8}
                 />
             </div>
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex flex-col items-center space-y-4">
                 <input
                     type="text"
                     placeholder="Search blogs..."
@@ -61,6 +73,25 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                     onChange={(e) => setSearch(e.target.value)}
                     className="w-full max-w-sm px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60 transition"
                 />
+                <div className="flex flex-wrap gap-2">
+                    <Button
+                        size="sm"
+                        variant={selectedTag === "" ? "default" : "outline"}
+                        onClick={() => { setSelectedTag(""); setPage(1); }}
+                    >
+                        All
+                    </Button>
+                    {tagsList.map((tag) => (
+                        <Button
+                            key={tag}
+                            size="sm"
+                            variant={selectedTag === tag ? "default" : "outline"}
+                            onClick={() => { setSelectedTag(tag); setPage(1); }}
+                        >
+                            {tag}
+                        </Button>
+                    ))}
+                </div>
             </div>
             <ul className="space-y-8">
                 {paginatedPosts.map((post) => (
@@ -69,30 +100,28 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                         className="border rounded-lg p-6 hover:shadow-lg transition"
                     >
                         {post.metadata.thumbnail && (
-                            <Link
-                                href={`/blog/${post.metadata.slug}`}
-                                className="block mb-4"
-                                legacyBehavior>
-                                <Image
-                                    src={post.metadata.thumbnail!}
-                                    alt={
-                                        post.metadata.title
-                                            ? `${post.metadata.title} thumbnail`
-                                            : "Blog post thumbnail"
-                                    }
-                                    width={1080}
-                                    height={480}
-                                    className="w-full h-48 object-cover rounded-md mb-2 transition-transform hover:scale-105"
-                                    loading="lazy"
-                                />
+                            <Link href={`/blog/${post.metadata.slug}`} legacyBehavior>
+                                <a className="block mb-4">
+                                    <Image
+                                        src={post.metadata.thumbnail!}
+                                        alt={
+                                            post.metadata.title
+                                                ? `${post.metadata.title} thumbnail`
+                                                : "Blog post thumbnail"
+                                        }
+                                        width={1080}
+                                        height={480}
+                                        className="w-full h-48 object-cover rounded-md mb-2 transition-transform hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </a>
                             </Link>
                         )}
                         <div className="flex flex-col items-left mb-2">
-                            <Link
-                                href={`/blog/${post.metadata.slug}`}
-                                className="text-xl font-semibold hover:underline"
-                                legacyBehavior>
-                                {post.metadata.title}
+                            <Link href={`/blog/${post.metadata.slug}`} legacyBehavior>
+                                <a className="text-xl font-semibold hover:underline">
+                                    {post.metadata.title}
+                                </a>
                             </Link>
                             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                                 <Avatar className="h-6 w-6">

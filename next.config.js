@@ -3,6 +3,7 @@ const nextConfig = {
     images: {
         domains: [
             "images.unsplash.com",
+            "bbs-img.huaweicloud.com"
             // Add other domains as needed
         ],
     },
