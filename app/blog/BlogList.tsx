@@ -72,7 +72,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                             <Link
                                 href={`/blog/${post.metadata.slug}`}
                                 className="block mb-4"
-                            >
+                                legacyBehavior>
                                 <Image
                                     src={post.metadata.thumbnail!}
                                     alt={
@@ -91,7 +91,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                             <Link
                                 href={`/blog/${post.metadata.slug}`}
                                 className="text-xl font-semibold hover:underline"
-                            >
+                                legacyBehavior>
                                 {post.metadata.title}
                             </Link>
                             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
