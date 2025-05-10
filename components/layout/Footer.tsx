@@ -26,15 +26,9 @@ export default function Footer() {
                         </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
-                        <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer"
+                        <a href="linkedin.com/in/junxiaog" target="_blank" rel="noopener noreferrer"
                            aria-label="LinkedIn">
                             <Linkedin className="h-4 w-4"/>
-                        </a>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                        <a href="https://twitter.com/your-profile" target="_blank" rel="noopener noreferrer"
-                           aria-label="Twitter">
-                            <Twitter className="h-4 w-4"/>
                         </a>
                     </Button>
                 </div>
