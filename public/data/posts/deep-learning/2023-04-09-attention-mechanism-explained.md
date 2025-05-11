@@ -3,6 +3,7 @@ title: Attention Mechanism Explained
 date: '2023-04-09'
 author: Cyborgoat
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
+thumbnail: "/images/posts/attention_mechanism.jpg" 
 tags:
   - Deep Learning
   - NLP
