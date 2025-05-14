@@ -13,11 +13,8 @@ export default function Footer() {
                     {/* <MountainIcon className="h-6 w-6" /> */}
                     <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                         &copy; {currentYear} Cyborgoat. All rights reserved.
-                        {/* Example additional links */}
-                        {/* <Link href="/privacy" className="font-medium underline underline-offset-4 ml-2">Privacy</Link> */}
                     </p>
                 </div>
-                {/* Social Links Example */}
                 <div className="flex items-center gap-1">
                     <Button variant="ghost" size="icon" asChild>
                         <a href="https://github.com/cyborgoat" target="_blank" rel="noopener noreferrer"
@@ -26,7 +23,7 @@ export default function Footer() {
                         </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
-                        <a href="linkedin.com/in/junxiaog" target="_blank" rel="noopener noreferrer"
+                        <a href="https://linkedin.com/in/junxiaog" target="_blank" rel="noopener noreferrer"
                            aria-label="LinkedIn">
                             <Linkedin className="h-4 w-4"/>
                         </a>
