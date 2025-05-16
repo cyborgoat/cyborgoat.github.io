@@ -3,6 +3,7 @@ export interface PostMetadata {
   date?: string;
   author?: string;
   authorImage?: string;
+  description?: string;
   tags?: string[];
   excerpt?: string;
   video?: string;
