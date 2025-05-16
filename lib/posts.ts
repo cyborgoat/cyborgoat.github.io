@@ -5,7 +5,7 @@ import fs from 'fs';
 import { Post, PostMetadata } from '@/types/post';
 
 // Define the directory where your posts are stored
-const postsDirectory = path.join(process.cwd(), 'public', 'data', 'posts');
+const postsDirectory = path.join(process.cwd(), 'data', 'posts');
 
 // Recursively collect all markdown file paths under postsDirectory
 function getPostFiles(): string[] {

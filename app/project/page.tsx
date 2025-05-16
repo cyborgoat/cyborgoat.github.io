@@ -14,7 +14,7 @@ type Project = {
 
 export default async function ProjectMainPage() {
   // Load projects data from public folder
-  const filePath = path.join(process.cwd(), "public", "data", "projects.json");
+  const filePath = path.join(process.cwd(), "data", "projects.json");
   const json = fs.readFileSync(filePath, "utf8");
   const projects: Project[] = JSON.parse(json);
 
