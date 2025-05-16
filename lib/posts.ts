@@ -25,27 +25,44 @@ function getPostFiles(): string[] {
   return files;
 }
 
-// Changed back to synchronous as MDX processing is removed
+// Helper function to find the full path of a post by slug (slug is relative path from postsDirectory, without .md)
+function findPostPathBySlug(targetSlug: string): string | null {
+  const potentialPath = path.join(postsDirectory, `${targetSlug}.md`);
+  if (fs.existsSync(potentialPath)) {
+    return potentialPath;
+  }
+  // Fallback for cases where the direct construction might miss due to casing or other subtle issues.
+  // This part is less likely to be hit if targetSlug is correctly formed.
+  const allFiles = getPostFiles();
+  for (const filePath of allFiles) {
+    const slugFromFile = path.relative(postsDirectory, filePath).replace(/\.md$/, '');
+    if (slugFromFile === targetSlug) {
+      return filePath;
+    }
+  }
+  return null;
+}
+
 export function getAllPosts(): Post[] {
   try {
     const filePaths = getPostFiles();
     const posts = filePaths.map((filePath) => {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
-      const slug = path.basename(filePath, '.md');
+      
+      const actualSlug = path.relative(postsDirectory, filePath).replace(/\.md$/, '');
+
       const tags = Array.isArray(data.tags) ? data.tags : [];
       return {
         metadata: {
           ...data,
-          slug,
+          slug: actualSlug, // Use actual slug for metadata
           tags,
-          // isMdx removed
         } as PostMetadata,
         content,
       } as Post;
     });
 
-    // Sort by date descending, posts with no date go to the end
     return posts.sort((a, b) => {
       const dateA = new Date(a.metadata.date || '2000-01-01');
       const dateB = new Date(b.metadata.date || '2000-01-01');
@@ -60,46 +77,37 @@ export function getAllPosts(): Post[] {
 export function getAllPostSlugs(): { slug: string }[] {
   try {
     const filePaths = getPostFiles();
-    return filePaths.map((filePath) => ({
-      slug: path.basename(filePath, '.md'), // Only .md files
-    }));
+    return filePaths.map((filePath) => {
+      const slug = path.relative(postsDirectory, filePath).replace(/\.md$/, '');
+      return { slug };
+    });
   } catch (error) {
     console.error('Error reading post slugs:', error);
     return [];
   }
 }
 
-// Changed back to synchronous as MDX processing is removed
 export function getPostData(slug: string): Post | null {
-  let fullPath = '';
-  const mdPath = path.join(postsDirectory, `${slug}.md`);
+  const postPath = findPostPathBySlug(slug);
 
-  if (fs.existsSync(mdPath)) {
-    fullPath = mdPath;
-  } else {
-    // If not found in the root, search recursively
-    const filePaths = getPostFiles();
-    const match = filePaths.find((fp) => path.basename(fp, '.md') === slug);
-    if (match) {
-      fullPath = match;
-    } else {
-      console.error(`Post file not found for slug "${slug}"`);
-      return null;
-    }
+  if (!postPath) {
+    console.error(`Post file not found for slug "${slug}"`);
+    return null;
   }
 
   try {
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = fs.readFileSync(postPath, 'utf8');
     const matterResult = matter(fileContents);
+    
     return {
       metadata: {
         ...matterResult.data,
-        slug,
+        slug, 
         tags: Array.isArray(matterResult.data.tags) ? matterResult.data.tags as string[] : [],
-        // isMdx removed
       } as PostMetadata,
       content: matterResult.content,
     } as Post;
+
   } catch (error) {
     console.error(`Error reading post data for slug "${slug}":`, error);
     return null;

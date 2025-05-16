@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+    children,
+}: {
     children: React.ReactNode;
-}>) {
+}) {
     return (
         <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
         <body className="min-h-screen bg-background font-sans antialiased flex flex-col">
