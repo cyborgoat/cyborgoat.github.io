@@ -47,6 +47,9 @@
     --radius: 0.625rem;
     --background: oklch(1 0 0);
     --foreground: oklch(0.147 0.004 49.25);
+    --particle-color: oklch(0.25 0.006 50); /* Darker grey for light mode particles */
+    /* Forcing a hex value if oklch var() doesn't work for tsparticles */
+    /* --particle-color-hex: #404040; */
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.147 0.004 49.25);
     --popover: oklch(1 0 0);
@@ -81,6 +84,8 @@
 .dark {
     --background: oklch(0.147 0.004 49.25);
     --foreground: oklch(0.985 0.001 106.423);
+    --particle-color: oklch(0.9 0.001 100); /* Lighter grey for dark mode particles */
+    /* --particle-color-hex: #CCCCCC; */
     --card: oklch(0.216 0.006 56.043);
     --card-foreground: oklch(0.985 0.001 106.423);
     --popover: oklch(0.216 0.006 56.043);
