@@ -41,7 +41,16 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
         },
         img({src, alt}) {
             const srcString = typeof src === 'string' ? src : "";
-            return <MarkdownMedia src={srcString} alt={alt || ""}/>;
+            return (
+                <figure className="my-4">
+                    <MarkdownMedia src={srcString} alt={alt || ""}/>
+                    {alt && (
+                        <figcaption className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2 italic">
+                            {alt}
+                        </figcaption>
+                    )}
+                </figure>
+            );
         },
         table({children}) {
             return (
@@ -112,7 +121,7 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
     };
 
     return (
-        <div className={`prose max-w-none ${className || ''}`}>
+        <div className={`prose prose-lg dark:prose-invert max-w-none ${className || ''}`}>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypeRaw]}
