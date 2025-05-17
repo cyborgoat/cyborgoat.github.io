@@ -19,12 +19,19 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
         code(
             props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & { inline?: boolean }
         ) {
-            const {className: codeClass, children, inline} = props;
-            if (!inline) {
+            const {className: codeClass, children} = props;
+
+            // Check if className indicates a language-specific fenced code block
+            if (codeClass && codeClass.startsWith('language-')) {
                 return <MarkdownCodeBlock className={codeClass}>{children}</MarkdownCodeBlock>;
+            } else {
+                // Treat as inline code
+                return (
+                    <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono text-gray-900 dark:text-gray-200">
+                        {children}
+                    </code>
+                );
             }
-            return <code
-                className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono text-gray-900 dark:text-gray-200">{children}</code>;
         },
         a({href, children}) {
             const isExternal = href && (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//'));

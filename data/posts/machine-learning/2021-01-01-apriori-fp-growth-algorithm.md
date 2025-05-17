@@ -42,7 +42,7 @@ Imagine a supermarket with 1000 transactions.
 A higher support value means the itemset is more frequent.
 
 *(Suggested Image: A simple bar chart showing transaction counts for a few items and itemsets, visually representing support. Alt: "Bar chart illustrating support for items like Bread, Butter, and Milk.")*
-Original image was: `https://bbs-img.huaweicloud.com/blogs/img/0.png` (Link might be unstable or unclear)
+<img src="/images/posts/association_rules/support_illustration.png" alt="Bar chart illustrating support for items like Bread, Butter, and Milk." />
 
 ### 2. Confidence
 
@@ -64,7 +64,7 @@ This means 50% of the customers who bought Bread also bought Butter.
 **Important Note:** Confidence can be misleading. If item Y is very popular overall, `Confidence(X -> Y)` might be high even if there's no strong association between X and Y. This is where Lift comes in.
 
 *(Suggested Image: A Venn diagram showing the overlap between transactions containing X and transactions containing Y, highlighting the portion for X and Y together relative to X. Alt: "Venn diagram illustrating confidence as the proportion of X transactions that also include Y.")*
-Original image was: `https://bbs-img.huaweicloud.com/blogs/img/2(30).png` (Link might be unstable or unclear)
+<img src="/images/posts/association_rules/confidence_illustration.png" alt="Venn diagram illustrating confidence as the proportion of X transactions that also include Y." />
 
 ### 3. Lift
 
@@ -88,9 +88,6 @@ Continuing with Bread and Butter:
 *   `Lift(Bread -> Butter) = 0.5 / 0.2 = 2.5`.
 Since Lift (2.5) > 1, this suggests a strong positive association: customers are 2.5 times more likely to buy Butter if they've bought Bread, compared to the general likelihood of buying Butter.
 
-*(Suggested Image: A conceptual diagram showing scales. If X and Y are independent, scales are balanced (Lift=1). If positively associated, Y side goes up (Lift>1). Alt: "Diagram with scales illustrating the concept of Lift in association rules.")*
-Original image was: `https://bbs-img.huaweicloud.com/blogs/img/3(27).png` (Link might be unstable or unclear)
-
 ## Apriori Algorithm
 
 The Apriori algorithm is a classic method for mining frequent itemsets and then generating association rules. Its core idea is based on the **Apriori principle**:
@@ -113,6 +110,7 @@ This principle allows the algorithm to efficiently prune the search space for fr
 5.  **Generate Association Rules**: From the final set of frequent itemsets, generate association rules that meet a **minimum confidence threshold (min_conf)**. For every frequent itemset `I`, find all non-empty subsets `S`. For each such subset, generate a rule `S -> (I-S)` if `Support(I) / Support(S) >= min_conf`.
 
 *(Suggested Image: A flowchart or step-by-step diagram illustrating the Apriori algorithm's iterative process of candidate generation, pruning, and support counting. Alt: "Flowchart of the Apriori algorithm showing candidate generation and pruning steps.")*
+<img src="/images/posts/association_rules/aprior_steps.png" alt="Flowchart of the Apriori algorithm showing candidate generation and pruning steps." />
 
 ### Limitations of Apriori
 
@@ -146,6 +144,7 @@ The FP-Growth (Frequent Pattern Growth) algorithm offers a more efficient altern
 The FP-Growth algorithm typically requires only two scans of the database, making it significantly faster than Apriori for many datasets.
 
 *(Suggested Image: A step-by-step diagram showing the construction of a small FP-Tree from a few sample transactions, followed by an illustration of how a conditional FP-Tree might be derived for one item. Alt: "Diagram illustrating FP-Tree construction and mining process.")*
+<img src="/images/posts/association_rules/fp_tree_construction_and_mining_process.png" alt="Diagram illustrating FP-Tree construction and mining process." />
 
 ## Python Example with `mlxtend`
 
