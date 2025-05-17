@@ -71,11 +71,6 @@ export default function MarkdownMedia({src = "", alt = ""}: { src?: string; alt?
             height={400}
             className="rounded-lg object-contain mx-auto"
         />
-                {alt && (
-                    <figcaption className="text-center text-sm text-muted-foreground mt-2">
-                        {alt}
-                    </figcaption>
-                )}
       </span>
         );
     }
