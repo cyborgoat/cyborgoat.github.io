@@ -1,5 +1,11 @@
 [
   {
+    "title": "Omnichat - All-in-One LLM Chat Application",
+    "excerpt": "A versatile chat application that allows you to interact with various Large Language Models (OpenAI, Google Gemini, Anthropic Claude, Deepseek, Alibaba Qwen) from different providers, all within a single, intuitive interface. Available as both a web application and a native desktop app built with Next.js, Tailwind CSS, Shadcn UI, and Tauri.",
+    "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWklMjBjaGF0fGVufDB8fDB8fHww",
+    "link": "https://github.com/cyborgoat/omnichat"
+  },
+  {
     "title": "LLM Agent Webapp",
     "excerpt": " A minimal agentic LLM web app built with Next.js 15 (App Router), featuring a chat interface and a visual workflow editor for AI agent flows.",
     "thumbnail": "https://images.unsplash.com/photo-1718241905462-56e7b9f722f3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNoYXRib3R8ZW58MHx8MHx8fDA%3D",

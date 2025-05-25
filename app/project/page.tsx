@@ -40,25 +40,25 @@ export default async function ProjectMainPage() {
             key={idx}
             className="group w-full h-full cursor-pointer"
           >
-            <CardBody>
+            <CardBody className="h-[500px] flex flex-col">
               <CardItem
                 as="img"
                 src={project.thumbnail}
                 alt={project.title}
                 translateZ={50}
-                className="w-full h-48 object-cover rounded-md transform transition-transform duration-300 ease-out group-hover:scale-105"
+                className="w-full h-48 object-cover rounded-md transform transition-transform duration-300 ease-out group-hover:scale-105 flex-shrink-0"
               />
               <CardItem
                 as="h3"
                 translateY={20}
-                className="mt-4 text-xl font-semibold"
+                className="mt-4 text-xl font-semibold line-clamp-2 flex-shrink-0"
               >
                 {project.title}
               </CardItem>
               <CardItem
                 as="p"
                 translateY={20}
-                className="mt-2 text-sm text-gray-600 dark:text-gray-400"
+                className="mt-2 text-sm text-gray-600 dark:text-gray-400 flex-grow line-clamp-4"
               >
                 {project.excerpt}
               </CardItem>
@@ -67,7 +67,7 @@ export default async function ProjectMainPage() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:underline hover:text-bold transition-colors duration-200"
+                className="mt-8 inline-flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:underline hover:text-bold transition-colors duration-200 flex-shrink-0"
               >
                 <CircleArrowOutUpLeft size={14} />
                 <span>Go to project</span>
