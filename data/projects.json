@@ -1,5 +1,11 @@
 [
   {
+    "title": "FastMCP Agent Boilerplate",
+    "excerpt": "A simple end-to-end agent application built with Python that integrates FastMCP to perform calculator tasks using any OpenAI-compatible LLM provider.",
+    "thumbnail": "https://images.unsplash.com/photo-1532538089574-ec1faa56325a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGFnZW50fGVufDB8fDB8fHww",
+    "link": "https://github.com/cyborgoat/mcp-boilerplate"
+  },
+  {
     "title": "MonoLLM - Unified interface for multiple LLM providers",
     "excerpt": "A powerful framework that provides a unified interface for multiple LLM providers, allowing developers to seamlessly switch between different AI models while maintaining consistent API interactions.",
     "thumbnail": "https://images.unsplash.com/photo-1747579263364-872c1e4ecfd0?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
