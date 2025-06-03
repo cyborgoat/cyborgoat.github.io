@@ -1,5 +1,11 @@
 [
   {
+    "title": "MonoLLM - Unified interface for multiple LLM providers",
+    "excerpt": "A powerful framework that provides a unified interface for multiple LLM providers, allowing developers to seamlessly switch between different AI models while maintaining consistent API interactions.",
+    "thumbnail": "https://images.unsplash.com/photo-1747579263364-872c1e4ecfd0?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "link": "https://github.com/cyborgoat/MonoLLM"
+  },
+  {
     "title": "Omnichat - All-in-One LLM Chat Application",
     "excerpt": "A versatile chat application that allows you to interact with various Large Language Models (OpenAI, Google Gemini, Anthropic Claude, Deepseek, Alibaba Qwen) from different providers, all within a single, intuitive interface. Available as both a web application and a native desktop app built with Next.js, Tailwind CSS, Shadcn UI, and Tauri.",
     "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWklMjBjaGF0fGVufDB8fDB8fHww",
