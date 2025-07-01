@@ -8,7 +8,7 @@
   {
     "title": "Omnichat - All-in-One LLM Chat Application",
     "excerpt": "A modern chat application for interacting with multiple AI models from different providers. Available as both a web app and desktop application.",
-    "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWklMjBjaGF0fGVufDB8fDB8fHww",
+    "thumbnail": "/images/projects/omnichat.png",
     "link": "https://github.com/cyborgoat/omnichat"
   },
   {
@@ -20,7 +20,7 @@
   {
     "title": "Company Website Template - Next.js",
     "excerpt": "This is a template for building a modern company website using Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui. It includes features for managing content like blogs and news articles via Markdown files.",
-    "thumbnail": "https://images.unsplash.com/photo-1726064855836-6042eb0bc5da?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    "thumbnail": "/images/projects/company-website-template.png",
     "link": "https://github.com/cyborgoat/company-website-template"
   },
   {
@@ -32,13 +32,13 @@
   {
     "title": "DayRider",
     "excerpt": "Simplify your weekly work.",
-    "thumbnail": "https://images.unsplash.com/photo-1517487881594-27827bb8b97f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGNsYXNzJTIwYm9va2luZ3xlbnwwfHwwfHx8MA%3D%3D",
+    "thumbnail": "/images/projects/dayrider.png",
     "link": "https://github.com/cyborgoat/Dayrider"
   },
   {
     "title": "An End-to-end Image Dehazing System with Light-weighted CNN And Dark Channel Prior",
     "excerpt": "Instructor: Joseph Konan Team: Jingsi Chen,Junxiao Guo, Shuhao Ren ,Luo Yu (ordered by last name initials)",
-    "thumbnail": "https://images.unsplash.com/photo-1517487881594-27827bb8b97f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGNsYXNzJTIwYm9va2luZ3xlbnwwfHwwfHx8MA%3D%3D",
+    "thumbnail": "/images/projects/aod-dc-net.png",
     "link": "https://github.com/cyborgoat/AOD-DC-Net"
   }
 ]
