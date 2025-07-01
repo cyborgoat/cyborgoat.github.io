@@ -26,11 +26,12 @@
   {
     "title": "SimpleLM: Lightweight Transformer Language Model with RLHF (PPO)",
     "excerpt": "SimpleLM is a minimal, CPU-friendly language model based on a Transformer decoder architecture. It supports both supervised fine-tuning (SFT) with prompt/response pairs and PPO-based RL training with a neural reward model (RLHF-style) for human/AI feedback (RLHF) using PPO. The project is designed for educational purposes and easy experimentation on small hardware.",
+    "thumbnail": "/images/projects/simplelm.png",
     "link": "https://github.com/cyborgoat/SimpleLM"
   },
   {
     "title": "DayRider",
-    "excerpt": "Simplify your weekly work.",
+    "excerpt": "Simplify your weekly work with a minimal todo task management app.",
     "thumbnail": "/images/projects/dayrider.png",
     "link": "https://github.com/cyborgoat/Dayrider"
   },
