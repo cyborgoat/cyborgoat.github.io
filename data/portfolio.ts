@@ -3,9 +3,9 @@ import { PortfolioData } from '@/types/portfolio';
 export const portfolioData: PortfolioData = {
   about: {
     title: "About Me",
-    description: "I'm passionate about leveraging technology to build innovative solutions. My journey in tech is driven by a curiosity for AI, a love for crafting seamless web experiences, and a knack for creative problem-solving.",
-    experience: "With over 7 years of experience bringing cutting-edge AI concepts to life, my current focus is on developing advanced Large Language Models (LLMs) and intelligent AI Agents.",
-    focus: "AI Engineer & Fullstack Enthusiast",
+    description: "I'm passionate about AI and fortunate to lead an incredible team of 20+ brilliant engineers, many of whom graduated from top universities globally. Together, we're pushing the boundaries of Large Language Models (LLMs), AI Agents, and full-stack development.",
+    experience: "I'm currently focused on leading our team's work on advanced LLM systems and AI agent development. It's incredibly rewarding to collaborate with such talented individuals - we've successfully delivered multiple AI projects from concept to production while learning from each other and fostering a culture of innovation.",
+    focus: "AI Tech Leader & Senior Engineer",
     socialLinks: [
       {
         id: "github",
