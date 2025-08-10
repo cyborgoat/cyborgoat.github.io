@@ -1,224 +1,302 @@
-import Hero from '@/components/layout/Hero'; // Using the centered Hero from previous step
-import {Bike, BrainCircuit, Cloud, Code, GraduationCap, Music, Trophy} from 'lucide-react'; // Added more icons
+import Hero from '@/components/layout/Hero';
+import {Bike, BrainCircuit, Cloud, Code, GraduationCap, Music, Trophy, Github, Linkedin, ExternalLink, Zap, Rocket, CheckCircle, Clock} from 'lucide-react';
 import {cn} from '@/lib/utils';
-import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"; // Import shadcn Card components
-import {Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar"; // Import shadcn Avatar components
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
+import {Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar";
+import {Badge} from "@/components/ui/badge";
+import { 
+  getAboutMe, 
+  getFeaturedProject, 
+  getOngoingProjects, 
+  getCompletedProjects, 
+  getAllSkills, 
+  getEducation, 
+  getHobbies 
+} from '@/lib/portfolio';
 
+// Icon mapping for dynamic icon rendering
+const iconMap = {
+  Bike, BrainCircuit, Cloud, Code, GraduationCap, Music, Trophy, 
+  Github, Linkedin, ExternalLink, Zap, Rocket, CheckCircle, Clock
+};
+
+const getIconComponent = (iconName: string) => {
+  return iconMap[iconName as keyof typeof iconMap] || Code;
+};
 
 export default function HomePage() {
+    const aboutMe = getAboutMe();
+    const featuredProject = getFeaturedProject();
+    const ongoingProjects = getOngoingProjects();
+    const completedProjects = getCompletedProjects();
+    const skills = getAllSkills();
+    const education = getEducation();
+    const hobbies = getHobbies();
+
     return (
         <main className="flex-1">
-            <Hero /> {/* Assumes the vertically centered Hero */}
-            {/* About Me Section - Remains largely the same, could wrap in Card if desired */}
-            <section
-                id="about"
-                className="w-full py-12 md:py-24 lg:py-32 border-t"
-            >
+            <Hero />
+            
+            {/* About Me Section */}
+            <section id="about" className="w-full py-12 md:py-24 lg:py-32 border-t">
                 <div className="container px-4 md:px-6 mx-auto">
                     <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
                         <div className="space-y-4">
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-                                About Me
+                                {aboutMe.title}
                             </h2>
-                            <p
-                                className={cn(
-                                    "text-foreground/80",
-                                    "md:text-lg lg:text-base xl:text-lg"
-                                )}
-                            >
-                                I am Cyborgoat, an AI Engineer and Fullstack
-                                Enthusiast with over 7 years of experience
-                                bringing cutting-edge AI concepts to life. My
-                                current focus is on developing advanced Large
-                                Language Models (LLMs) and intelligent AI
-                                Agents.
+                            <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
+                                {aboutMe.description}
                             </p>
-                            <p
-                                className={cn(
-                                    "text-foreground/80",
-                                    "md:text-lg lg:text-base xl:text-lg"
-                                )}
-                            >
-                                With a background bridging Physics and
-                                Electrical & Computer Engineering, I approach
-                                problems with a unique analytical perspective,
-                                always eager to learn and build robust, scalable
-                                solutions across the full stack.
+                            <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
+                                {aboutMe.experience}
                             </p>
+                            <div className="flex gap-4 pt-4">
+                                {aboutMe.socialLinks.map((link) => {
+                                    const IconComponent = getIconComponent(link.icon);
+                                    return (
+                                        <a 
+                                            key={link.id}
+                                            href={link.url} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                                        >
+                                            <IconComponent className="w-5 h-5" />
+                                            <span>{link.label}</span>
+                                        </a>
+                                    );
+                                })}
+                            </div>
                         </div>
-                        {/* Optional Avatar */}
                         <div className="flex items-center justify-center">
                             <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border-2 border-primary/20">
-                                {/* Add your image source here */}
-                                <AvatarImage
-                                    src="./images/ghibli_selfie.png"
-                                    alt="@cyborgoat"
-                                />
-                                {/* Fallback initials */}
-                                <AvatarFallback className="text-4xl">
-                                    CG
-                                </AvatarFallback>
+                                <AvatarImage src="./images/ghibli_selfie.png" alt="@cyborgoat" />
+                                <AvatarFallback className="text-4xl">CG</AvatarFallback>
                             </Avatar>
                         </div>
                     </div>
                 </div>
             </section>
-            {/* Skills & Expertise Section - Using shadcn Card */}
-            <section
-                id="skills"
-                className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t"
-            >
+
+            {/* Featured Project: Swarm */}
+            <section id="featured" className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t">
+                <div className="container px-4 md:px-6 mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary mb-4">
+                            🌟 Featured Project: {featuredProject.title}
+                        </h2>
+                        <p className="text-foreground/80 max-w-3xl mx-auto text-lg">
+                            Dive into <strong>{featuredProject.title}</strong>, {featuredProject.description.split('.')[0]}.
+                        </p>
+                    </div>
+                    <Card className="max-w-4xl mx-auto">
+                        <CardHeader>
+                            <div className="flex items-center gap-3">
+                                {(() => {
+                                    const IconComponent = getIconComponent(featuredProject.icon);
+                                    return <IconComponent className="w-8 h-8 text-primary" />;
+                                })()}
+                                <div>
+                                    <CardTitle className="text-2xl">{featuredProject.title}</CardTitle>
+                                    <CardDescription>Interactive Web Browsing & AI Automation</CardDescription>
+                                </div>
+                            </div>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <p className="text-foreground/80">
+                                {featuredProject.description}
+                            </p>
+                            <div className="flex gap-2 flex-wrap">
+                                {featuredProject.tags.map((tag) => (
+                                    <Badge key={tag} variant="secondary">{tag}</Badge>
+                                ))}
+                            </div>
+                            <a 
+                                href={featuredProject.githubUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                            >
+                                <ExternalLink className="w-4 h-4" />
+                                Explore {featuredProject.title} on GitHub
+                            </a>
+                        </CardContent>
+                    </Card>
+                </div>
+            </section>
+
+            {/* Projects Showcase */}
+            <section id="projects" className="w-full py-12 md:py-24 lg:py-32 border-t">
                 <div className="container px-4 md:px-6 mx-auto">
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12 text-primary">
-                        Skills & Expertise
+                        🛠️ Projects Showcase
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Skill Card 1: AI/ML */}
-                        <Card className="flex flex-col">
-                            <CardHeader className="items-center pb-4">
-                                <BrainCircuit className="w-10 h-10 mb-4 text-primary" />
-                                <CardTitle>AI & Machine Learning</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground text-center">
-                                    Deep Learning, LLMs (Large Language Models),
-                                    AI Agents, Natural Language Processing
-                                    (NLP), Computer Vision basics. 7+ years
-                                    experience building and deploying AI
-                                    solutions.
-                                </p>
-                                {/* Optional: Add specific tech badges/list here */}
-                            </CardContent>
-                        </Card>
+                    
+                    {/* Ongoing Ventures */}
+                    <div className="mb-16">
+                        <h3 className="text-2xl font-bold mb-8 text-primary flex items-center gap-2">
+                            <Clock className="w-6 h-6" />
+                            Ongoing Ventures 🌱
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {ongoingProjects.map((project) => {
+                                const IconComponent = getIconComponent(project.icon);
+                                return (
+                                    <Card key={project.id}>
+                                        <CardHeader>
+                                            <div className="flex items-center gap-2">
+                                                <IconComponent className="w-5 h-5 text-primary" />
+                                                <CardTitle className="text-lg">{project.title}</CardTitle>
+                                            </div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <p className="text-sm text-muted-foreground mb-3">
+                                                {project.description}
+                                            </p>
+                                            <a 
+                                                href={project.githubUrl} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="text-primary hover:text-primary/80 text-sm"
+                                            >
+                                                View on GitHub →
+                                            </a>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
+                        </div>
+                    </div>
 
-                        {/* Skill Card 2: Fullstack Dev */}
-                        <Card className="flex flex-col">
-                            <CardHeader className="items-center pb-4">
-                                <Code className="w-10 h-10 mb-4 text-primary" />
-                                <CardTitle>Fullstack Development</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground text-center">
-                                    Building complete web applications with
-                                    modern stacks. Proficient in React, Next.js,
-                                    TypeScript, Node.js, Python (Flask/Django),
-                                    Tailwind CSS, SQL/NoSQL databases.
-                                </p>
-                            </CardContent>
-                        </Card>
-
-                        {/* Skill Card 3: Cloud & Tools */}
-                        <Card className="flex flex-col">
-                            <CardHeader className="items-center pb-4">
-                                <Cloud className="w-10 h-10 mb-4 text-primary" />
-                                <CardTitle>Cloud & DevOps</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground text-center">
-                                    Deploying and managing applications on cloud
-                                    platforms (AWS, GCP, Azure). Experience with
-                                    Docker, Kubernetes basics, CI/CD pipelines
-                                    (GitHub Actions/GitLab CI), Terraform.
-                                </p>
-                            </CardContent>
-                        </Card>
+                    {/* Completed Milestones */}
+                    <div>
+                        <h3 className="text-2xl font-bold mb-8 text-primary flex items-center gap-2">
+                            <CheckCircle className="w-6 h-6" />
+                            Completed Milestones ✅
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {completedProjects.map((project) => {
+                                const IconComponent = getIconComponent(project.icon);
+                                return (
+                                    <Card key={project.id}>
+                                        <CardHeader>
+                                            <div className="flex items-center gap-2">
+                                                <IconComponent className="w-5 h-5 text-primary" />
+                                                <CardTitle className="text-lg">{project.title}</CardTitle>
+                                            </div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <p className="text-sm text-muted-foreground mb-3">
+                                                {project.description}
+                                            </p>
+                                            <a 
+                                                href={project.githubUrl} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="text-primary hover:text-primary/80 text-sm"
+                                            >
+                                                View on GitHub →
+                                            </a>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             </section>
-            {/* Education & Hobbies Section */}
-            <section
-                id="background"
-                className="w-full py-12 md:py-24 lg:py-32 border-t"
-            >
+
+            {/* Tech Stack & Skills */}
+            <section id="skills" className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t">
+                <div className="container px-4 md:px-6 mx-auto">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12 text-primary">
+                        💡 My Tech Stack & Skills
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {skills.map((skill) => {
+                            const IconComponent = getIconComponent(skill.icon);
+                            return (
+                                <Card key={skill.id} className="flex flex-col">
+                                    <CardHeader className="items-center pb-4">
+                                        <IconComponent className="w-10 h-10 mb-4 text-primary" />
+                                        <CardTitle>{skill.title}</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p className="text-sm text-muted-foreground text-center mb-4">
+                                            {skill.description}
+                                        </p>
+                                        <div className="flex flex-wrap gap-2 justify-center">
+                                            {skill.technologies.map((tech) => (
+                                                <Badge key={tech} variant="outline">{tech}</Badge>
+                                            ))}
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* Education & Hobbies */}
+            <section id="background" className="w-full py-12 md:py-24 lg:py-32 border-t">
                 <div className="container px-4 md:px-6 mx-auto grid md:grid-cols-2 gap-12">
-                    {/* Education - Using Card */}
                     <div>
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-8 text-primary">
                             Education
                         </h2>
                         <div className="space-y-6">
-                            <Card>
-                                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                                    <Avatar>
-                                        {/* <AvatarImage src="/cmu-logo.png" alt="CMU Logo" /> */}
-                                        <AvatarFallback>
-                                            <GraduationCap />
-                                        </AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <CardTitle className="text-base font-semibold">
-                                            Carnegie Mellon University (CMU)
-                                        </CardTitle>
-                                        <CardDescription>
-                                            Master of Science (2020)
-                                        </CardDescription>
-                                    </div>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">
-                                        Electrical & Computer Engineering
-                                    </p>
-                                    {/* Optional: Add relevant coursework or thesis title */}
-                                </CardContent>
-                            </Card>
-                            <Card>
-                                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                                    <Avatar>
-                                        {/* <AvatarImage src="/drexel-logo.png" alt="Drexel Logo" /> */}
-                                        <AvatarFallback>
-                                            <GraduationCap />
-                                        </AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <CardTitle className="text-base font-semibold">
-                                            Drexel University
-                                        </CardTitle>
-                                        <CardDescription>
-                                            Bachelor of Science (2017)
-                                        </CardDescription>
-                                    </div>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">
-                                        Physics
-                                    </p>
-                                </CardContent>
-                            </Card>
+                            {education.map((edu) => {
+                                const IconComponent = getIconComponent(edu.icon);
+                                return (
+                                    <Card key={edu.id}>
+                                        <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+                                            <Avatar>
+                                                <AvatarFallback>
+                                                    <IconComponent />
+                                                </AvatarFallback>
+                                            </Avatar>
+                                            <div className="flex-1">
+                                                <CardTitle className="text-base font-semibold">
+                                                    {edu.institution}
+                                                </CardTitle>
+                                                <CardDescription>
+                                                    {edu.degree} ({edu.year})
+                                                </CardDescription>
+                                            </div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <p className="text-sm text-muted-foreground">
+                                                {edu.field}
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
                         </div>
                     </div>
 
-                    {/* Hobbies - Keeping simple list */}
                     <div>
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-8 text-primary">
                             Hobbies
                         </h2>
                         <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                                <Bike className="w-6 h-6 text-primary flex-shrink-0" />
-                                <p className="text-foreground/80">
-                                    Cycling - Exploring trails and roads for
-                                    fitness and fun.
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <Music className="w-6 h-6 text-primary flex-shrink-0" />
-                                <p className="text-foreground/80">
-                                    Music Production - Creating beats and
-                                    exploring sound design.
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <Trophy className="w-6 h-6 text-primary flex-shrink-0" />
-                                <p className="text-foreground/80">
-                                    Golfing - Enjoying the challenge and
-                                    outdoors on the course.
-                                </p>
-                            </div>
+                            {hobbies.map((hobby) => {
+                                const IconComponent = getIconComponent(hobby.icon);
+                                return (
+                                    <div key={hobby.id} className="flex items-center gap-4">
+                                        <IconComponent className="w-6 h-6 text-primary flex-shrink-0" />
+                                        <p className="text-foreground/80">
+                                            {hobby.title} - {hobby.description}
+                                        </p>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
             </section>
-            {/* Placeholder for Project/Blog Previews - Still recommend adding later */}
         </main>
     );
 }
