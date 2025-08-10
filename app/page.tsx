@@ -71,8 +71,8 @@ export default function HomePage() {
                         </div>
                         <div className="flex items-center justify-center">
                             <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border-2 border-primary/20">
-                                <AvatarImage src="./images/ghibli_selfie.png" alt="@cyborgoat" />
-                                <AvatarFallback className="text-4xl">CG</AvatarFallback>
+                                <AvatarImage src="./images/ghibli_selfie.png" alt="Junxiao Guo" />
+                                <AvatarFallback className="text-4xl">JG</AvatarFallback>
                             </Avatar>
                         </div>
                     </div>

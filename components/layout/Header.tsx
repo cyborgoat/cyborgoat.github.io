@@ -36,7 +36,7 @@ export default function Header() {
                 >
           <span className="flex items-center space-x-2">
             <MountainIcon className="h-6 w-6"/>
-            <span className="font-bold inline-block">Cyborgoat</span>
+            <span className="font-bold inline-block">Junxiao Guo</span>
           </span>
                 </Link>
 
@@ -90,7 +90,7 @@ export default function Header() {
                                     >
                     <span className="flex items-center gap-2 text-lg font-semibold">
                       <MountainIcon className="h-6 w-6"/>
-                      <span className="">Cyborgoat</span>
+                      <span className="">Junxiao Guo</span>
                     </span>
                                     </Link>
                                     {navLinks.map((link) => (
