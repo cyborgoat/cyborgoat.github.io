@@ -84,7 +84,7 @@ export default function HomePage() {
                 <div className="container px-4 md:px-6 mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary mb-4">
-                            🌟 Featured Project: {featuredProject.title}
+                            Featured Project: {featuredProject.title}
                         </h2>
                         <p className="text-foreground/80 max-w-3xl mx-auto text-lg">
                             Dive into <strong>{featuredProject.title}</strong>, {featuredProject.description.split('.')[0]}.
@@ -173,7 +173,7 @@ export default function HomePage() {
                     <div>
                         <h3 className="text-2xl font-bold mb-8 text-primary flex items-center gap-2">
                             <CheckCircle className="w-6 h-6" />
-                            Completed Milestones ✅
+                            Completed Milestones 
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {completedProjects.map((project) => {
@@ -211,7 +211,7 @@ export default function HomePage() {
             <section id="skills" className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t">
                 <div className="container px-4 md:px-6 mx-auto">
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12 text-primary">
-                        💡 My Tech Stack & Skills
+                         My Tech Stack & Skills
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {skills.map((skill) => {
