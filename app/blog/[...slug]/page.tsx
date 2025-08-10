@@ -5,23 +5,23 @@ import {getAllPostSlugs, getPostData} from "@/lib/posts";
 import MarkdownRender from "@/components/markdown/MarkdownRender";
 import MarkdownMedia from "@/components/markdown/MarkdownMedia";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 
 // Mark the component as async - getPostData can remain async if other async operations happen, but it is not strictly necessary if only getPostData (now sync) is awaited.
 // For simplicity with potential future async ops, we can leave page as async.
 
 // The params object itself is a Promise in Next.js 15 for Server Components
-export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string[] }> }) {
-    const { slug: slugArray } = await params; // Await params to get its properties
+export default async function BlogDetailPage({params}: { params: Promise<{ slug: string[] }> }) {
+    const {slug: slugArray} = await params; // Await params to get its properties
     const slugString = slugArray.join('/');
 
     const post = getPostData(slugString);
 
     if (!post) {
-        notFound(); 
+        notFound();
     }
 
-    const metadata = post.metadata; 
+    const metadata = post.metadata;
 
     const displayDate = metadata.date
         ? new Date(metadata.date).toLocaleDateString("en-US", { // Default to en-US date format
@@ -74,8 +74,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
             {/* Post Content */}
             <div className="prose prose-stone dark:prose-invert max-w-none">
-                {metadata.video && <MarkdownMedia src={metadata.video} alt={metadata.title || "Post video"} />} {/* Reverted fallback */}
-                <MarkdownRender content={post.content as string} />
+                {metadata.video && <MarkdownMedia src={metadata.video}
+                                                  alt={metadata.title || "Post video"}/>} {/* Reverted fallback */}
+                <MarkdownRender content={post.content as string}/>
             </div>
             <div className="mt-8 flex justify-center">
                 <Button asChild variant="link">
@@ -88,7 +89,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
 // generateStaticParams function using the helper
 export function generateStaticParams() {
-    const postSlugs = getAllPostSlugs(); 
+    const postSlugs = getAllPostSlugs();
     return postSlugs.map(item => ({
         slug: item.slug.split('/'), // This remains to support [...slug]
     }));

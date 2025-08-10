@@ -1,30 +1,19 @@
 "use client";
-import React, { useState, useMemo, useEffect } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import React, {useEffect, useMemo, useState} from "react";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Badge} from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
-import { Post } from "@/types/post";
+import {Post} from "@/types/post";
 import TextPressure from "@/components/animation/TextPressure";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command";
+import {Button} from "@/components/ui/button";
+import {motion} from "framer-motion";
+import {Check, ChevronsUpDown} from "lucide-react";
+import {cn} from "@/lib/utils";
+import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover";
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,} from "@/components/ui/command";
 
-export default function BlogList({ posts }: { posts: Post[] }) {
+export default function BlogList({posts}: { posts: Post[] }) {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [selectedTag, setSelectedTag] = useState("");
@@ -45,7 +34,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
         const q = search.trim().toLowerCase();
         if (!q) return filtered;
         return filtered.filter((post) => {
-            const { title = "", excerpt = "", tags = [] } = post.metadata || {};
+            const {title = "", excerpt = "", tags = []} = post.metadata || {};
             return (
                 title.toLowerCase().includes(q) ||
                 excerpt.toLowerCase().includes(q) ||
@@ -95,7 +84,10 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                     <Button
                         size="sm"
                         variant={selectedTag === "" ? "default" : "outline"}
-                        onClick={() => { setSelectedTag(""); setPage(1); }}
+                        onClick={() => {
+                            setSelectedTag("");
+                            setPage(1);
+                        }}
                         className="transition-all"
                     >
                         All Tags
@@ -112,12 +104,12 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                                 {selectedTag
                                     ? tagsList.find((tag) => tag.toLowerCase() === selectedTag.toLowerCase())
                                     : "Select a tag..."}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-[200px] p-0">
                             <Command>
-                                <CommandInput placeholder="Search tag..." />
+                                <CommandInput placeholder="Search tag..."/>
                                 <CommandList>
                                     <CommandEmpty>No tag found.</CommandEmpty>
                                     <CommandGroup>
@@ -152,12 +144,12 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                     <motion.li
                         key={post.metadata.slug}
                         className="relative border rounded-lg p-6 group hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-1 bg-background/50 backdrop-blur-sm overflow-hidden will-change-transform will-change-opacity"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
+                        initial={{opacity: 0, y: 20}}
+                        animate={{opacity: 1, y: 0}}
+                        transition={{duration: 0.5}}
                         whileHover={{
                             scale: 1.02,
-                            transition: { duration: 0.2 }
+                            transition: {duration: 0.2}
                         }}
                     >
                         <Link href={`/blog/${post.metadata.slug}`} className="block focus:outline-none">
@@ -165,8 +157,8 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                                 <div className="mb-4 overflow-hidden rounded-md">
                                     <motion.div
                                         className="will-change-transform"
-                                        whileHover={{ scale: 1.05 }}
-                                        transition={{ duration: 0.3 }}
+                                        whileHover={{scale: 1.05}}
+                                        transition={{duration: 0.3}}
                                     >
                                         <Image
                                             src={post.metadata.thumbnail!}
@@ -206,12 +198,12 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                                     <time dateTime={post.metadata.date}>
                                         {post.metadata.date
                                             ? new Date(
-                                                  post.metadata.date
-                                              ).toLocaleDateString("en-US", {
-                                                  year: "numeric",
-                                                  month: "short",
-                                                  day: "numeric",
-                                              })
+                                                post.metadata.date
+                                            ).toLocaleDateString("en-US", {
+                                                year: "numeric",
+                                                month: "short",
+                                                day: "numeric",
+                                            })
                                             : "No date"}
                                     </time>
                                 </div>
@@ -240,7 +232,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                     >
                         Previous
                     </button>
-                    {Array.from({ length: pageCount }, (_, i) => (
+                    {Array.from({length: pageCount}, (_, i) => (
                         <button
                             key={i}
                             className={`px-3 py-1 rounded-md border text-sm ${

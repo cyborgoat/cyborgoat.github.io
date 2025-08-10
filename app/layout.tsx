@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         "AI Engineer",
         "Tech Leadership"
     ],
-    authors: [{ name: "Junxiao Guo" }],
+    authors: [{name: "Junxiao Guo"}],
     creator: "Junxiao Guo",
     publisher: "Junxiao Guo",
     formatDetection: {
@@ -81,19 +81,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-    children,
-}: {
+                                       children,
+                                   }: {
     children: React.ReactNode;
 }) {
     return (
         <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
         <head>
-            <link rel="icon" href="/favicon.ico" />
-            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-            <link rel="manifest" href="/manifest.json" />
-            <meta name="theme-color" content="#000000" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            
+            <link rel="icon" href="/favicon.ico"/>
+            <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+            <link rel="manifest" href="/manifest.json"/>
+            <meta name="theme-color" content="#000000"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
             {/* Structured Data for Person */}
             <script
                 type="application/ld+json"
@@ -118,7 +118,7 @@ export default function RootLayout({
                                 "description": "Master of Science in Electrical & Computer Engineering"
                             },
                             {
-                                "@type": "CollegeOrUniversity", 
+                                "@type": "CollegeOrUniversity",
                                 "name": "Drexel University",
                                 "description": "Bachelor of Science in Physics"
                             }

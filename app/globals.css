@@ -317,16 +317,16 @@
 }
 
 @keyframes shine {
-  0% {
-    transform: translateX(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(100%) rotate(45deg);
-  }
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
 }
 
 @layer utilities {
-  .animate-shine {
-    animation: shine 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
+    .animate-shine {
+        animation: shine 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
 }
