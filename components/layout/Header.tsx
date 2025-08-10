@@ -11,7 +11,6 @@ import {
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import {Menu, MountainIcon} from 'lucide-react'; // Or your preferred icons
-import {ThemeToggleButton} from "@/components/theme-toggle-button";
 import {usePathname} from 'next/navigation';
 import {cn} from "@/lib/utils";
 
@@ -70,10 +69,8 @@ export default function Header() {
                     </NavigationMenu>
                 </div>
 
-                {/* Right-aligned items: Theme Toggle and Mobile Menu Trigger */}
-                <div className="flex items-right ml-auto space-x-4">
-                    <ThemeToggleButton/>
-
+                {/* Right-aligned items: Mobile Menu Trigger */}
+                <div className="flex items-right ml-auto">
                     {/* Mobile Navigation Trigger */}
                     <div className="md:hidden">
                         <Sheet>
