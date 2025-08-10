@@ -34,7 +34,7 @@ export default function Header() {
                     href="/"
                     className="mr-6 flex items-center space-x-2"
                     prefetch={false}
-                    legacyBehavior>
+                >
           <span className="flex items-center space-x-2">
             <MountainIcon className="h-6 w-6"/>
             <span className="font-bold inline-block">Cyborgoat</span>
@@ -47,22 +47,23 @@ export default function Header() {
                         <NavigationMenuList>
                             {navLinks.map((link) => (
                                 <NavigationMenuItem key={link.href}>
-                                    <Link href={link.href} legacyBehavior passHref>
-                                        <NavigationMenuLink
-                                            className={cn(
-                                                "group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                                                "bg-transparent",
-                                                pathname !== link.href &&
-                                                "hover:text-primary hover:underline underline-offset-4 focus:bg-transparent focus:text-primary focus:outline-none focus:underline",
-                                                pathname === link.href
-                                                    ? "text-primary font-semibold underline underline-offset-4"
-                                                    : "text-muted-foreground",
-                                                "disabled:pointer-events-none disabled:opacity-50"
-                                            )}
-                                        >
+                                    <NavigationMenuLink
+                                        asChild
+                                        className={cn(
+                                            "group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                                            "bg-transparent",
+                                            pathname !== link.href &&
+                                            "hover:text-primary hover:underline underline-offset-4 focus:bg-transparent focus:text-primary focus:outline-none focus:underline",
+                                            pathname === link.href
+                                                ? "text-primary font-semibold underline underline-offset-4"
+                                                : "text-muted-foreground",
+                                            "disabled:pointer-events-none disabled:opacity-50"
+                                        )}
+                                    >
+                                        <Link href={link.href} prefetch={false}>
                                             {link.label}
-                                        </NavigationMenuLink>
-                                    </Link>
+                                        </Link>
+                                    </NavigationMenuLink>
                                 </NavigationMenuItem>
                             ))}
                         </NavigationMenuList>
@@ -89,7 +90,7 @@ export default function Header() {
                                         href="/"
                                         className="flex items-center gap-2 text-lg font-semibold"
                                         prefetch={false}
-                                        legacyBehavior>
+                                    >
                     <span className="flex items-center gap-2 text-lg font-semibold">
                       <MountainIcon className="h-6 w-6"/>
                       <span className="">Cyborgoat</span>
@@ -101,7 +102,7 @@ export default function Header() {
                                             href={link.href}
                                             className="text-muted-foreground hover:text-foreground"
                                             prefetch={false}
-                                            legacyBehavior>
+                                        >
                                             {link.label}
                                         </Link>
                                     ))}
