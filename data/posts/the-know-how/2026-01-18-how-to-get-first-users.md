@@ -1,4 +1,13 @@
-# How to Get Your First Users
+---
+title: How to get your first users
+date: '2026-01-18'
+author: Cyborgoat
+authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
+tags:
+  - Business Strategy
+excerpt: Strategies and insights on how to acquire your first users effectively.
+---
+
 
 > **Based on**: [How To Get Your First Users](https://www.youtube.com/watch?v=0kARDVL2nZg) — Y Combinator
 >
