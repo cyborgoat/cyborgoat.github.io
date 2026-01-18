@@ -53,20 +53,20 @@ export default function HomePage() {
             <Hero/>
 
             {/* About Me Section */}
-            <section id="about" className="w-full py-12 md:py-24 lg:py-32 border-t">
-                <div className="container px-4 md:px-6 mx-auto">
-                    <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-                        <div className="space-y-4">
-                            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
+            <section id="about" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+                <div className="container px-4 md:px-6 mx-auto max-w-6xl">
+                    <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-center">
+                        <div className="space-y-5 lg:col-span-7">
+                            <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground">
                                 {aboutMe.title}
                             </h2>
-                            <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
+                            <p className={cn("text-foreground/70", "leading-relaxed md:text-lg") }>
                                 {aboutMe.description}
                             </p>
-                            <p className={cn("text-foreground/80", "md:text-lg lg:text-base xl:text-lg")}>
+                            <p className={cn("text-foreground/70", "leading-relaxed md:text-lg") }>
                                 {aboutMe.experience}
                             </p>
-                            <div className="flex gap-4 pt-4">
+                            <div className="flex flex-wrap items-center gap-4 pt-4">
                                 {aboutMe.socialLinks.map((link) => {
                                     const IconComponent = getIconComponent(link.icon);
                                     return (
@@ -75,7 +75,7 @@ export default function HomePage() {
                                             href={link.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                                            className="flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors duration-200"
                                         >
                                             <IconComponent className="w-5 h-5"/>
                                             <span>{link.label}</span>
@@ -84,8 +84,8 @@ export default function HomePage() {
                                 })}
                             </div>
                         </div>
-                        <div className="flex items-center justify-center">
-                            <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border-2 border-primary/20">
+                        <div className="flex items-center justify-center lg:col-span-5">
+                            <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border border-border/60 shadow-sm">
                                 <AvatarImage src="./images/ghibli_selfie.png" alt="Junxiao Guo"/>
                                 <AvatarFallback className="text-4xl">JG</AvatarFallback>
                             </Avatar>
@@ -95,18 +95,18 @@ export default function HomePage() {
             </section>
 
             {/* Featured Project: Swarm */}
-            <section id="featured" className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t">
-                <div className="container px-4 md:px-6 mx-auto">
+            <section id="featured" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
+                <div className="container px-4 md:px-6 mx-auto max-w-6xl">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary mb-4">
+                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground mb-4">
                             Featured Project: {featuredProject.title}
                         </h2>
-                        <p className="text-foreground/80 max-w-3xl mx-auto text-lg">
+                        <p className="text-foreground/70 max-w-3xl mx-auto text-base md:text-lg">
                             Dive
                             into <strong>{featuredProject.title}</strong>, {featuredProject.description.split('.')[0]}.
                         </p>
                     </div>
-                    <Card className="max-w-4xl mx-auto">
+                    <Card className="max-w-4xl mx-auto border border-border/60 bg-card/90 shadow-sm transition-shadow duration-300 hover:shadow-md">
                         <CardHeader>
                             <div className="flex items-center gap-3">
                                 {(() => {
@@ -120,7 +120,7 @@ export default function HomePage() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <p className="text-foreground/80">
+                            <p className="text-foreground/70 leading-relaxed">
                                 {featuredProject.description}
                             </p>
                             <div className="flex gap-2 flex-wrap">
@@ -132,7 +132,7 @@ export default function HomePage() {
                                 href={featuredProject.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors duration-200"
                             >
                                 <ExternalLink className="w-4 h-4"/>
                                 Explore {featuredProject.title} on GitHub
@@ -143,23 +143,28 @@ export default function HomePage() {
             </section>
 
             {/* Projects Showcase */}
-            <section id="projects" className="w-full py-12 md:py-24 lg:py-32 border-t">
-                <div className="container px-4 md:px-6 mx-auto">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12 text-primary">
-                        🛠️ Projects Showcase
-                    </h2>
+            <section id="projects" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+                <div className="container px-4 md:px-6 mx-auto max-w-6xl">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground">
+                            Projects Showcase
+                        </h2>
+                        <p className="mt-3 text-foreground/70 text-base md:text-lg">
+                            A focused view of my active builds and completed milestones.
+                        </p>
+                    </div>
 
                     {/* Ongoing Ventures */}
                     <div className="mb-16">
-                        <h3 className="text-2xl font-bold mb-8 text-primary flex items-center gap-2">
+                        <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center gap-2">
                             <Clock className="w-6 h-6"/>
-                            Ongoing Ventures 🌱
+                            Ongoing Ventures
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {ongoingProjects.map((project) => {
                                 const IconComponent = getIconComponent(project.icon);
                                 return (
-                                    <Card key={project.id}>
+                                    <Card key={project.id} className="border border-border/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
                                         <CardHeader>
                                             <div className="flex items-center gap-2">
                                                 <IconComponent className="w-5 h-5 text-primary"/>
@@ -167,14 +172,14 @@ export default function HomePage() {
                                             </div>
                                         </CardHeader>
                                         <CardContent>
-                                            <p className="text-sm text-muted-foreground mb-3">
+                                            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
                                                 {project.description}
                                             </p>
                                             <a
                                                 href={project.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-primary hover:text-primary/80 text-sm"
+                                                className="text-primary hover:text-primary/80 text-sm transition-colors duration-200"
                                             >
                                                 View on GitHub →
                                             </a>
@@ -187,7 +192,7 @@ export default function HomePage() {
 
                     {/* Completed Milestones */}
                     <div>
-                        <h3 className="text-2xl font-bold mb-8 text-primary flex items-center gap-2">
+                        <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center gap-2">
                             <CheckCircle className="w-6 h-6"/>
                             Completed Milestones
                         </h3>
@@ -195,7 +200,7 @@ export default function HomePage() {
                             {completedProjects.map((project) => {
                                 const IconComponent = getIconComponent(project.icon);
                                 return (
-                                    <Card key={project.id}>
+                                    <Card key={project.id} className="border border-border/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
                                         <CardHeader>
                                             <div className="flex items-center gap-2">
                                                 <IconComponent className="w-5 h-5 text-primary"/>
@@ -203,14 +208,14 @@ export default function HomePage() {
                                             </div>
                                         </CardHeader>
                                         <CardContent>
-                                            <p className="text-sm text-muted-foreground mb-3">
+                                            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
                                                 {project.description}
                                             </p>
                                             <a
                                                 href={project.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-primary hover:text-primary/80 text-sm"
+                                                className="text-primary hover:text-primary/80 text-sm transition-colors duration-200"
                                             >
                                                 View on GitHub →
                                             </a>
@@ -224,22 +229,22 @@ export default function HomePage() {
             </section>
 
             {/* Tech Stack & Skills */}
-            <section id="skills" className="w-full py-12 md:py-24 lg:py-32 bg-muted/40 border-t">
-                <div className="container px-4 md:px-6 mx-auto">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12 text-primary">
+            <section id="skills" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
+                <div className="container px-4 md:px-6 mx-auto max-w-6xl">
+                    <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-center mb-12 text-foreground">
                         My Tech Stack & Skills
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {skills.map((skill) => {
                             const IconComponent = getIconComponent(skill.icon);
                             return (
-                                <Card key={skill.id} className="flex flex-col">
+                                <Card key={skill.id} className="flex flex-col border border-border/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
                                     <CardHeader className="items-center pb-4">
                                         <IconComponent className="w-10 h-10 mb-4 text-primary"/>
                                         <CardTitle>{skill.title}</CardTitle>
                                     </CardHeader>
                                     <CardContent>
-                                        <p className="text-sm text-muted-foreground text-center mb-4">
+                                        <p className="text-sm text-muted-foreground text-center mb-4 leading-relaxed">
                                             {skill.description}
                                         </p>
                                         <div className="flex flex-wrap gap-2 justify-center">
@@ -256,17 +261,17 @@ export default function HomePage() {
             </section>
 
             {/* Education & Hobbies */}
-            <section id="background" className="w-full py-12 md:py-24 lg:py-32 border-t">
-                <div className="container px-4 md:px-6 mx-auto grid md:grid-cols-2 gap-12">
+            <section id="background" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+                <div className="container px-4 md:px-6 mx-auto max-w-6xl grid md:grid-cols-2 gap-12">
                     <div>
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-8 text-primary">
+                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground">
                             Education
                         </h2>
                         <div className="space-y-6">
                             {education.map((edu) => {
                                 const IconComponent = getIconComponent(edu.icon);
                                 return (
-                                    <Card key={edu.id}>
+                                    <Card key={edu.id} className="border border-border/60 shadow-sm">
                                         <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
                                             <Avatar>
                                                 <AvatarFallback>
@@ -294,7 +299,7 @@ export default function HomePage() {
                     </div>
 
                     <div>
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-8 text-primary">
+                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground">
                             Hobbies
                         </h2>
                         <div className="space-y-4">
@@ -303,7 +308,7 @@ export default function HomePage() {
                                 return (
                                     <div key={hobby.id} className="flex items-center gap-4">
                                         <IconComponent className="w-6 h-6 text-primary flex-shrink-0"/>
-                                        <p className="text-foreground/80">
+                                        <p className="text-foreground/70 leading-relaxed">
                                             {hobby.title} - {hobby.description}
                                         </p>
                                     </div>

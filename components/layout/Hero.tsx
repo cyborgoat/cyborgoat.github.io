@@ -13,12 +13,12 @@ const LightBeams = dynamic(
 
 export default function Hero() {
     return (
-        <section className="relative w-full min-h-[calc(100vh-theme(spacing.14))] flex items-center justify-center bg-muted/40 overflow-hidden">
+        <section className="relative w-full min-h-[calc(100vh-theme(spacing.14))] flex items-center justify-center bg-background overflow-hidden">
             <LightBeams className="absolute inset-0 z-0" sizePercent={80} themeMode="dark" />
-            <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <div className="flex flex-col items-center space-y-6 text-center">
-                    <div className="space-y-3">
-                        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none text-primary">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-6xl">
+                <div className="flex flex-col items-center space-y-8 text-center">
+                    <div className="space-y-4">
+                        <div className="w-full">
                             <TextPressure
                                 text="Junxiao Guo"
                                 flex={true}
@@ -27,12 +27,11 @@ export default function Hero() {
                                 width={true}
                                 weight={true}
                                 italic={true}
-                                textColor="#ffffff"
-                                strokeColor="#ff0000"
-                                minFontSize={36}
+                                className="!text-foreground tracking-[-0.06em] font-black"
+                                minFontSize={44}
                             />
-                        </h1>
-                        <p className="mx-auto max-w-[700px] text-foreground/80 text-lg md:text-xl">
+                        </div>
+                        <p className="mx-auto max-w-[760px] text-foreground/70 text-base md:text-lg">
                             <DecryptedText
                                 text="AI Engineer & Fullstack Enthusiast."
                                 animateOn="view"
@@ -42,7 +41,7 @@ export default function Hero() {
                             />
                         </p>
                     </div>
-                    <div className="space-x-4 pt-4">
+                    <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <Button asChild size="lg">
                             <Link href="/project" prefetch={false}>
                                 View Projects
