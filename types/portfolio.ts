@@ -47,6 +47,7 @@ export interface AboutMe {
   description: string;
   experience: string;
   focus: string;
+  authorImage?: string;
   socialLinks: SocialLink[];
 }
 

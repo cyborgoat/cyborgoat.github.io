@@ -21,6 +21,11 @@ export default function BlogTocMenu({
 }: BlogTocMenuProps) {
   const [items, setItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const container = document.querySelector(containerSelector);
@@ -115,7 +120,7 @@ export default function BlogTocMenu({
     );
   }, [items, activeId, className]);
 
-  if (typeof document === "undefined") return null;
+  if (!isMounted || typeof document === "undefined") return null;
   if (!menu) return null;
 
   return createPortal(menu, document.body);

@@ -6,6 +6,7 @@ export const portfolioData: PortfolioData = {
     description: "I'm passionate about AI and fortunate to lead an incredible team of 20+ brilliant engineers, many of whom graduated from top universities globally. Together, we're pushing the boundaries of Large Language Models (LLMs), AI Agents, and full-stack development.",
     experience: "I'm currently focused on leading our team's work on advanced LLM systems and AI agent development. It's incredibly rewarding to collaborate with such talented individuals - we've successfully delivered multiple AI projects from concept to production while learning from each other and fostering a culture of innovation.",
     focus: "AI Tech Leader & Senior Engineer",
+    authorImage: "/junxiaog.jpeg",
     socialLinks: [
       {
         id: "github",

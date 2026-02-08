@@ -21,6 +21,11 @@ export default function AnchorMenu({
   className,
 }: AnchorMenuProps) {
   const [activeSection, setActiveSection] = useState<string>("");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (sections.length === 0) return;
@@ -122,7 +127,7 @@ export default function AnchorMenu({
   );
 
   if (position === "fixed") {
-    if (typeof document === "undefined") return null;
+    if (!isMounted || typeof document === "undefined") return null;
     return createPortal(menu, document.body);
   }
 
