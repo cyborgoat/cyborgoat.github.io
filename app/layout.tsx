@@ -9,7 +9,7 @@ import {ThemeProvider} from "@/components/theme-provider";
 
 export const metadata: Metadata = {
     title: {
-        default: "Junxiao Guo - AI Tech Leader & Senior Engineer",
+        default: "Junxiao Guo",
         template: "%s | Junxiao Guo"
     },
     description: "AI Tech Leader with 7+ years of experience in Large Language Models (LLMs), AI Agents, and full-stack development. Leading a team of 20+ engineers from top global universities.",
@@ -89,8 +89,6 @@ export default function RootLayout({
         <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
         <head>
             <script async src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-            <link rel="icon" href="/favicon.ico"/>
-            <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
             <link rel="manifest" href="/manifest.json"/>
             <meta name="theme-color" content="#000000"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
