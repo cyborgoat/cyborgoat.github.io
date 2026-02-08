@@ -8,6 +8,7 @@ import rehypeRaw from 'rehype-raw';
 import 'katex/dist/katex.min.css';
 import MarkdownCodeBlock from "@/components/markdown/MarkdownCodeBlock";
 import MarkdownMedia from "@/components/markdown/MarkdownMedia";
+import MermaidDiagram from "@/components/markdown/MermaidDiagram";
 
 interface MarkdownRenderProps {
     content: string;
@@ -20,6 +21,12 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
             props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & { inline?: boolean }
         ) {
             const {className: codeClass, children} = props;
+
+            // Check if it's a mermaid diagram
+            if (codeClass === 'language-mermaid') {
+                const content = typeof children === 'string' ? children : String(children);
+                return <MermaidDiagram content={content} />;
+            }
 
             // Check if className indicates a language-specific fenced code block
             if (codeClass && codeClass.startsWith('language-')) {

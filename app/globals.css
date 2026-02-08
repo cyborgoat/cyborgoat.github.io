@@ -341,3 +341,18 @@
         animation: shine 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 }
+/* Mermaid Diagram Styles */
+.mermaid {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.mermaid svg {
+    max-width: 85%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}

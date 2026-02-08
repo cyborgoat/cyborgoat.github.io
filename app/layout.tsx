@@ -88,6 +88,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
         <head>
+            <script async src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
             <link rel="icon" href="/favicon.ico"/>
             <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
             <link rel="manifest" href="/manifest.json"/>
