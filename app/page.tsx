@@ -1,4 +1,7 @@
+'use client';
+
 import Hero from '@/components/layout/Hero';
+import AnchorMenu from '@/components/layout/AnchorMenu';
 import {
     Bike,
     BrainCircuit,
@@ -48,15 +51,30 @@ export default function HomePage() {
     const education = getEducation();
     const hobbies = getHobbies();
 
+    const anchorSections = [
+        { id: 'about', label: 'About' },
+        { id: 'featured', label: 'Featured' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'skills', label: 'Skills' },
+        { id: 'background', label: 'Background' },
+    ];
+
     return (
         <main className="flex-1">
-            <Hero/>
+            <AnchorMenu
+                sections={anchorSections}
+                position="fixed"
+                className="hidden lg:block"
+            />
+            <div data-speed="1.05">
+                <Hero/>
+            </div>
 
             {/* About Me Section */}
-            <section id="about" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+            <section id="about" data-speed="0.9" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
                     <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-center">
-                        <div className="space-y-5 lg:col-span-7">
+                        <div className="space-y-5 lg:col-span-7 fade-on-scroll">
                             <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground">
                                 {aboutMe.title}
                             </h2>
@@ -95,9 +113,9 @@ export default function HomePage() {
             </section>
 
             {/* Featured Project: Swarm */}
-            <section id="featured" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
+            <section id="featured" data-speed="1.05" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <div className="text-center mb-12">
+                    <div className="text-center mb-12 fade-on-scroll">
                         <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground mb-4">
                             Featured Project: {featuredProject.title}
                         </h2>
@@ -143,9 +161,9 @@ export default function HomePage() {
             </section>
 
             {/* Projects Showcase */}
-            <section id="projects" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+            <section id="projects" data-speed="0.95" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <div className="text-center mb-12">
+                    <div className="text-center mb-12 fade-on-scroll">
                         <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground">
                             Projects Showcase
                         </h2>
@@ -229,9 +247,9 @@ export default function HomePage() {
             </section>
 
             {/* Tech Stack & Skills */}
-            <section id="skills" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
+            <section id="skills" data-speed="1.1" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-center mb-12 text-foreground">
+                    <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-center mb-12 text-foreground fade-on-scroll">
                         My Tech Stack & Skills
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -261,10 +279,10 @@ export default function HomePage() {
             </section>
 
             {/* Education & Hobbies */}
-            <section id="background" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+            <section id="background" data-speed="0.9" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl grid md:grid-cols-2 gap-12">
                     <div>
-                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground">
+                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground fade-on-scroll">
                             Education
                         </h2>
                         <div className="space-y-6">
@@ -299,7 +317,7 @@ export default function HomePage() {
                     </div>
 
                     <div>
-                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground">
+                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground fade-on-scroll">
                             Hobbies
                         </h2>
                         <div className="space-y-4">

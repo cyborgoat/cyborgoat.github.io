@@ -16,6 +16,24 @@ interface MarkdownRenderProps {
 }
 
 export default function MarkdownRender({content, className}: MarkdownRenderProps) {
+    const getNodeText = (node: React.ReactNode): string => {
+        if (typeof node === "string") return node;
+        if (typeof node === "number") return String(node);
+        if (Array.isArray(node)) return node.map(getNodeText).join("");
+        if (React.isValidElement<{ children?: React.ReactNode }>(node)) {
+            return getNodeText(node.props.children);
+        }
+        return "";
+    };
+
+    const slugify = (text: string) =>
+        text
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-");
+
     const components: Components = {
         code(
             props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & { inline?: boolean }
@@ -107,23 +125,30 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
             return <li className="text-gray-900 dark:text-gray-200">{children}</li>;
         },
         h1({children}) {
-            return <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-200 mb-6">{children}</h1>;
+            const id = slugify(getNodeText(children));
+            return <h1 id={id} className="text-3xl font-bold text-gray-900 dark:text-gray-200 mb-6">{children}</h1>;
         },
         h2({children}) {
+            const id = slugify(getNodeText(children));
             return <h2
+                id={id}
                 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-4 border-b-2 border-gray-900 dark:border-gray-200">{children}</h2>;
         },
         h3({children}) {
-            return <h3 className="text-xl font-bold text-gray-900 dark:text-gray-200 mb-3">{children}</h3>;
+            const id = slugify(getNodeText(children));
+            return <h3 id={id} className="text-xl font-bold text-gray-900 dark:text-gray-200 mb-3">{children}</h3>;
         },
         h4({children}) {
-            return <h4 className="text-lg font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h4>;
+            const id = slugify(getNodeText(children));
+            return <h4 id={id} className="text-lg font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h4>;
         },
         h5({children}) {
-            return <h5 className="text-base font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h5>;
+            const id = slugify(getNodeText(children));
+            return <h5 id={id} className="text-base font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h5>;
         },
         h6: ({children}) => {
-            return <h6 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h6>;
+            const id = slugify(getNodeText(children));
+            return <h6 id={id} className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h6>;
         },
         blockquote: ({children}) => {
             return (

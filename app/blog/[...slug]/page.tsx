@@ -6,6 +6,7 @@ import MarkdownRender from "@/components/markdown/MarkdownRender";
 import MarkdownMedia from "@/components/markdown/MarkdownMedia";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import BlogTocMenu from "@/components/layout/BlogTocMenu";
 
 // Mark the component as async - getPostData can remain async if other async operations happen, but it is not strictly necessary if only getPostData (now sync) is awaited.
 // For simplicity with potential future async ops, we can leave page as async.
@@ -34,6 +35,7 @@ export default async function BlogDetailPage({params}: { params: Promise<{ slug:
 
     return (
         <article className="container relative max-w-3xl py-6 lg:py-10 px-4 md:px-6 mx-auto">
+            <BlogTocMenu />
             {/* Post Header */}
             <div className="mb-8 text-center">
                 {metadata.tags && metadata.tags.length > 0 && (
@@ -73,7 +75,7 @@ export default async function BlogDetailPage({params}: { params: Promise<{ slug:
             </div>
 
             {/* Post Content */}
-            <div className="prose prose-stone dark:prose-invert max-w-none">
+            <div id="post-content" className="prose prose-stone dark:prose-invert max-w-none">
                 {metadata.video && <MarkdownMedia src={metadata.video}
                                                   alt={metadata.title || "Post video"}/>} {/* Reverted fallback */}
                 <MarkdownRender content={post.content as string}/>

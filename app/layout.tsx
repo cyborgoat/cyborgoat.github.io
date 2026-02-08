@@ -6,6 +6,7 @@ import {cn} from "@/lib/utils";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {ThemeProvider} from "@/components/theme-provider";
+import SmoothScroller from "@/components/layout/SmoothScroller";
 
 export const metadata: Metadata = {
     title: {
@@ -145,10 +146,12 @@ export default function RootLayout({
             disableTransitionOnChange
         >
             <Header/>
-            <div className="flex-1">
-                {children}
-            </div>
-            <Footer/>
+            <SmoothScroller>
+              <div className="flex-1">
+                  {children}
+              </div>
+              <Footer/>
+            </SmoothScroller>
         </ThemeProvider>
         </body>
         </html>
