@@ -1,27 +1,15 @@
 [
   {
-    "title": "MonoLLM",
-    "excerpt": "A powerful framework that provides a unified interface for multiple LLM providers, allowing developers to seamlessly switch between different AI models while maintaining consistent API interactions.",
-    "thumbnail": "https://images.unsplash.com/photo-1747579263364-872c1e4ecfd0?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "link": "https://github.com/cyborgoat/MonoLLM"
-  },
-  {
-    "title": "Omnichat - All-in-One LLM Chat Application",
-    "excerpt": "A modern chat application for interacting with multiple AI models from different providers. Available as both a web app and desktop application.",
-    "thumbnail": "/images/projects/omnichat.png",
-    "link": "https://github.com/cyborgoat/omnichat"
+    "title": "Cubicles",
+    "excerpt": "An inspectable, tool-driven agent workbench with a Python CLI core, persistent sessions, traceable memory, explicit tool use, and support for local and OpenAI-compatible model providers.",
+    "thumbnail": "/images/projects/cubicles.png",
+    "link": "https://github.com/cyborgoat/cubicles"
   },
   {
     "title": "LLM Agent Workflow Generator",
     "excerpt": "A minimal agentic LLM web app built with Next.js 15 (App Router), featuring a chat interface and a visual workflow editor for AI agent flows.",
     "thumbnail": "/images/projects/workflow-agent.png",
     "link": "https://github.com/cyborgoat/llm-workflow-agent-template"
-  },
-  {
-    "title": "Company Website Template - Next.js",
-    "excerpt": "This is a template for building a modern company website using Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui. It includes features for managing content like blogs and news articles via Markdown files.",
-    "thumbnail": "/images/projects/company-website-template.png",
-    "link": "https://github.com/cyborgoat/company-website-template"
   },
   {
     "title": "SimpleLM: Lightweight Transformer Language Model with RLHF (PPO)",
