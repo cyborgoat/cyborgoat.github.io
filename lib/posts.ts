@@ -10,18 +10,20 @@ const postsDirectory = path.join(process.cwd(), 'data', 'posts');
 // Recursively collect all markdown file paths under postsDirectory
 function getPostFiles(): string[] {
   const files: string[] = [];
-  function walk(dir: string) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
+  function walk(relativeDir = '') {
+    const currentDir = path.join(postsDirectory, relativeDir);
+    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
     for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
+      const relativePath = path.join(relativeDir, entry.name);
+      const fullPath = path.join(postsDirectory, relativePath);
       if (entry.isDirectory()) {
-        walk(fullPath);
+        walk(relativePath);
       } else if (entry.isFile() && entry.name.endsWith('.md')) { // Only .md files
         files.push(fullPath);
       }
     }
   }
-  walk(postsDirectory);
+  walk();
   return files;
 }
 

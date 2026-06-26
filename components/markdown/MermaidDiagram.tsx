@@ -1,23 +1,39 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import mermaid from "mermaid";
+import React, { useEffect, useMemo, useState } from "react";
 
 interface MermaidDiagramProps {
     content: string;
 }
 
 export default function MermaidDiagram({ content }: MermaidDiagramProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const mermaidRef = useRef<HTMLDivElement>(null);
+    const [svg, setSvg] = useState<string>("");
+    const [renderError, setRenderError] = useState(false);
+
+    const diagramId = useMemo(() => {
+        // Stable id derived from content avoids random values and keeps render deterministic.
+        let hash = 0;
+        for (let i = 0; i < content.length; i += 1) {
+            hash = (hash << 5) - hash + content.charCodeAt(i);
+            hash |= 0;
+        }
+        return `mermaid-${Math.abs(hash)}`;
+    }, [content]);
 
     useEffect(() => {
-        const renderDiagram = async () => {
-            if (!mermaidRef.current || !content) return;
+        let isCancelled = false;
+
+        const renderDiagram = async (): Promise<void> => {
+            if (!content.trim()) {
+                setSvg("");
+                setRenderError(false);
+                return;
+            }
 
             try {
-                // Initialize mermaid with responsive configuration
+                const mermaid = (await import("mermaid")).default;
+
                 mermaid.initialize({
-                    startOnLoad: true,
+                    startOnLoad: false,
                     theme: "dark",
                     securityLevel: "loose",
                     flowchart: {
@@ -33,28 +49,42 @@ export default function MermaidDiagram({ content }: MermaidDiagramProps) {
                     },
                 });
 
-                // Clear previous content
-                mermaidRef.current.innerHTML = content;
-                
-                // Render the diagram
-                await mermaid.contentLoaded();
+                const { svg: renderedSvg } = await mermaid.render(diagramId, content);
+
+                if (!isCancelled) {
+                    setSvg(renderedSvg);
+                    setRenderError(false);
+                }
             } catch (error) {
                 console.error("Error rendering Mermaid diagram:", error);
+                if (!isCancelled) {
+                    setSvg("");
+                    setRenderError(true);
+                }
             }
         };
 
-        renderDiagram();
-    }, [content]);
+        void renderDiagram();
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [content, diagramId]);
 
     return (
-        <div
-            ref={containerRef}
-            className="flex justify-center my-6 w-full"
-        >
-            <div
-                ref={mermaidRef}
-                className="mermaid w-full flex justify-center overflow-x-auto"
-            />
+        <div className="flex justify-center my-6 w-full">
+            {svg ? (
+                <div
+                    className="w-full flex justify-center overflow-x-auto"
+                    dangerouslySetInnerHTML={{ __html: svg }}
+                />
+            ) : (
+                <div className="w-full flex justify-center overflow-x-auto">
+                    <pre className="w-full overflow-x-auto rounded-md border border-border/60 bg-muted/30 p-4 text-xs">
+                        <code>{renderError ? "Failed to render Mermaid diagram." : content}</code>
+                    </pre>
+                </div>
+            )}
         </div>
     );
 }
