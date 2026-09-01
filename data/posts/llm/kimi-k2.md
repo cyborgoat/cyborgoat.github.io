@@ -2,7 +2,7 @@
 title: "Kimi K2: Moonshot AI's Trillion-Parameter Open Agentic Intelligence Model"
 date: "2025-08-19"
 author: "Cyborgoat"
-thumbnail: "https://arxiv.org/html/2507.20534v1"
+thumbnail: "https://arxiv.org/html/2507.20534v1/x2.png"
 authorImage: 'https://avatars.githubusercontent.com/u/44262838?v=4&size=64'
 tags: ["AI", "Kimi", "MoonShot", "LLM", "Agentic Intelligence"]
 excerpt: "A comprehensive technical analysis of Kimi K2, Moonshot AI's groundbreaking trillion-parameter open-source model designed specifically for agentic intelligence, featuring revolutionary MuonClip optimizer and state-of-the-art performance across coding and tool-use benchmarks."
