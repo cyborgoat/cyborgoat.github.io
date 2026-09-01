@@ -1,11 +1,10 @@
 "use client";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
 import {Post} from "@/types/post";
-import TextPressure from "@/components/animation/TextPressure";
 import {Button} from "@/components/ui/button";
 import {motion} from "framer-motion";
 import {Check, ChevronsUpDown} from "lucide-react";
@@ -45,39 +44,32 @@ export default function BlogList({posts}: { posts: Post[] }) {
     }, [search, selectedTag, posts]);
 
     const pageCount = Math.ceil(filteredPosts.length / postsPerPage);
+    const safePage = pageCount === 0 ? 1 : Math.min(page, pageCount);
     const paginatedPosts = useMemo(
         () =>
-            filteredPosts.slice((page - 1) * postsPerPage, page * postsPerPage),
-        [filteredPosts, page]
+            filteredPosts.slice((safePage - 1) * postsPerPage, safePage * postsPerPage),
+        [filteredPosts, safePage]
     );
 
-    useEffect(() => {
-        if (page > pageCount && pageCount > 0) setPage(pageCount);
-        else if (page > pageCount && pageCount === 0) setPage(1);
-    }, [pageCount, page]);
-
     return (
-        <section className="container max-w-3xl py-8 mx-auto">
-            <div className="w-32 h-12 mx-auto mb-8">
-                <TextPressure
-                    text="Blogs"
-                    flex={true}
-                    alpha={false}
-                    stroke={false}
-                    width={true}
-                    weight={true}
-                    italic={true}
-                    textColor="var(--foreground)"
-                    strokeColor="var(--primary)"
-                    minFontSize={8}
-                />
-            </div>
+        <section className="container max-w-3xl py-16 md:py-24 mx-auto px-4">
+            <header className="mb-10">
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-brand">
+                    Writing
+                </p>
+                <h1 className="mt-4 font-serif text-4xl font-normal tracking-[-0.02em] text-foreground sm:text-5xl">
+                    Notes &amp; essays
+                </h1>
+            </header>
             <div className="mb-6 flex flex-col items-center space-y-4">
                 <input
                     type="text"
                     placeholder="Search blogs..."
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                        setPage(1);
+                    }}
                     className="w-full max-w-sm px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60 transition bg-background text-foreground placeholder:text-muted-foreground"
                 />
                 <div className="flex flex-wrap items-center justify-center gap-2">
@@ -143,40 +135,30 @@ export default function BlogList({posts}: { posts: Post[] }) {
                 {paginatedPosts.map((post) => (
                     <motion.li
                         key={post.metadata.slug}
-                        className="relative border rounded-lg p-6 group hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-1 bg-background/50 backdrop-blur-sm overflow-hidden will-change-transform will-change-opacity"
-                        initial={{opacity: 0, y: 20}}
+                        className="group rounded-[--radius] border border-border p-6 transition-colors duration-200 hover:border-foreground/30 hover:bg-accent/40"
+                        initial={{opacity: 0, y: 16}}
                         animate={{opacity: 1, y: 0}}
-                        transition={{duration: 0.5}}
-                        whileHover={{
-                            scale: 1.02,
-                            transition: {duration: 0.2}
-                        }}
+                        transition={{duration: 0.4}}
                     >
                         <Link href={`/blog/${post.metadata.slug}`} className="block focus:outline-none">
                             {post.metadata.thumbnail && (
-                                <div className="mb-4 overflow-hidden rounded-md">
-                                    <motion.div
-                                        className="will-change-transform"
-                                        whileHover={{scale: 1.05}}
-                                        transition={{duration: 0.3}}
-                                    >
-                                        <Image
-                                            src={post.metadata.thumbnail!}
-                                            alt={
-                                                post.metadata.title
-                                                    ? `${post.metadata.title} thumbnail`
-                                                    : "Blog post thumbnail"
-                                            }
-                                            width={1080}
-                                            height={480}
-                                            className="w-full h-48 object-cover rounded-md transition-all duration-300"
-                                            loading="lazy"
-                                        />
-                                    </motion.div>
+                                <div className="mb-4 overflow-hidden rounded-[--radius]">
+                                    <Image
+                                        src={post.metadata.thumbnail!}
+                                        alt={
+                                            post.metadata.title
+                                                ? `${post.metadata.title} thumbnail`
+                                                : "Blog post thumbnail"
+                                        }
+                                        width={1080}
+                                        height={480}
+                                        className="w-full h-48 object-cover rounded-[--radius]"
+                                        loading="lazy"
+                                    />
                                 </div>
                             )}
                             <div className="flex flex-col items-left mb-2">
-                                <h2 className="text-xl font-semibold hover:underline">
+                                <h2 className="font-serif text-xl font-normal text-foreground group-hover:underline underline-offset-4">
                                     {post.metadata.title}
                                 </h2>
                                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
@@ -228,7 +210,7 @@ export default function BlogList({posts}: { posts: Post[] }) {
                     <button
                         className="px-3 py-1 rounded-md border bg-background hover:bg-muted text-sm disabled:opacity-50"
                         onClick={() => setPage(page - 1)}
-                        disabled={page === 1}
+                        disabled={safePage === 1}
                     >
                         Previous
                     </button>
@@ -236,7 +218,7 @@ export default function BlogList({posts}: { posts: Post[] }) {
                         <button
                             key={i}
                             className={`px-3 py-1 rounded-md border text-sm ${
-                                page === i + 1
+                                safePage === i + 1
                                     ? "bg-primary text-primary-foreground"
                                     : "bg-background hover:bg-muted"
                             }`}
@@ -247,8 +229,8 @@ export default function BlogList({posts}: { posts: Post[] }) {
                     ))}
                     <button
                         className="px-3 py-1 rounded-md border bg-background hover:bg-muted text-sm disabled:opacity-50"
-                        onClick={() => setPage(page + 1)}
-                        disabled={page === pageCount}
+                        onClick={() => setPage(Math.min(pageCount, safePage + 1))}
+                        disabled={safePage === pageCount}
                     >
                         Next
                     </button>

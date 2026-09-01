@@ -6,8 +6,11 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
+    --color-brand: var(--brand);
+    --color-brand-foreground: var(--brand-foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
+    --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -44,77 +47,80 @@
 }
 
 :root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.147 0.004 49.25);
+    --radius: 0.3rem;
+    /* Warm ivory light theme — inspired by sequoiacap.com */
+    --background: #FBF8F3;
+    --foreground: #211C16;
     --particle-color: oklch(0.25 0.006 50); /* Darker grey for light mode particles */
-    /* Forcing a hex value if oklch var() doesn't work for tsparticles */
-    /* --particle-color-hex: #404040; */
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.147 0.004 49.25);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.147 0.004 49.25);
-    --primary: oklch(0.216 0.006 56.043);
-    --primary-foreground: oklch(0.985 0.001 106.423);
-    --secondary: oklch(0.97 0.001 106.424);
-    --secondary-foreground: oklch(0.216 0.006 56.043);
-    --muted: oklch(0.97 0.001 106.424);
-    --muted-foreground: oklch(0.553 0.013 58.071);
-    --accent: oklch(0.97 0.001 106.424);
-    --accent-foreground: oklch(0.216 0.006 56.043);
+    --card: #FFFFFF;
+    --card-foreground: #211C16;
+    --popover: #FFFFFF;
+    --popover-foreground: #211C16;
+    --primary: #26201A;
+    --primary-foreground: #FBF8F3;
+    --secondary: #EFE7D9;
+    --secondary-foreground: #26201A;
+    --muted: #F3ECE0;
+    --muted-foreground: #6F6455;
+    --accent: #EFE7D9;
+    --accent-foreground: #26201A;
+    --brand: #B4471F;
+    --brand-foreground: #FBF8F3;
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.923 0.003 48.717);
-    --input: oklch(0.923 0.003 48.717);
-    --ring: oklch(0.709 0.01 56.259);
+    --border: #E6DDCE;
+    --input: #E6DDCE;
+    --ring: #C6753F;
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0.001 106.423);
-    --sidebar-foreground: oklch(0.147 0.004 49.25);
-    --sidebar-primary: oklch(0.216 0.006 56.043);
-    --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
-    --sidebar-accent: oklch(0.97 0.001 106.424);
-    --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-    --sidebar-border: oklch(0.923 0.003 48.717);
-    --sidebar-ring: oklch(0.709 0.01 56.259);
+    --sidebar: #FBF8F3;
+    --sidebar-foreground: #211C16;
+    --sidebar-primary: #26201A;
+    --sidebar-primary-foreground: #FBF8F3;
+    --sidebar-accent: #EFE7D9;
+    --sidebar-accent-foreground: #26201A;
+    --sidebar-border: #E6DDCE;
+    --sidebar-ring: #C6753F;
 }
 
 .dark {
-    --background: oklch(0.147 0.004 49.25);
-    --foreground: oklch(0.985 0.001 106.423);
+    /* Warm espresso dark theme */
+    --background: #1A1714;
+    --foreground: #ECE4D8;
     --particle-color: oklch(0.9 0.001 100); /* Lighter grey for dark mode particles */
-    /* --particle-color-hex: #CCCCCC; */
-    --card: oklch(0.216 0.006 56.043);
-    --card-foreground: oklch(0.985 0.001 106.423);
-    --popover: oklch(0.216 0.006 56.043);
-    --popover-foreground: oklch(0.985 0.001 106.423);
-    --primary: oklch(0.923 0.003 48.717);
-    --primary-foreground: oklch(0.216 0.006 56.043);
-    --secondary: oklch(0.268 0.007 34.298);
-    --secondary-foreground: oklch(0.985 0.001 106.423);
-    --muted: oklch(0.268 0.007 34.298);
-    --muted-foreground: oklch(0.709 0.01 56.259);
-    --accent: oklch(0.268 0.007 34.298);
-    --accent-foreground: oklch(0.985 0.001 106.423);
+    --card: #221E19;
+    --card-foreground: #ECE4D8;
+    --popover: #221E19;
+    --popover-foreground: #ECE4D8;
+    --primary: #ECE4D8;
+    --primary-foreground: #1A1714;
+    --secondary: #302A22;
+    --secondary-foreground: #ECE4D8;
+    --muted: #2C2720;
+    --muted-foreground: #A99D8B;
+    --accent: #302A22;
+    --accent-foreground: #ECE4D8;
+    --brand: #E08A4F;
+    --brand-foreground: #1A1714;
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.553 0.013 58.071);
+    --border: #38322A;
+    --input: #38322A;
+    --ring: #D2703A;
     --chart-1: oklch(0.488 0.243 264.376);
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
     --chart-4: oklch(0.627 0.265 303.9);
     --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.216 0.006 56.043);
-    --sidebar-foreground: oklch(0.985 0.001 106.423);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
-    --sidebar-accent: oklch(0.268 0.007 34.298);
-    --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.553 0.013 58.071);
+    --sidebar: #221E19;
+    --sidebar-foreground: #ECE4D8;
+    --sidebar-primary: #ECE4D8;
+    --sidebar-primary-foreground: #1A1714;
+    --sidebar-accent: #302A22;
+    --sidebar-accent-foreground: #ECE4D8;
+    --sidebar-border: #38322A;
+    --sidebar-ring: #D2703A;
 }
 
 @layer base {
@@ -142,8 +148,8 @@
 
 /* Apply a base font and color to the container if needed */
 .markdown-container {
-    font-family: sans-serif; /* Or your preferred font */
-    color: #333; /* Base text color */
+    font-family: var(--font-geist-sans), sans-serif;
+    color: var(--foreground);
     line-height: 1.6;
 }
 
@@ -153,7 +159,7 @@
     margin-top: 1em;
     margin-bottom: 0.5em;
     font-weight: bold;
-    border-bottom: 1px solid #eaecef; /* Optional separator */
+    border-bottom: 1px solid var(--border); /* Optional separator */
     padding-bottom: 0.3em;
 }
 
@@ -162,7 +168,7 @@
     margin-top: 1.5em; /* More space before H2 */
     margin-bottom: 0.5em;
     font-weight: bold;
-    border-bottom: 1px solid #eaecef; /* Optional separator */
+    border-bottom: 1px solid var(--border); /* Optional separator */
     padding-bottom: 0.3em;
 }
 
@@ -192,7 +198,7 @@
     margin-top: 1em;
     margin-bottom: 0.3em;
     font-weight: bold;
-    color: #555;
+    color: var(--muted-foreground);
 }
 
 /* Paragraphs */
@@ -282,9 +288,9 @@
 .markdown-container blockquote {
     margin: 1.5em 0;
     padding: 0.5em 1.5em;
-    color: #666;
-    border-left: 0.25em solid #dfe2e5;
-    background-color: #f9f9f9; /* Light background for emphasis */
+    color: var(--muted-foreground);
+    border-left: 0.25em solid var(--brand);
+    background-color: var(--muted); /* Light background for emphasis */
 }
 
 .markdown-container blockquote p {
@@ -293,16 +299,16 @@
 
 /* Horizontal Rules */
 .markdown-container hr {
-    height: 0.25em;
+    height: 1px;
     padding: 0;
     margin: 2em 0; /* More spacing around HRs */
-    background-color: #e1e4e8;
+    background-color: var(--border);
     border: 0;
 }
 
 /* Links (already partially handled by your component, but for general styling) */
 .markdown-container a {
-    color: #0366d6; /* Example link color */
+    color: var(--brand);
     text-decoration: none;
 }
 
@@ -312,9 +318,9 @@
 
 /* Inline Code (already handled by your component, but for styling the default) */
 .markdown-container code {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
-    background-color: rgba(27, 31, 35, 0.05);
+    background-color: var(--muted);
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;

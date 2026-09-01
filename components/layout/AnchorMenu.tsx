@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
@@ -21,11 +21,11 @@ export default function AnchorMenu({
   className,
 }: AnchorMenuProps) {
   const [activeSection, setActiveSection] = useState<string>("");
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     if (sections.length === 0) return;
@@ -127,7 +127,7 @@ export default function AnchorMenu({
   );
 
   if (position === "fixed") {
-    if (!isMounted || typeof document === "undefined") return null;
+    if (!isClient) return null;
     return createPortal(menu, document.body);
   }
 

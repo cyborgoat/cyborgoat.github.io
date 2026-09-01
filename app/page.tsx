@@ -4,49 +4,63 @@ import Hero from '@/components/layout/Hero';
 import AnchorMenu from '@/components/layout/AnchorMenu';
 import {
     Bike,
+    BookMarked,
+    Boxes,
     BrainCircuit,
     CheckCircle,
     Clock,
     Cloud,
     Code,
     ExternalLink,
-    Github,
     GraduationCap,
-    Linkedin,
+    Link2,
+    Mic,
     Music,
     Rocket,
     Trophy,
     Zap
 } from 'lucide-react';
 import {cn} from '@/lib/utils';
-import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import {
     getAboutMe,
     getAllSkills,
-    getCompletedProjects,
+    getCurrentProjects,
+    getEarlierProjects,
     getEducation,
-    getFeaturedProject,
-    getHobbies,
-    getOngoingProjects
+    getFeaturedProjects,
+    getHobbies
 } from '@/lib/portfolio';
 
 // Icon mapping for dynamic icon rendering
 const iconMap = {
-    Bike, BrainCircuit, Cloud, Code, GraduationCap, Music, Trophy,
-    Github, Linkedin, ExternalLink, Zap, Rocket, CheckCircle, Clock
+    Bike, BookMarked, Boxes, BrainCircuit, Cloud, Code, GraduationCap, Mic, Music, Trophy,
+    Github: ExternalLink,
+    Linkedin: Link2,
+    ExternalLink,
+    Zap,
+    Rocket,
+    CheckCircle,
+    Clock
 };
 
 const getIconComponent = (iconName: string) => {
     return iconMap[iconName as keyof typeof iconMap] || Code;
 };
 
+const eyebrow = "font-mono text-xs uppercase tracking-[0.22em] text-brand";
+const heading = "font-serif text-3xl font-normal tracking-[-0.01em] text-foreground sm:text-4xl";
+const cellCard =
+    "flex flex-col rounded-[--radius] border border-border bg-card p-6 transition-colors hover:border-foreground/30 hover:bg-accent/40";
+const githubLink =
+    "mt-4 inline-flex items-center gap-1 text-sm text-brand transition-opacity hover:opacity-70";
+
 export default function HomePage() {
     const aboutMe = getAboutMe();
-    const featuredProject = getFeaturedProject();
-    const ongoingProjects = getOngoingProjects();
-    const completedProjects = getCompletedProjects();
+    const featuredProjects = getFeaturedProjects();
+    const currentProjects = getCurrentProjects();
+    const earlierProjects = getEarlierProjects();
     const skills = getAllSkills();
     const education = getEducation();
     const hobbies = getHobbies();
@@ -66,25 +80,23 @@ export default function HomePage() {
                 position="fixed"
                 className="hidden lg:block"
             />
-            <div data-speed="1.05">
-                <Hero/>
-            </div>
+
+            <Hero/>
 
             {/* About Me Section */}
-            <section id="about" data-speed="0.9" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+            <section id="about" className="w-full py-16 md:py-24 border-t border-border scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-center">
+                    <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 items-start">
                         <div className="space-y-5 lg:col-span-7 fade-on-scroll">
-                            <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground">
-                                {aboutMe.title}
-                            </h2>
-                            <p className={cn("text-foreground/70", "leading-relaxed md:text-lg") }>
+                            <p className={eyebrow}>About</p>
+                            <h2 className={heading}>{aboutMe.title}</h2>
+                            <p className="text-muted-foreground leading-relaxed md:text-lg">
                                 {aboutMe.description}
                             </p>
-                            <p className={cn("text-foreground/70", "leading-relaxed md:text-lg") }>
+                            <p className="text-muted-foreground leading-relaxed md:text-lg">
                                 {aboutMe.experience}
                             </p>
-                            <div className="flex flex-wrap items-center gap-4 pt-4">
+                            <div className="flex flex-wrap items-center gap-5 pt-2">
                                 {aboutMe.socialLinks.map((link) => {
                                     const IconComponent = getIconComponent(link.icon);
                                     return (
@@ -95,186 +107,166 @@ export default function HomePage() {
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors duration-200"
                                         >
-                                            <IconComponent className="w-5 h-5"/>
+                                            <IconComponent className="w-4 h-4"/>
                                             <span>{link.label}</span>
                                         </a>
                                     );
                                 })}
                             </div>
                         </div>
-                        <div className="flex items-center justify-center lg:col-span-5">
-                            <Avatar className="w-48 h-48 lg:w-64 lg:h-64 border border-border/60 shadow-sm">
+                        <div className="flex items-start justify-center lg:col-span-5">
+                            <Avatar className="w-44 h-44 lg:w-60 lg:h-60 rounded-[--radius] border border-border">
                                 <AvatarImage
                                     src={aboutMe.authorImage ?? "/images/authors/cyborgoat-avatar.png"}
                                     alt="Junxiao Guo"
+                                    className="rounded-[--radius]"
                                 />
-                                <AvatarFallback className="text-4xl">JG</AvatarFallback>
+                                <AvatarFallback className="text-4xl rounded-[--radius]">JG</AvatarFallback>
                             </Avatar>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Featured Project: Swarm */}
-            <section id="featured" data-speed="1.05" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
+            {/* Featured Projects */}
+            <section id="featured" className="w-full py-16 md:py-24 border-t border-border scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <div className="text-center mb-12 fade-on-scroll">
-                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground mb-4">
-                            Featured Project: {featuredProject.title}
-                        </h2>
-                        <p className="text-foreground/70 max-w-3xl mx-auto text-base md:text-lg">
-                            Dive
-                            into <strong>{featuredProject.title}</strong>, {featuredProject.description.split('.')[0]}.
+                    <div className="mb-10 fade-on-scroll">
+                        <p className={eyebrow}>Selected work</p>
+                        <h2 className={cn(heading, "mt-4")}>Two projects I keep coming back to</h2>
+                        <p className="mt-3 max-w-2xl text-muted-foreground md:text-lg">
+                            Local-first desktop tools built with Tauri&nbsp;v2 &mdash; private by
+                            default, and shaped by daily use.
                         </p>
                     </div>
-                    <Card className="max-w-4xl mx-auto border border-border/60 bg-card/90 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                        <CardHeader>
-                            <div className="flex items-center gap-3">
-                                {(() => {
-                                    const IconComponent = getIconComponent(featuredProject.icon);
-                                    return <IconComponent className="w-8 h-8 text-primary"/>;
-                                })()}
-                                <div>
-                                    <CardTitle className="text-2xl">{featuredProject.title}</CardTitle>
-                                    <CardDescription>Interactive Web Browsing & AI Automation</CardDescription>
+                    <div className="grid gap-6 md:grid-cols-2">
+                        {featuredProjects.map((project) => {
+                            const IconComponent = getIconComponent(project.icon);
+                            return (
+                                <div key={project.id} className={cn(cellCard, "p-8")}>
+                                    <div className="flex items-center gap-3">
+                                        <IconComponent className="w-6 h-6 text-brand"/>
+                                        <h3 className="font-serif text-2xl font-normal text-foreground">
+                                            {project.title}
+                                        </h3>
+                                    </div>
+                                    <p className="mt-4 text-muted-foreground leading-relaxed">
+                                        {project.description}
+                                    </p>
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        {project.tags.map((tag) => (
+                                            <Badge key={tag} variant="outline">{tag}</Badge>
+                                        ))}
+                                    </div>
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={githubLink}
+                                    >
+                                        View on GitHub
+                                        <ExternalLink className="w-3.5 h-3.5"/>
+                                    </a>
                                 </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <p className="text-foreground/70 leading-relaxed">
-                                {featuredProject.description}
-                            </p>
-                            <div className="flex gap-2 flex-wrap">
-                                {featuredProject.tags.map((tag) => (
-                                    <Badge key={tag} variant="secondary">{tag}</Badge>
-                                ))}
-                            </div>
-                            <a
-                                href={featuredProject.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors duration-200"
-                            >
-                                <ExternalLink className="w-4 h-4"/>
-                                Explore {featuredProject.title} on GitHub
-                            </a>
-                        </CardContent>
-                    </Card>
+                            );
+                        })}
+                    </div>
                 </div>
             </section>
 
             {/* Projects Showcase */}
-            <section id="projects" data-speed="0.95" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+            <section id="projects" className="w-full py-16 md:py-24 border-t border-border scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <div className="text-center mb-12 fade-on-scroll">
-                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-foreground">
-                            Projects Showcase
-                        </h2>
-                        <p className="mt-3 text-foreground/70 text-base md:text-lg">
-                            A focused view of my active builds and completed milestones.
-                        </p>
+                    <div className="mb-10 fade-on-scroll">
+                        <p className={eyebrow}>Currently</p>
+                        <h2 className={cn(heading, "mt-4")}>What I&rsquo;m building now</h2>
                     </div>
 
-                    {/* Ongoing Ventures */}
-                    <div className="mb-16">
-                        <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center gap-2">
-                            <Clock className="w-6 h-6"/>
-                            Ongoing Ventures
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {ongoingProjects.map((project) => {
-                                const IconComponent = getIconComponent(project.icon);
-                                return (
-                                    <Card key={project.id} className="border border-border/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                                        <CardHeader>
-                                            <div className="flex items-center gap-2">
-                                                <IconComponent className="w-5 h-5 text-primary"/>
-                                                <CardTitle className="text-lg">{project.title}</CardTitle>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-                                                {project.description}
-                                            </p>
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-primary hover:text-primary/80 text-sm transition-colors duration-200"
-                                            >
-                                                View on GitHub →
-                                            </a>
-                                        </CardContent>
-                                    </Card>
-                                );
-                            })}
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {currentProjects.map((project) => {
+                            const IconComponent = getIconComponent(project.icon);
+                            return (
+                                <div key={project.id} className={cellCard}>
+                                    <div className="flex items-center gap-2">
+                                        <IconComponent className="w-5 h-5 text-brand"/>
+                                        <h3 className="font-serif text-xl font-normal text-foreground">
+                                            {project.title}
+                                        </h3>
+                                    </div>
+                                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                                        {project.description}
+                                    </p>
+                                    <div className="mt-4 flex flex-wrap gap-2">
+                                        {project.tags.map((tag) => (
+                                            <Badge key={tag} variant="outline">{tag}</Badge>
+                                        ))}
+                                    </div>
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={githubLink}
+                                    >
+                                        View on GitHub
+                                        <ExternalLink className="w-3.5 h-3.5"/>
+                                    </a>
+                                </div>
+                            );
+                        })}
                     </div>
 
-                    {/* Completed Milestones */}
-                    <div>
-                        <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center gap-2">
-                            <CheckCircle className="w-6 h-6"/>
-                            Completed Milestones
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {completedProjects.map((project) => {
-                                const IconComponent = getIconComponent(project.icon);
-                                return (
-                                    <Card key={project.id} className="border border-border/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                                        <CardHeader>
-                                            <div className="flex items-center gap-2">
-                                                <IconComponent className="w-5 h-5 text-primary"/>
-                                                <CardTitle className="text-lg">{project.title}</CardTitle>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-                                                {project.description}
-                                            </p>
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-primary hover:text-primary/80 text-sm transition-colors duration-200"
-                                            >
-                                                View on GitHub →
-                                            </a>
-                                        </CardContent>
-                                    </Card>
-                                );
-                            })}
-                        </div>
+                    {/* Earlier work */}
+                    <div className="mt-16 fade-on-scroll">
+                        <p className={eyebrow}>Earlier work</p>
+                        <ul className="mt-6 divide-y divide-border border-y border-border">
+                            {earlierProjects.map((project) => (
+                                <li key={project.id}>
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group flex flex-col gap-1 py-4 transition-colors hover:bg-accent/40 sm:flex-row sm:items-baseline sm:gap-6"
+                                    >
+                                        <span className="font-serif text-lg font-normal text-foreground shrink-0 sm:w-56">
+                                            {project.title}
+                                        </span>
+                                        <span className="text-sm text-muted-foreground">
+                                            {project.description}
+                                        </span>
+                                        <ExternalLink className="hidden w-3.5 h-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 sm:ml-auto sm:block sm:self-center"/>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </section>
 
             {/* Tech Stack & Skills */}
-            <section id="skills" data-speed="1.1" className="w-full py-16 md:py-28 lg:py-32 bg-muted/30 border-t border-border/60 scroll-mt-20">
+            <section id="skills" className="w-full py-16 md:py-24 border-t border-border scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                    <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl text-center mb-12 text-foreground fade-on-scroll">
-                        My Tech Stack & Skills
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="mb-10 fade-on-scroll">
+                        <p className={eyebrow}>Toolkit</p>
+                        <h2 className={cn(heading, "mt-4")}>Tech stack &amp; skills</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {skills.map((skill) => {
                             const IconComponent = getIconComponent(skill.icon);
                             return (
-                                <Card key={skill.id} className="flex flex-col border border-border/60 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                                    <CardHeader className="items-center pb-4">
-                                        <IconComponent className="w-10 h-10 mb-4 text-primary"/>
-                                        <CardTitle>{skill.title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <p className="text-sm text-muted-foreground text-center mb-4 leading-relaxed">
-                                            {skill.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-2 justify-center">
-                                            {skill.technologies.map((tech) => (
-                                                <Badge key={tech} variant="outline">{tech}</Badge>
-                                            ))}
-                                        </div>
-                                    </CardContent>
-                                </Card>
+                                <div key={skill.id} className={cellCard}>
+                                    <IconComponent className="w-7 h-7 mb-4 text-brand"/>
+                                    <h3 className="font-serif text-lg font-normal text-foreground">
+                                        {skill.title}
+                                    </h3>
+                                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                                        {skill.description}
+                                    </p>
+                                    <div className="mt-4 flex flex-wrap gap-2">
+                                        {skill.technologies.map((tech) => (
+                                            <Badge key={tech} variant="outline">{tech}</Badge>
+                                        ))}
+                                    </div>
+                                </div>
                             );
                         })}
                     </div>
@@ -282,55 +274,47 @@ export default function HomePage() {
             </section>
 
             {/* Education & Hobbies */}
-            <section id="background" data-speed="0.9" className="w-full py-16 md:py-28 lg:py-32 border-t border-border/60 scroll-mt-20">
+            <section id="background" className="w-full py-16 md:py-24 border-t border-border scroll-mt-20">
                 <div className="container px-4 md:px-6 mx-auto max-w-6xl grid md:grid-cols-2 gap-12">
-                    <div>
-                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground fade-on-scroll">
-                            Education
-                        </h2>
-                        <div className="space-y-6">
+                    <div className="fade-on-scroll">
+                        <p className={eyebrow}>Background</p>
+                        <h2 className={cn(heading, "mt-4 mb-8")}>Education</h2>
+                        <div className="space-y-4">
                             {education.map((edu) => {
                                 const IconComponent = getIconComponent(edu.icon);
                                 return (
-                                    <Card key={edu.id} className="border border-border/60 shadow-sm">
-                                        <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                                            <Avatar>
-                                                <AvatarFallback>
-                                                    <IconComponent/>
-                                                </AvatarFallback>
-                                            </Avatar>
-                                            <div className="flex-1">
-                                                <CardTitle className="text-base font-semibold">
+                                    <div key={edu.id} className="rounded-[--radius] border border-border bg-card p-5">
+                                        <div className="flex items-center gap-3">
+                                            <IconComponent className="w-5 h-5 text-brand"/>
+                                            <div>
+                                                <h3 className="font-serif text-base font-normal text-foreground">
                                                     {edu.institution}
-                                                </CardTitle>
-                                                <CardDescription>
+                                                </h3>
+                                                <p className="text-sm text-muted-foreground">
                                                     {edu.degree} ({edu.year})
-                                                </CardDescription>
+                                                </p>
                                             </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm text-muted-foreground">
-                                                {edu.field}
-                                            </p>
-                                        </CardContent>
-                                    </Card>
+                                        </div>
+                                        <p className="mt-3 text-sm text-muted-foreground">
+                                            {edu.field}
+                                        </p>
+                                    </div>
                                 );
                             })}
                         </div>
                     </div>
 
-                    <div>
-                        <h2 className="text-4xl font-bold tracking-[-0.02em] sm:text-5xl mb-8 text-foreground fade-on-scroll">
-                            Hobbies
-                        </h2>
+                    <div className="fade-on-scroll">
+                        <p className={eyebrow}>Off the clock</p>
+                        <h2 className={cn(heading, "mt-4 mb-8")}>Hobbies</h2>
                         <div className="space-y-4">
                             {hobbies.map((hobby) => {
                                 const IconComponent = getIconComponent(hobby.icon);
                                 return (
                                     <div key={hobby.id} className="flex items-center gap-4">
-                                        <IconComponent className="w-6 h-6 text-primary flex-shrink-0"/>
-                                        <p className="text-foreground/70 leading-relaxed">
-                                            {hobby.title} - {hobby.description}
+                                        <IconComponent className="w-5 h-5 text-brand flex-shrink-0"/>
+                                        <p className="text-muted-foreground leading-relaxed">
+                                            {hobby.title} &mdash; {hobby.description}
                                         </p>
                                     </div>
                                 );

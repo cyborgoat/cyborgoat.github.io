@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
@@ -19,29 +19,30 @@ export default function BlogTocMenu({
   containerSelector = "#post-content",
   className,
 }: BlogTocMenuProps) {
-  const [items, setItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const items = useMemo<TocItem[]>(() => {
+    if (typeof document === "undefined") return [];
     const container = document.querySelector(containerSelector);
-    if (!container) return;
+    if (!container) return [];
 
     const headings = Array.from(
       container.querySelectorAll<HTMLElement>("h2, h3, h4"),
     ).filter((el) => el.id && el.textContent);
 
-    const nextItems = headings.map((el) => ({
+    return headings.map((el) => ({
       id: el.id,
       label: el.textContent || "",
       level: Number(el.tagName.replace("H", "")),
     }));
+  }, [containerSelector]);
 
-    setItems(nextItems);
+  useEffect(() => {
+    if (items.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -54,10 +55,13 @@ export default function BlogTocMenu({
       { root: null, rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
 
-    headings.forEach((heading) => observer.observe(heading));
+    items.forEach((item) => {
+      const heading = document.getElementById(item.id);
+      if (heading) observer.observe(heading);
+    });
 
     return () => observer.disconnect();
-  }, [containerSelector]);
+  }, [items]);
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
@@ -120,7 +124,7 @@ export default function BlogTocMenu({
     );
   }, [items, activeId, className]);
 
-  if (!isMounted || typeof document === "undefined") return null;
+  if (!isClient) return null;
   if (!menu) return null;
 
   return createPortal(menu, document.body);

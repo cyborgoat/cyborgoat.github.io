@@ -1,7 +1,15 @@
 import type {Metadata} from "next";
 import {GeistSans} from "geist/font/sans";
 import {GeistMono} from "geist/font/mono";
+import {Fraunces} from "next/font/google";
 import "./globals.css";
+
+const fraunces = Fraunces({
+    subsets: ["latin"],
+    weight: ["400", "600"],
+    variable: "--font-fraunces",
+    display: "swap",
+});
 import {cn} from "@/lib/utils";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -87,11 +95,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
+        <html lang="en" className={cn(GeistSans.variable, GeistMono.variable, fraunces.variable)} suppressHydrationWarning>
         <head>
             <script async src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
             <link rel="manifest" href="/manifest.json"/>
-            <meta name="theme-color" content="#000000"/>
+            <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)"/>
+            <meta name="theme-color" content="#1A1714" media="(prefers-color-scheme: dark)"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
             {/* Structured Data for Person */}
@@ -140,9 +149,8 @@ export default function RootLayout({
         <body className="min-h-screen bg-background font-sans antialiased flex flex-col">
         <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="light"
             enableSystem={false}
-            forcedTheme="dark"
             disableTransitionOnChange
         >
             <Header/>

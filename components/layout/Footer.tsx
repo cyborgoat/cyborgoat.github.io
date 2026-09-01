@@ -1,5 +1,5 @@
 import {Button} from "@/components/ui/button";
-import {Github, Linkedin} from 'lucide-react';
+import {ExternalLink, Link2} from 'lucide-react';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -19,13 +19,13 @@ export default function Footer() {
                     <Button variant="ghost" size="icon" asChild>
                         <a href="https://github.com/cyborgoat" target="_blank" rel="noopener noreferrer"
                            aria-label="GitHub">
-                            <Github className="h-4 w-4"/>
+                            <ExternalLink className="h-4 w-4"/>
                         </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
                         <a href="https://linkedin.com/in/junxiaog" target="_blank" rel="noopener noreferrer"
                            aria-label="LinkedIn">
-                            <Linkedin className="h-4 w-4"/>
+                            <Link2 className="h-4 w-4"/>
                         </a>
                     </Button>
                 </div>

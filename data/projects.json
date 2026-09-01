@@ -1,19 +1,43 @@
 [
   {
+    "title": "Nest",
+    "excerpt": "A local-first desktop knowledge workspace for reading, editing, and searching Markdown knowledge packs via retrieval-augmented chat with OpenAI-compatible LLMs. Built with Tauri v2 + React, a NestJS Hub API, and FastEmbed + SQLite FTS for offline retrieval.",
+    "thumbnail": "",
+    "link": "https://github.com/cyborgoat/nest"
+  },
+  {
+    "title": "Quizzy",
+    "excerpt": "A Tauri v2 desktop quiz app for organizing and tracking learning through local JSON-based quizzes, with study goal tracking, attempt history, a mistake log, and integrated markdown notes — fully private, local-only data.",
+    "thumbnail": "",
+    "link": "https://github.com/cyborgoat/quizzy"
+  },
+  {
+    "title": "Finch",
+    "excerpt": "A privacy-focused voice transcription app that runs locally using Qwen3-ASR-1.7B, with optional LLM post-processing. FastAPI backend, TanStack Start frontend, speaker diarization, and persistent voiceprint profiles.",
+    "thumbnail": "",
+    "link": "https://github.com/cyborgoat/finch"
+  },
+  {
     "title": "Cubicles",
-    "excerpt": "An inspectable, tool-driven agent workbench with a Python CLI core, persistent sessions, traceable memory, explicit tool use, and support for local and OpenAI-compatible model providers.",
+    "excerpt": "A Python agent workbench for human-guided AI collaboration, with persistent sessions, inspectable workflows, explicit tool approvals, and both CLI and web interfaces. Supports Ollama and OpenAI-compatible providers.",
     "thumbnail": "/images/projects/cubicles.png",
     "link": "https://github.com/cyborgoat/cubicles"
   },
   {
+    "title": "Swarm",
+    "excerpt": "A comprehensive CLI-based agent for web browsing, automation, and deep research with LLM integration.",
+    "thumbnail": "/images/projects/swarm.png",
+    "link": "https://github.com/cyborgoat/swarm"
+  },
+  {
     "title": "LLM Agent Workflow Generator",
-    "excerpt": "A minimal agentic LLM web app built with Next.js 15 (App Router), featuring a chat interface and a visual workflow editor for AI agent flows.",
+    "excerpt": "A minimal agentic LLM web app built with Next.js (App Router), featuring a chat interface and a visual workflow editor for AI agent flows.",
     "thumbnail": "/images/projects/workflow-agent.png",
     "link": "https://github.com/cyborgoat/llm-workflow-agent-template"
   },
   {
     "title": "SimpleLM: Lightweight Transformer Language Model with RLHF (PPO)",
-    "excerpt": "SimpleLM is a minimal, CPU-friendly language model based on a Transformer decoder architecture. It supports both supervised fine-tuning (SFT) with prompt/response pairs and PPO-based RL training with a neural reward model (RLHF-style) for human/AI feedback (RLHF) using PPO. The project is designed for educational purposes and easy experimentation on small hardware.",
+    "excerpt": "A minimal, CPU-friendly language model based on a Transformer decoder. Supports supervised fine-tuning with prompt/response pairs and PPO-based RL training with a neural reward model (RLHF-style), designed for education and small-hardware experimentation.",
     "thumbnail": "/images/projects/simplelm.png",
     "link": "https://github.com/cyborgoat/SimpleLM"
   },
@@ -24,15 +48,9 @@
     "link": "https://github.com/cyborgoat/Dayrider"
   },
   {
-    "title": "An End-to-end Image Dehazing System with Light-weighted CNN And Dark Channel Prior",
-    "excerpt": "Instructor: Joseph Konan Team: Jingsi Chen,Junxiao Guo, Shuhao Ren ,Luo Yu (ordered by last name initials)",
+    "title": "AOD-DC-Net: End-to-end Image Dehazing",
+    "excerpt": "An end-to-end image dehazing system with a light-weighted CNN and dark channel prior. Course project (instructor: Joseph Konan) with Jingsi Chen, Junxiao Guo, Shuhao Ren, and Luo Yu.",
     "thumbnail": "/images/projects/aod-dc-net.jpg",
     "link": "https://github.com/cyborgoat/AOD-DC-Net"
-  },
-  {
-    "title": "Swarm",
-    "excerpt": "A comprehensive CLI-based agent for web browsing, automation, and deep research with LLM integration.",
-    "thumbnail": "/images/projects/swarm.png",
-    "link": "https://github.com/cyborgoat/swarm"
   }
 ]

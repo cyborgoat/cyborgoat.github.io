@@ -10,9 +10,10 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import {Menu, MountainIcon} from 'lucide-react'; // Or your preferred icons
+import {Menu} from 'lucide-react'; // Or your preferred icons
 import {usePathname} from 'next/navigation';
 import {cn} from "@/lib/utils";
+import {ThemeToggleButton} from "@/components/theme-toggle-button";
 
 export default function Header() {
     const pathname = usePathname();
@@ -26,18 +27,15 @@ export default function Header() {
 
     return (
         <header
-            className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
             <div className="container flex h-14 items-center px-4 md:px-6 mx-auto">
                 {/* Logo/Site Name */}
                 <Link
                     href="/"
-                    className="mr-6 flex items-center space-x-2"
+                    className="mr-6 flex items-center"
                     prefetch={false}
                 >
-          <span className="flex items-center space-x-2">
-            <MountainIcon className="h-6 w-6"/>
-            <span className="font-bold inline-block">Junxiao Guo</span>
-          </span>
+          <span className="font-serif text-lg tracking-[-0.01em] text-foreground">Junxiao&nbsp;Guo</span>
                 </Link>
 
                 {/* Centered Desktop Navigation Wrapper */}
@@ -52,9 +50,9 @@ export default function Header() {
                                             "group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
                                             "bg-transparent",
                                             pathname !== link.href &&
-                                            "hover:text-primary hover:underline underline-offset-4 focus:bg-transparent focus:text-primary focus:outline-none focus:underline",
+                                            "hover:text-foreground focus:bg-transparent focus:text-foreground focus:outline-none",
                                             pathname === link.href
-                                                ? "text-primary font-semibold underline underline-offset-4"
+                                                ? "text-foreground font-semibold underline decoration-brand underline-offset-[6px]"
                                                 : "text-muted-foreground",
                                             "disabled:pointer-events-none disabled:opacity-50"
                                         )}
@@ -69,8 +67,9 @@ export default function Header() {
                     </NavigationMenu>
                 </div>
 
-                {/* Right-aligned items: Mobile Menu Trigger */}
-                <div className="flex items-right ml-auto">
+                {/* Right-aligned items: Theme toggle + Mobile Menu Trigger */}
+                <div className="flex items-center gap-1 ml-auto">
+                    <ThemeToggleButton/>
                     {/* Mobile Navigation Trigger */}
                     <div className="md:hidden">
                         <Sheet>
@@ -85,13 +84,10 @@ export default function Header() {
                                 <nav className="grid gap-6 text-lg font-medium mt-6">
                                     <Link
                                         href="/"
-                                        className="flex items-center gap-2 text-lg font-semibold"
+                                        className="font-serif text-lg tracking-[-0.01em]"
                                         prefetch={false}
                                     >
-                    <span className="flex items-center gap-2 text-lg font-semibold">
-                      <MountainIcon className="h-6 w-6"/>
-                      <span className="">Junxiao Guo</span>
-                    </span>
+                                        Junxiao Guo
                                     </Link>
                                     {navLinks.map((link) => (
                                         <Link

@@ -25,45 +25,95 @@ export const portfolioData: PortfolioData = {
     ]
   },
 
-  featuredProject: {
-    id: "swarm",
-    title: "Swarm",
-    description: "A powerful CLI-based agent designed for interactive web browsing, intelligent automation, and deep research with seamless LLM integration. This project offers a transparent and controllable way to interact with the web, featuring advanced LLM integration for intelligent automation and research capabilities.",
-    githubUrl: "https://github.com/cyborgoat/swarm",
-    icon: "Zap",
-    tags: ["Python", "CLI", "LLM", "Web Automation"],
-    status: "completed",
-    featured: true
-  },
+  featuredProjects: [
+    {
+      id: "nest",
+      title: "Nest",
+      description: "A local-first desktop knowledge workspace for reading, editing, and searching Markdown knowledge packs via retrieval-augmented chat with OpenAI-compatible LLMs. Built with Tauri v2 + React, a NestJS Hub API, and FastEmbed + SQLite FTS for offline retrieval.",
+      githubUrl: "https://github.com/cyborgoat/nest",
+      icon: "BookMarked",
+      tags: ["Tauri v2", "React", "NestJS", "RAG"],
+      status: "ongoing",
+      featured: true
+    },
+    {
+      id: "quizzy",
+      title: "Quizzy",
+      description: "A Tauri v2 desktop quiz app for organizing and tracking learning through local JSON-based quizzes — study goals, attempt history, a mistake log, and integrated markdown notes, with fully private, local-only data.",
+      githubUrl: "https://github.com/cyborgoat/quizzy",
+      icon: "GraduationCap",
+      tags: ["Tauri v2", "React", "Local-first"],
+      status: "ongoing",
+      featured: true
+    }
+  ],
 
   projects: [
-    // Ongoing Ventures
+    // Currently building
     {
-      id: "llm-workflow-agent-template",
-      title: "LLM Workflow Agent Template",
-      description: "A minimal agentic LLM web app built with Next.js 15, featuring a chat interface and a visual workflow editor for AI agent flows.",
-      githubUrl: "https://github.com/cyborgoat/llm-workflow-agent-template",
-      icon: "Rocket",
-      tags: ["Next.js", "React", "AI", "Workflow"],
+      id: "nest",
+      title: "Nest",
+      description: "A local-first desktop knowledge workspace: read, edit, and search Markdown knowledge packs via retrieval-augmented chat with OpenAI-compatible LLMs. Tauri v2 + React, NestJS Hub API, FastEmbed + SQLite FTS.",
+      githubUrl: "https://github.com/cyborgoat/nest",
+      icon: "BookMarked",
+      tags: ["Tauri v2", "React", "NestJS", "RAG"],
       status: "ongoing"
     },
     {
-      id: "company-website-template",
-      title: "Company Website Template",
-      description: "A responsive website template for companies, built with modern web technologies.",
-      githubUrl: "https://github.com/cyborgoat/company-website-template",
-      icon: "Code",
-      tags: ["Web", "Template", "Responsive"],
+      id: "quizzy",
+      title: "Quizzy",
+      description: "A Tauri v2 desktop quiz app for organizing and tracking learning — study goals, attempt history, a mistake log, and markdown notes, all stored locally and privately.",
+      githubUrl: "https://github.com/cyborgoat/quizzy",
+      icon: "GraduationCap",
+      tags: ["Tauri v2", "React", "Local-first"],
       status: "ongoing"
+    },
+    {
+      id: "finch",
+      title: "Finch",
+      description: "A privacy-focused voice transcription app that runs locally with Qwen3-ASR-1.7B, with optional LLM post-processing. FastAPI backend, TanStack Start frontend, speaker diarization, and persistent voiceprint profiles.",
+      githubUrl: "https://github.com/cyborgoat/finch",
+      icon: "Mic",
+      tags: ["FastAPI", "ASR", "TanStack Start"],
+      status: "ongoing"
+    },
+    {
+      id: "cubicles",
+      title: "Cubicles",
+      description: "A Python agent workbench for human-guided AI collaboration — persistent sessions, inspectable workflows, explicit tool approvals, and both CLI and web interfaces. Supports Ollama and OpenAI-compatible providers.",
+      githubUrl: "https://github.com/cyborgoat/cubicles",
+      icon: "Boxes",
+      tags: ["Python", "Agents", "CLI"],
+      status: "ongoing"
+    },
+
+    // Earlier work
+    {
+      id: "swarm",
+      title: "Swarm",
+      description: "A CLI-based agent for interactive web browsing, automation, and deep research with LLM integration.",
+      githubUrl: "https://github.com/cyborgoat/swarm",
+      icon: "Zap",
+      tags: ["Python", "CLI", "LLM"],
+      status: "archived"
+    },
+    {
+      id: "llm-workflow-agent-template",
+      title: "LLM Workflow Agent Template",
+      description: "A minimal agentic LLM web app built with Next.js, featuring a chat interface and a visual workflow editor for AI agent flows.",
+      githubUrl: "https://github.com/cyborgoat/llm-workflow-agent-template",
+      icon: "Rocket",
+      tags: ["Next.js", "React", "Workflow"],
+      status: "archived"
     },
     {
       id: "simplelm",
       title: "SimpleLM",
-      description: "A simple language model implementation for educational purposes.",
+      description: "A lightweight, CPU-friendly Transformer language model with SFT and PPO-based RLHF, built for teaching and small-hardware experimentation.",
       githubUrl: "https://github.com/cyborgoat/SimpleLM",
       icon: "BrainCircuit",
-      tags: ["Python", "AI", "Education"],
-      status: "ongoing"
+      tags: ["Python", "Transformers", "RLHF"],
+      status: "archived"
     },
     {
       id: "omnichat",
@@ -72,45 +122,43 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/cyborgoat/omnichat",
       icon: "Cloud",
       tags: ["Chat", "AI", "Multi-provider"],
-      status: "ongoing"
+      status: "archived"
     },
     {
       id: "dayrider",
-      title: "Dayrider",
-      description: "A project related to daily riding or tracking activities.",
+      title: "DayRider",
+      description: "A minimal weekly todo and task-management app for simplifying your work week.",
       githubUrl: "https://github.com/cyborgoat/dayrider",
       icon: "Bike",
-      tags: ["Activity", "Tracking"],
-      status: "ongoing"
+      tags: ["Productivity", "Tasks"],
+      status: "archived"
     },
     {
       id: "monollm",
       title: "MonoLLM",
-      description: "A project focused on a monolithic Large Language Model approach.",
+      description: "An exploration of a monolithic Large Language Model approach.",
       githubUrl: "https://github.com/cyborgoat/MonoLLM",
       icon: "BrainCircuit",
-      tags: ["LLM", "Monolithic"],
-      status: "ongoing"
+      tags: ["LLM", "Research"],
+      status: "archived"
     },
-
-    // Completed Milestones
     {
       id: "aod-dc-net",
       title: "AOD-DC-Net",
       description: "An end-to-end image dehazing system using a lightweight CNN and dark channel prior.",
       githubUrl: "https://github.com/cyborgoat/AOD-DC-Net",
       icon: "BrainCircuit",
-      tags: ["CNN", "Image Processing", "Dehazing"],
-      status: "completed"
+      tags: ["CNN", "Image Processing"],
+      status: "archived"
     },
     {
       id: "map-matching",
       title: "Map Matching",
-      description: "A project focused on matching GPS data to a map for improved navigation and tracking.",
+      description: "Matching noisy GPS traces to road networks for improved navigation and tracking.",
       githubUrl: "https://github.com/cyborgoat/map-matching",
       icon: "Code",
-      tags: ["GPS", "Navigation", "Mapping"],
-      status: "completed"
+      tags: ["GPS", "Navigation"],
+      status: "archived"
     }
   ],
 

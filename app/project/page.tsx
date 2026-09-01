@@ -1,9 +1,7 @@
 import React from "react";
-import {CardBody, CardContainer, CardItem} from "@/components/ui/3d-card";
 import fs from "fs";
 import path from "path";
-import {CircleArrowOutUpLeft} from "lucide-react";
-import TextPressure from "@/components/animation/TextPressure";
+import { ArrowUpRight } from "lucide-react";
 
 type Project = {
     title: string;
@@ -13,67 +11,46 @@ type Project = {
 };
 
 export default async function ProjectMainPage() {
-    // Load projects data from public folder
+    // Load projects data from the data folder
     const filePath = path.join(process.cwd(), "data", "projects.json");
     const json = fs.readFileSync(filePath, "utf8");
     const projects: Project[] = JSON.parse(json);
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <div className="w-36 h-12 mx-auto">
-                <TextPressure
-                    text="Projects"
-                    flex={true}
-                    alpha={false}
-                    stroke={false}
-                    width={true}
-                    weight={true}
-                    italic={true}
-                    textColor="#ffffff"
-                    strokeColor="#ff0000"
-                    minFontSize={8}
-                />
-            </div>
-            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
+            <header className="max-w-2xl">
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-brand">
+                    Projects
+                </p>
+                <h1 className="mt-4 font-serif text-4xl font-normal tracking-[-0.02em] text-foreground sm:text-5xl">
+                    Things I&rsquo;ve built
+                </h1>
+                <p className="mt-4 text-muted-foreground md:text-lg">
+                    Local-first apps, agent tooling, and research experiments &mdash; newest
+                    first. Each links out to its repository.
+                </p>
+            </header>
+
+            <div className="mt-12 grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project, idx) => (
-                    <CardContainer
+                    <a
                         key={idx}
-                        className="group w-full h-full cursor-pointer"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-col bg-background p-6 transition-colors hover:bg-accent/40"
                     >
-                        <CardBody className="h-[500px] flex flex-col">
-                            <CardItem
-                                as="img"
-                                src={project.thumbnail}
-                                alt={project.title}
-                                translateZ={50}
-                                className="w-full h-48 object-cover rounded-md transform transition-transform duration-300 ease-out group-hover:scale-105 flex-shrink-0"
-                            />
-                            <CardItem
-                                as="h3"
-                                translateY={20}
-                                className="mt-4 text-xl font-semibold line-clamp-2 flex-shrink-0"
-                            >
-                                {project.title}
-                            </CardItem>
-                            <CardItem
-                                as="p"
-                                translateY={20}
-                                className="mt-2 text-sm text-gray-600 dark:text-gray-400 flex-grow line-clamp-4"
-                            >
-                                {project.excerpt}
-                            </CardItem>
-                            <CardItem
-                                as="a"
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-8 inline-flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:underline hover:text-bold transition-colors duration-200 flex-shrink-0"
-                            >
-                                <CircleArrowOutUpLeft size={14}/>
-                                <span>Go to project</span>
-                            </CardItem>
-                        </CardBody>
-                    </CardContainer>
+                        <h2 className="font-serif text-xl font-normal text-foreground">
+                            {project.title}
+                        </h2>
+                        <p className="mt-3 flex-grow text-sm leading-relaxed text-muted-foreground line-clamp-5">
+                            {project.excerpt}
+                        </p>
+                        <span className="mt-6 inline-flex items-center gap-1 text-sm text-brand transition-opacity group-hover:opacity-70">
+                            Go to project
+                            <ArrowUpRight className="w-4 h-4" />
+                        </span>
+                    </a>
                 ))}
             </div>
         </div>

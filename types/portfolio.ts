@@ -5,7 +5,7 @@ export interface Project {
   githubUrl: string;
   icon: string;
   tags: string[];
-  status: 'ongoing' | 'completed';
+  status: 'ongoing' | 'completed' | 'archived';
   featured?: boolean;
 }
 
@@ -53,7 +53,7 @@ export interface AboutMe {
 
 export interface PortfolioData {
   about: AboutMe;
-  featuredProject: Project;
+  featuredProjects: Project[];
   projects: Project[];
   skills: Skill[];
   education: Education[];

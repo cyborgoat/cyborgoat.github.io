@@ -1,16 +1,18 @@
 import { portfolioData } from '@/data/portfolio';
 import type { Project, Skill } from '@/types/portfolio';
 
-export const getOngoingProjects = (): Project[] => {
+export const getCurrentProjects = (): Project[] => {
   return portfolioData.projects.filter(project => project.status === 'ongoing');
 };
 
-export const getCompletedProjects = (): Project[] => {
-  return portfolioData.projects.filter(project => project.status === 'completed');
+export const getEarlierProjects = (): Project[] => {
+  return portfolioData.projects.filter(
+    project => project.status === 'archived' || project.status === 'completed'
+  );
 };
 
-export const getFeaturedProject = () => {
-  return portfolioData.featuredProject;
+export const getFeaturedProjects = (): Project[] => {
+  return portfolioData.featuredProjects;
 };
 
 export const getSkillsByCategory = (category: Skill['category']) => {

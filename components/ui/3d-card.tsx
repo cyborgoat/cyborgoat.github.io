@@ -5,6 +5,7 @@ import {cn} from "@/lib/utils"; // Assuming you have this utility
 import React, {
     createContext,
     ElementType,
+    ComponentPropsWithoutRef,
     forwardRef,
     ReactNode,
     useContext,
@@ -12,7 +13,7 @@ import React, {
     useRef,
     useState,
 } from "react";
-import {motion, MotionProps, useMotionValue, useSpring, useTransform,} from "framer-motion";
+import {motion, useMotionValue, useSpring, useTransform,} from "framer-motion";
 
 // --- Context Definition ---
 interface MouseEnterContextType {
@@ -142,10 +143,7 @@ type CardItemProps = {
     rotateX?: number | string;
     rotateY?: number | string;
     rotateZ?: number | string;
-    // Ensure any custom props needed by 'as' components (like href for Link) are allowed
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any; // Allow other props like href, target, etc.
-} & MotionProps; // Include MotionProps for motion-specific attributes
+} & Omit<ComponentPropsWithoutRef<ElementType>, "as" | "children" | "className">;
 
 export const CardItem = forwardRef<HTMLElement, CardItemProps>(
     (
@@ -187,21 +185,26 @@ export const CardItem = forwardRef<HTMLElement, CardItemProps>(
                 `translateX(${currentX}px) translateY(${currentY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
         );
 
-        // Create a dynamic motion component based on the 'as' prop
-        const MotionComponent = motion(Tag);
+        const element = React.createElement(
+            Tag,
+            {
+                ...rest,
+                className,
+            },
+            children
+        );
 
         return (
-            <MotionComponent
-                ref={ref} // Apply the forwarded ref here
-                className={cn("w-fit", className)} // Base styles + custom classes
+            <motion.div
+                ref={ref as React.Ref<HTMLDivElement>}
+                className={cn("w-fit")}
                 style={{
-                    transformStyle: "preserve-3d", // Needed for children if they also have transforms
-                    transform: transform, // Apply the animated transform
+                    transformStyle: "preserve-3d",
+                    transform: transform,
                 }}
-                {...rest} // Spread the rest of the props (IMPORTANT: including href)
             >
-                {children}
-            </MotionComponent>
+                {element}
+            </motion.div>
         );
     }
 );

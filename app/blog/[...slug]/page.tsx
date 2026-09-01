@@ -48,7 +48,7 @@ export default async function BlogDetailPage({params}: { params: Promise<{ slug:
                     </div>
                 )}
 
-                <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] mb-4">
+                <h1 className="font-serif text-3xl font-normal leading-tight tracking-[-0.02em] md:text-4xl lg:text-5xl lg:leading-[1.1] mb-4 text-foreground">
                     {metadata.title ?? "Untitled Post"} {/* Reverted fallback */}
                 </h1>
 

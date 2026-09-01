@@ -52,7 +52,7 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
             } else {
                 // Treat as inline code
                 return (
-                    <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono text-gray-900 dark:text-gray-200">
+                    <code className="rounded border border-border bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
                         {children}
                     </code>
                 );
@@ -63,7 +63,7 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
             return (
                 <a
                     href={href}
-                    className="text-blue-600 underline hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-200 transition-colors"
+                    className="text-brand underline underline-offset-4 decoration-brand/40 hover:decoration-brand transition-colors"
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
                 >
@@ -77,7 +77,7 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
                 <figure className="my-4">
                     <MarkdownMedia src={srcString} alt={alt || ""}/>
                     {alt && (
-                        <figcaption className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2 italic">
+                        <figcaption className="text-center text-sm text-muted-foreground mt-2 italic">
                             {alt}
                         </figcaption>
                     )}
@@ -86,73 +86,71 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
         },
         table({children}) {
             return (
-                <div className="overflow-x-auto my-6">
-                    <table
-                        className="min-w-full border border-gray-300 dark:border-gray-700 text-sm text-gray-900 dark:text-gray-200">{children}</table>
+                <div className="overflow-x-auto my-6 rounded-[--radius] border border-border">
+                    <table className="min-w-full text-sm text-foreground">{children}</table>
                 </div>
             );
         },
         thead({children}) {
-            return <thead className="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-200">{children}</thead>;
+            return <thead className="bg-muted text-foreground">{children}</thead>;
         },
         tbody({children}) {
-            return <tbody
-                className="divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 dark:text-gray-200">{children}</tbody>;
+            return <tbody className="divide-y divide-border text-foreground">{children}</tbody>;
         },
         th({children}) {
             return <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{children}</th>;
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">{children}</th>;
         },
         td({children}) {
-            return <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">{children}</td>;
+            return <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">{children}</td>;
         },
         p({children}) {
-            return <p className="text-gray-900 dark:text-gray-200 leading-relaxed mb-4">{children}</p>;
+            return <p className="text-foreground/90 leading-relaxed mb-4">{children}</p>;
         },
         strong({children}) {
-            return <strong className="font-bold text-gray-900 dark:text-gray-200">{children}</strong>;
+            return <strong className="font-semibold text-foreground">{children}</strong>;
         },
         em({children}) {
-            return <em className="italic text-gray-900 dark:text-gray-200">{children}</em>;
+            return <em className="italic text-foreground">{children}</em>;
         },
         ul({children}) {
-            return <ul className="list-disc list-inside text-gray-900 dark:text-gray-200 mb-4">{children}</ul>;
+            return <ul className="list-disc list-inside text-foreground/90 mb-4">{children}</ul>;
         },
         ol({children}) {
-            return <ol className="list-decimal list-inside text-gray-900 dark:text-gray-200 mb-4">{children}</ol>;
+            return <ol className="list-decimal list-inside text-foreground/90 mb-4">{children}</ol>;
         },
         li({children}) {
-            return <li className="text-gray-900 dark:text-gray-200">{children}</li>;
+            return <li className="text-foreground/90">{children}</li>;
         },
         h1({children}) {
             const id = slugify(getNodeText(children));
-            return <h1 id={id} className="text-3xl font-bold text-gray-900 dark:text-gray-200 mb-6">{children}</h1>;
+            return <h1 id={id} className="font-serif text-3xl font-normal text-foreground mb-6">{children}</h1>;
         },
         h2({children}) {
             const id = slugify(getNodeText(children));
             return <h2
                 id={id}
-                className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-4 border-b-2 border-gray-900 dark:border-gray-200">{children}</h2>;
+                className="font-serif text-2xl font-normal text-foreground mb-4 pb-2 border-b border-border">{children}</h2>;
         },
         h3({children}) {
             const id = slugify(getNodeText(children));
-            return <h3 id={id} className="text-xl font-bold text-gray-900 dark:text-gray-200 mb-3">{children}</h3>;
+            return <h3 id={id} className="font-serif text-xl font-normal text-foreground mb-3">{children}</h3>;
         },
         h4({children}) {
             const id = slugify(getNodeText(children));
-            return <h4 id={id} className="text-lg font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h4>;
+            return <h4 id={id} className="text-lg font-semibold text-foreground mb-2">{children}</h4>;
         },
         h5({children}) {
             const id = slugify(getNodeText(children));
-            return <h5 id={id} className="text-base font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h5>;
+            return <h5 id={id} className="text-base font-semibold text-foreground mb-2">{children}</h5>;
         },
         h6: ({children}) => {
             const id = slugify(getNodeText(children));
-            return <h6 id={id} className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2">{children}</h6>;
+            return <h6 id={id} className="text-sm font-semibold text-muted-foreground mb-2">{children}</h6>;
         },
         blockquote: ({children}) => {
             return (
-                <blockquote className="border-l-4 pl-4 text-gray-900 dark:text-gray-200 italic mb-4">
+                <blockquote className="border-l-4 border-brand pl-4 text-muted-foreground italic mb-4">
                     {children}
                 </blockquote>
             );
@@ -160,7 +158,7 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
     };
 
     return (
-        <div className={`prose prose-lg dark:prose-invert max-w-none ${className || ''}`}>
+        <div className={`prose prose-stone prose-lg dark:prose-invert max-w-none ${className || ''}`}>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypeRaw]}
