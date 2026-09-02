@@ -19,7 +19,7 @@ MHS introduces a standardized driver layer that translates those vendor-specific
 
 That example captures the central value of MHS: it does not make legacy interfaces disappear; it hides their differences behind a common, agent-readable contract. [Anthropic's full MHS announcement](https://www.anthropic.com/news/model-hardware-standard-research-preview)
 
-![High-resolution video frame showing the MHS common-interface concept](./images/mhs-device-map-high-resolution.png)
+![High-resolution video frame showing the MHS common-interface concept](/images/posts/anthropic-analysis/mhs-device-map-high-resolution.png)
 
 *The video presents MHS as a common interface connecting otherwise separate devices. Frame from Anthropic's [MHS overview video](https://www.youtube.com/watch?v=UxJZrCFzTHY), approximately 00:49. © Anthropic; reproduced here for commentary and analysis.*
 
@@ -108,7 +108,7 @@ This separation is essential. An LLM should not sit inside every millisecond-lev
 
 The [MHS video](https://www.youtube.com/watch?v=UxJZrCFzTHY) says that connected devices can communicate at “bare-metal speed” while the agent receives context and controls operations. The practical interpretation is not that LLM reasoning runs at hardware speed. Device-to-device communication and compiled control logic remain fast while the model works at a slower supervisory layer.
 
-![High-resolution frame of an agent controlling a microscope](./images/agent-microscope-high-resolution.png)
+![High-resolution frame of an agent controlling a microscope](/images/posts/anthropic-analysis/agent-microscope-high-resolution.png)
 
 *The agent analyzes a microscope image while coordinating autofocus and stage movement, illustrating the observe–reason–act loop over physical equipment. Frame from Anthropic's [MHS overview video](https://www.youtube.com/watch?v=UxJZrCFzTHY). © Anthropic; reproduced here for commentary and analysis.*
 
@@ -134,7 +134,7 @@ The video shows Claude focusing a microscope, locating bacteria, and deciding wh
 
 The deeper lesson is not merely that natural language can control hardware. It is that high-level intent can be translated into an observable, constrained, and repeatable control loop.
 
-![High-resolution frame of the automated Genentech experiment](./images/genentech-workstation-high-resolution.png)
+![High-resolution frame of the automated Genentech experiment](/images/posts/anthropic-analysis/genentech-workstation-high-resolution.png)
 
 *The Genentech demonstration coordinates a liquid-handling workstation from a scientist-authored protocol and includes unattended error recovery. Frame from Anthropic's [MHS overview video](https://www.youtube.com/watch?v=UxJZrCFzTHY). © Anthropic; reproduced here for commentary and analysis.*
 

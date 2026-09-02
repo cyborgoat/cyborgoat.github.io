@@ -56,8 +56,8 @@ export default function MarkdownMedia({src = "", alt = ""}: { src?: string; alt?
                 alt={alt}
                 width={800}
                 height={600}
-                className="rounded-lg my-6 mx-auto max-w-full"
-                style={{maxHeight: 400, objectFit: 'contain'}}
+                className="rounded-lg my-6 mx-auto max-w-full h-auto"
+                style={{maxHeight: 400, objectFit: 'contain', width: 'auto'}}
             />
         );
     } else {
@@ -69,7 +69,7 @@ export default function MarkdownMedia({src = "", alt = ""}: { src?: string; alt?
             alt={alt}
             width={700}
             height={400}
-            className="rounded-lg object-contain mx-auto"
+            className="rounded-lg object-contain mx-auto w-full h-auto"
         />
       </span>
         );

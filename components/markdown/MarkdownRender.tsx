@@ -104,7 +104,15 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
         td({children}) {
             return <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">{children}</td>;
         },
-        p({children}) {
+        p({node, children}) {
+            const child = node?.children?.[0];
+            if (
+                node?.children?.length === 1 &&
+                child?.type === "element" &&
+                child.tagName === "img"
+            ) {
+                return <>{children}</>;
+            }
             return <p className="text-foreground/90 leading-relaxed mb-4">{children}</p>;
         },
         strong({children}) {
