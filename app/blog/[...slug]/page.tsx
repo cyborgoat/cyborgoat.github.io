@@ -34,7 +34,7 @@ export default async function BlogDetailPage({params}: { params: Promise<{ slug:
         : "Date not available"; // Reverted to hardcoded string
 
     return (
-        <article className="container relative max-w-3xl py-6 lg:py-10 px-4 md:px-6 mx-auto">
+        <article className="container relative max-w-3xl py-10 lg:py-14 px-4 md:px-6 mx-auto">
             <BlogTocMenu />
             {/* Post Header */}
             <div className="mb-8 text-center">

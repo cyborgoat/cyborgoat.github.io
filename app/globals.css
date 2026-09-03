@@ -363,7 +363,9 @@
     margin: 0 auto;
 }
 
-/* GSAP ScrollSmoother Styles */
+/* GSAP ScrollSmoother Styles
+   ScrollSmoother sets wrapper to position:fixed; top:0; height:100% via inline styles,
+   so content must clear the fixed header with padding — not by offsetting the wrapper. */
 #smooth-wrapper {
     position: fixed;
     width: 100%;
@@ -377,6 +379,8 @@
     width: 100%;
     position: relative;
     will-change: transform;
+    /* Match header h-14 so pages don't render under the navbar */
+    padding-top: 3.5rem;
 }
 
 /* Prevent layout shift during smooth scrolling */
