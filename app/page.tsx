@@ -14,6 +14,7 @@ import {
     ExternalLink,
     GraduationCap,
     Link2,
+    Mail,
     Mic,
     Music,
     Rocket,
@@ -35,7 +36,7 @@ import {
 
 // Icon mapping for dynamic icon rendering
 const iconMap = {
-    Bike, BookMarked, Boxes, BrainCircuit, Cloud, Code, GraduationCap, Mic, Music, Trophy,
+    Bike, BookMarked, Boxes, BrainCircuit, Cloud, Code, GraduationCap, Mail, Mic, Music, Trophy,
     Github: ExternalLink,
     Linkedin: Link2,
     ExternalLink,

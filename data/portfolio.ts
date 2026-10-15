@@ -87,6 +87,25 @@ export const portfolioData: PortfolioData = {
       status: "ongoing"
     },
 
+    {
+      id: "team-orbit",
+      title: "Team Orbit",
+      description: "A backend-first team hub for ~100 members: events, announcements, markdown news, a discussion forum, uploads, and live notifications. NestJS modular monolith with Prisma + SQLite, JWT RBAC, Socket.io, Swagger, and a React test console.",
+      githubUrl: "https://github.com/cyborgoat/team-orbit",
+      icon: "Rocket",
+      tags: ["NestJS", "Prisma", "Socket.io", "React"],
+      status: "ongoing"
+    },
+    {
+      id: "mdmailer",
+      title: "mdmailer",
+      description: "A Node.js CLI that turns a Markdown file into a branded HTML email, an EML file, and a PNG card with QR codes. Multiple email types and themes, English/Chinese labels, batch generation, and a bundled SKILL.md for LLM agents.",
+      githubUrl: "https://github.com/cyborgoat/mdmailer",
+      icon: "Mail",
+      tags: ["TypeScript", "CLI", "Puppeteer", "Markdown"],
+      status: "ongoing"
+    },
+
     // Earlier work
     {
       id: "swarm",

@@ -1,5 +1,17 @@
 [
   {
+    "title": "Team Orbit",
+    "excerpt": "A backend-first team hub for managing ~100 members, with events, announcements, markdown news, a discussion forum, file uploads, and live notifications. NestJS modular monolith with Prisma + SQLite, JWT RBAC, Socket.io, and Swagger docs.",
+    "thumbnail": "",
+    "link": "https://github.com/cyborgoat/team-orbit"
+  },
+  {
+    "title": "mdmailer",
+    "excerpt": "A Node.js CLI that turns a Markdown file into a branded HTML email, an EML file, and a PNG card with QR codes. Supports multiple email types and themes, English/Chinese labels, and batch generation.",
+    "thumbnail": "",
+    "link": "https://github.com/cyborgoat/mdmailer"
+  },
+  {
     "title": "Nest",
     "excerpt": "A local-first desktop knowledge workspace for reading, editing, and searching Markdown knowledge packs via retrieval-augmented chat with OpenAI-compatible LLMs. Built with Tauri v2 + React, a NestJS Hub API, and FastEmbed + SQLite FTS for offline retrieval.",
     "thumbnail": "",
