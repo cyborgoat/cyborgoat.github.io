@@ -8,9 +8,6 @@ Here are some of my projects. Check out their repositories for more details!
 
 **[AOD-DC-Net](https://github.com/cyborgoat/AOD-DC-Net)**
 **[Company Website Template](https://github.com/cyborgoat/company-website-template)**
-**[SimpleLM](https://github.com/cyborgoat/SimpleLM)**
-**[DayRider](https://github.com/cyborgoat/dayrider)**
-**[LLM Workflow Agent Template](https://github.com/cyborgoat/llm-workflow-agent-template)**
 
 ## About Me
 

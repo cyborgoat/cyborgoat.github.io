@@ -117,39 +117,12 @@ export const portfolioData: PortfolioData = {
       status: "archived"
     },
     {
-      id: "llm-workflow-agent-template",
-      title: "LLM Workflow Agent Template",
-      description: "A minimal agentic LLM web app built with Next.js, featuring a chat interface and a visual workflow editor for AI agent flows.",
-      githubUrl: "https://github.com/cyborgoat/llm-workflow-agent-template",
-      icon: "Rocket",
-      tags: ["Next.js", "React", "Workflow"],
-      status: "archived"
-    },
-    {
-      id: "simplelm",
-      title: "SimpleLM",
-      description: "A lightweight, CPU-friendly Transformer language model with SFT and PPO-based RLHF, built for teaching and small-hardware experimentation.",
-      githubUrl: "https://github.com/cyborgoat/SimpleLM",
-      icon: "BrainCircuit",
-      tags: ["Python", "Transformers", "RLHF"],
-      status: "archived"
-    },
-    {
       id: "omnichat",
       title: "Omnichat",
       description: "A modern chat application for interacting with multiple AI models from different providers.",
       githubUrl: "https://github.com/cyborgoat/omnichat",
       icon: "Cloud",
       tags: ["Chat", "AI", "Multi-provider"],
-      status: "archived"
-    },
-    {
-      id: "dayrider",
-      title: "DayRider",
-      description: "A minimal weekly todo and task-management app for simplifying your work week.",
-      githubUrl: "https://github.com/cyborgoat/dayrider",
-      icon: "Bike",
-      tags: ["Productivity", "Tasks"],
       status: "archived"
     },
     {

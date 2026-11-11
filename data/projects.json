@@ -42,24 +42,6 @@
     "link": "https://github.com/cyborgoat/swarm"
   },
   {
-    "title": "LLM Agent Workflow Generator",
-    "excerpt": "A minimal agentic LLM web app built with Next.js (App Router), featuring a chat interface and a visual workflow editor for AI agent flows.",
-    "thumbnail": "/images/projects/workflow-agent.png",
-    "link": "https://github.com/cyborgoat/llm-workflow-agent-template"
-  },
-  {
-    "title": "SimpleLM: Lightweight Transformer Language Model with RLHF (PPO)",
-    "excerpt": "A minimal, CPU-friendly language model based on a Transformer decoder. Supports supervised fine-tuning with prompt/response pairs and PPO-based RL training with a neural reward model (RLHF-style), designed for education and small-hardware experimentation.",
-    "thumbnail": "/images/projects/simplelm.png",
-    "link": "https://github.com/cyborgoat/SimpleLM"
-  },
-  {
-    "title": "DayRider",
-    "excerpt": "Simplify your weekly work with a minimal todo task management app.",
-    "thumbnail": "/images/projects/dayrider.png",
-    "link": "https://github.com/cyborgoat/Dayrider"
-  },
-  {
     "title": "AOD-DC-Net: End-to-end Image Dehazing",
     "excerpt": "An end-to-end image dehazing system with a light-weighted CNN and dark channel prior. Course project (instructor: Joseph Konan) with Jingsi Chen, Junxiao Guo, Shuhao Ren, and Luo Yu.",
     "thumbnail": "/images/projects/aod-dc-net.jpg",
