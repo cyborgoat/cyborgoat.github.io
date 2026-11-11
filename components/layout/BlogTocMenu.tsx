@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
@@ -20,25 +20,53 @@ export default function BlogTocMenu({
   className,
 }: BlogTocMenuProps) {
   const [activeId, setActiveId] = useState<string>("");
-  const isClient = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-  const items = useMemo<TocItem[]>(() => {
-    if (typeof document === "undefined") return [];
+  const [items, setItems] = useState<TocItem[]>([]);
+
+  useEffect(() => {
     const container = document.querySelector(containerSelector);
-    if (!container) return [];
+    if (!container) return;
 
-    const headings = Array.from(
-      container.querySelectorAll<HTMLElement>("h2, h3, h4"),
-    ).filter((el) => el.id && el.textContent);
+    const updateItems = () => {
+      const headings = Array.from(
+        container.querySelectorAll<HTMLElement>("h2, h3, h4"),
+      ).filter((el) => el.id && el.textContent);
 
-    return headings.map((el) => ({
-      id: el.id,
-      label: el.textContent || "",
-      level: Number(el.tagName.replace("H", "")),
-    }));
+      const nextItems = headings.map((el) => ({
+        id: el.id,
+        label: el.textContent || "",
+        level: Number(el.tagName.replace("H", "")),
+      }));
+
+      setItems((previous) =>
+        previous.length === nextItems.length &&
+        previous.every((item, index) =>
+          item.id === nextItems[index].id &&
+          item.label === nextItems[index].label &&
+          item.level === nextItems[index].level,
+        )
+          ? previous
+          : nextItems,
+      );
+    };
+
+    // Read headings after the article has committed, including on client navigation.
+    let frame = requestAnimationFrame(updateItems);
+    const observer = new MutationObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateItems);
+    });
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["id"],
+    });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [containerSelector]);
 
   useEffect(() => {
@@ -88,6 +116,7 @@ export default function BlogTocMenu({
     if (items.length === 0) return null;
     return (
       <nav
+        aria-label="On this page"
         className={cn(
           "fixed left-6 top-24 z-40 hidden xl:block",
           "max-w-xs",
@@ -124,7 +153,6 @@ export default function BlogTocMenu({
     );
   }, [items, activeId, className]);
 
-  if (!isClient) return null;
   if (!menu) return null;
 
   return createPortal(menu, document.body);

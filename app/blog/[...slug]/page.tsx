@@ -35,7 +35,7 @@ export default async function BlogDetailPage({params}: { params: Promise<{ slug:
 
     return (
         <article className="container relative max-w-3xl py-10 lg:py-14 px-4 md:px-6 mx-auto">
-            <BlogTocMenu />
+            <BlogTocMenu key={slugString} />
             {/* Post Header */}
             <div className="mb-8 text-center">
                 {metadata.tags && metadata.tags.length > 0 && (
