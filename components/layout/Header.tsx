@@ -1,6 +1,6 @@
 "use client";
 
-import {profile} from "@/data/site";
+import {profile, weeklyFrontierUrl} from "@/data/site";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Menu} from "lucide-react";
@@ -13,6 +13,7 @@ const links = [
     {href: "/", label: "Home"},
     {href: "/project", label: "Projects"},
     {href: "/blog", label: "Blog"},
+    {href: weeklyFrontierUrl, label: "Weekly Frontier"},
 ];
 
 export default function Header() {

@@ -1,5 +1,6 @@
 export const siteUrl = "https://cyborgoat.github.io";
 export const rssPath = "/rss.xml";
+export const weeklyFrontierUrl = "https://www.cyborgoat.com/weekly-frontier/";
 
 export const profile = {
     name: "Junxiao Guo",
