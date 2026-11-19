@@ -1,5 +1,6 @@
 import {Button} from "@/components/ui/button";
-import {ExternalLink, Link2} from 'lucide-react';
+import {GitHubIcon, LinkedInIcon} from "@/components/social-icons";
+import {Rss} from "lucide-react";
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -15,17 +16,25 @@ export default function Footer() {
                         &copy; {currentYear} Cyborgoat. All rights reserved.
                     </p>
                 </div>
-                <div className="flex items-center gap-1">
-                    <Button variant="ghost" size="icon" asChild>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                    <Button variant="outline" size="sm" className="rounded-full" asChild>
                         <a href="https://github.com/cyborgoat" target="_blank" rel="noopener noreferrer"
-                           aria-label="GitHub">
-                            <ExternalLink className="h-4 w-4"/>
+                           aria-label="GitHub (opens in a new tab)">
+                            <GitHubIcon className="h-4 w-4"/>
+                            GitHub
                         </a>
                     </Button>
-                    <Button variant="ghost" size="icon" asChild>
+                    <Button variant="outline" size="sm" className="rounded-full" asChild>
                         <a href="https://linkedin.com/in/junxiaog" target="_blank" rel="noopener noreferrer"
-                           aria-label="LinkedIn">
-                            <Link2 className="h-4 w-4"/>
+                           aria-label="LinkedIn (opens in a new tab)">
+                            <LinkedInIcon className="h-4 w-4"/>
+                            LinkedIn
+                        </a>
+                    </Button>
+                    <Button variant="outline" size="sm" className="rounded-full" asChild>
+                        <a href="/rss.xml" type="application/rss+xml" title="Subscribe to the blog in your feed reader">
+                            <Rss className="h-4 w-4" aria-hidden="true"/>
+                            Subscribe via RSS
                         </a>
                     </Button>
                 </div>

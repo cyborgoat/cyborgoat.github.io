@@ -51,6 +51,15 @@ export const portfolioData: PortfolioData = {
   projects: [
     // Currently building
     {
+      id: "weekly-frontier",
+      title: "Weekly Frontier",
+      description: "A weekly reading companion covering AI, technology, politics, finance, science, and business. Collects publisher feeds daily into concise, source-linked briefings, with topic browsing and Atom/RSS subscriptions.",
+      githubUrl: "https://github.com/cyborgoat/weekly-frontier",
+      icon: "BookMarked",
+      tags: ["News", "Automation", "RSS", "Markdown"],
+      status: "ongoing"
+    },
+    {
       id: "nest",
       title: "Nest",
       description: "A local-first desktop knowledge workspace: read, edit, and search Markdown knowledge packs via retrieval-augmented chat with OpenAI-compatible LLMs. Tauri v2 + React, NestJS Hub API, FastEmbed + SQLite FTS.",

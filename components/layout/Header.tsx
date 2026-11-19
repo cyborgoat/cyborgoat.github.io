@@ -14,6 +14,7 @@ import {Menu} from 'lucide-react'; // Or your preferred icons
 import {usePathname} from 'next/navigation';
 import {cn} from "@/lib/utils";
 import {ThemeToggleButton} from "@/components/theme-toggle-button";
+import {GitHubIcon} from "@/components/social-icons";
 
 export default function Header() {
     const pathname = usePathname();
@@ -67,8 +68,14 @@ export default function Header() {
                     </NavigationMenu>
                 </div>
 
-                {/* Right-aligned items: Theme toggle + Mobile Menu Trigger */}
+                {/* Right-aligned items: GitHub, theme toggle, and mobile menu */}
                 <div className="flex items-center gap-1 ml-auto">
+                    <Button variant="ghost" size="icon" asChild>
+                        <a href="https://github.com/cyborgoat" target="_blank" rel="noopener noreferrer"
+                           aria-label="GitHub (opens in a new tab)">
+                            <GitHubIcon className="h-4 w-4"/>
+                        </a>
+                    </Button>
                     <ThemeToggleButton/>
                     {/* Mobile Navigation Trigger */}
                     <div className="md:hidden">

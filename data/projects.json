@@ -1,5 +1,11 @@
 [
   {
+    "title": "Weekly Frontier",
+    "excerpt": "A weekly reading companion covering AI, technology, politics, finance, science, and business. Collects publisher feeds daily into concise, source-linked briefings, with topic browsing and Atom/RSS subscriptions.",
+    "thumbnail": "",
+    "link": "https://github.com/cyborgoat/weekly-frontier"
+  },
+  {
     "title": "Team Orbit",
     "excerpt": "A backend-first team hub for managing ~100 members, with events, announcements, markdown news, a discussion forum, file uploads, and live notifications. NestJS modular monolith with Prisma + SQLite, JWT RBAC, Socket.io, and Swagger docs.",
     "thumbnail": "",

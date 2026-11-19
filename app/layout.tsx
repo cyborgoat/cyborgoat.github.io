@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://cyborgoat.github.io'),
     alternates: {
         canonical: '/',
+        types: {
+            'application/rss+xml': '/rss.xml',
+        },
     },
     openGraph: {
         type: 'website',
