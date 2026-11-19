@@ -1,8 +1,8 @@
+import {profile, rssPath, siteUrl} from "@/data/site";
+import {articlePath} from "@/lib/post-display";
 import {getAllPosts} from "@/lib/posts";
 
 export const dynamic = "force-static";
-
-const siteUrl = "https://cyborgoat.github.io";
 
 function escapeXml(value: string) {
     return value.replace(/[<>&"']/g, (character) => ({
@@ -16,7 +16,7 @@ function escapeXml(value: string) {
 
 export function GET() {
     const items = getAllPosts().map(({metadata}) => {
-        const url = `${siteUrl}/blog/${metadata.slug.split("/").map(encodeURIComponent).join("/")}`;
+        const url = `${siteUrl}${articlePath(metadata)}`;
         const date = metadata.date ? new Date(metadata.date) : null;
         const pubDate = date && !Number.isNaN(date.getTime())
             ? `<pubDate>${date.toUTCString()}</pubDate>`
@@ -35,11 +35,11 @@ export function GET() {
     return new Response(`<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Junxiao Guo — Blog</title>
+        <title>${profile.name} — Blog</title>
         <link>${siteUrl}/blog</link>
-        <description>Writing by Junxiao Guo on AI, technology, and software development.</description>
+        <description>Writing by ${profile.name} on AI, technology, and software development.</description>
         <language>en</language>
-        <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="${siteUrl}${rssPath}" rel="self" type="application/rss+xml"/>
         ${items}
     </channel>
 </rss>`, {

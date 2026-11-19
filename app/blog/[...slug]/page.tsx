@@ -1,98 +1,63 @@
+import {profile} from "@/data/site";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Badge} from "@/components/ui/badge";
 import {notFound} from "next/navigation";
 import {getAllPostSlugs, getPostData} from "@/lib/posts";
+import {formatPostDate} from "@/lib/post-display";
 import MarkdownRender from "@/components/markdown/MarkdownRender";
 import MarkdownMedia from "@/components/markdown/MarkdownMedia";
 import Link from "next/link";
-import {Button} from "@/components/ui/button";
 import BlogTocMenu from "@/components/layout/BlogTocMenu";
 
-// Mark the component as async - getPostData can remain async if other async operations happen, but it is not strictly necessary if only getPostData (now sync) is awaited.
-// For simplicity with potential future async ops, we can leave page as async.
+export default async function BlogDetailPage({params}: {params: Promise<{slug: string[]}>}) {
+    const {slug} = await params;
+    const post = getPostData(slug.join("/"));
 
-// The params object itself is a Promise in Next.js 15 for Server Components
-export default async function BlogDetailPage({params}: { params: Promise<{ slug: string[] }> }) {
-    const {slug: slugArray} = await params; // Await params to get its properties
-    const slugString = slugArray.join('/');
+    if (!post) notFound();
 
-    const post = getPostData(slugString);
-
-    if (!post) {
-        notFound();
-    }
-
-    const metadata = post.metadata;
-
-    const displayDate = metadata.date
-        ? new Date(metadata.date).toLocaleDateString("en-US", { // Default to en-US date format
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            timeZone: "UTC",
-        })
-        : "Date not available"; // Reverted to hardcoded string
+    const {metadata, content} = post;
+    const date = formatPostDate(metadata.date);
+    const author = metadata.author ?? profile.name;
 
     return (
-        <article className="container relative max-w-3xl py-10 lg:py-14 px-4 md:px-6 mx-auto">
-            <BlogTocMenu key={slugString} />
-            {/* Post Header */}
-            <div className="mb-8 text-center">
-                {metadata.tags && metadata.tags.length > 0 && (
-                    <div className="mb-4 flex justify-center flex-wrap gap-2">
-                        {metadata.tags.map((tag: string) => (
-                            <Badge key={tag} variant="secondary">
-                                {tag}
-                            </Badge>
-                        ))}
-                    </div>
-                )}
-
-                <h1 className="font-serif text-3xl font-normal leading-tight tracking-[-0.02em] md:text-4xl lg:text-5xl lg:leading-[1.1] mb-4 text-foreground">
-                    {metadata.title ?? "Untitled Post"} {/* Reverted fallback */}
+        <article className="site-shell page-spacing article-shell">
+            <header className="mb-7 border-b border-rule pb-6 md:mb-8">
+                <Link href="/blog" className="text-link">Blog archive</Link>
+                <h1 className="mt-4 max-w-[28ch] text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                    {metadata.title ?? "Untitled article"}
                 </h1>
-
-                <div className="flex items-center justify-center space-x-4 text-sm text-muted-foreground">
-                    <div className="flex items-center space-x-2">
-                        <Avatar className="h-6 w-6">
-                            <AvatarImage
-                                src={metadata.authorImage ?? "/images/authors/cyborgoat-avatar.png"}
-                                alt={metadata.author ?? "Author"} /* Reverted fallback */
-                            />
-                            <AvatarFallback>
-                                {metadata.author?.slice(0, 1).toUpperCase() ?? "A"} {/* Reverted fallback */}
-                            </AvatarFallback>
-                        </Avatar>
-                        <span>{metadata.author ?? "Anonymous"}</span> {/* Reverted fallback */}
-                    </div>
-                    {metadata.date && (
-                        <>
-                            <span>·</span>
-                            <time dateTime={metadata.date}>{displayDate}</time>
-                        </>
-                    )}
+                {(metadata.excerpt ?? metadata.description) && (
+                    <p className="mt-4 max-w-[70ch] leading-relaxed text-muted-foreground">{metadata.excerpt ?? metadata.description}</p>
+                )}
+                <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                    <Avatar className="size-8">
+                        <AvatarImage src={metadata.authorImage ?? profile.portrait} alt=""/>
+                        <AvatarFallback>{author.slice(0, 1).toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    <span>{author}</span>
+                    {date && <time dateTime={metadata.date} className="border-l border-rule pl-3">{date}</time>}
                 </div>
-            </div>
-
-            {/* Post Content */}
-            <div id="post-content" className="prose prose-stone dark:prose-invert max-w-none">
-                {metadata.video && <MarkdownMedia src={metadata.video}
-                                                  alt={metadata.title || "Post video"}/>} {/* Reverted fallback */}
-                <MarkdownRender content={post.content as string}/>
-            </div>
-            <div className="mt-8 flex justify-center">
-                <Button asChild variant="link">
-                    <Link href="/blog">← Back to all blogs</Link>
-                </Button>
+                {metadata.tags && metadata.tags.length > 0 && (
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{metadata.tags.join(" · ")}</p>
+                )}
+            </header>
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_12rem]">
+                <div className="mx-auto w-full min-w-0 max-w-[46rem]">
+                    <div id="post-content" className="break-words">
+                        {metadata.video && <MarkdownMedia src={metadata.video} alt={metadata.title ?? "Post video"}/>}
+                        <MarkdownRender content={content}/>
+                    </div>
+                    <div className="mt-10 border-t border-rule pt-6">
+                        <Link href="/blog" className="text-link">Back to the blog</Link>
+                    </div>
+                </div>
+                <div className="hidden lg:block">
+                    <BlogTocMenu/>
+                </div>
             </div>
         </article>
     );
 }
 
-// generateStaticParams function using the helper
 export function generateStaticParams() {
-    const postSlugs = getAllPostSlugs();
-    return postSlugs.map(item => ({
-        slug: item.slug.split('/'), // This remains to support [...slug]
-    }));
+    return getAllPostSlugs().map((slug) => ({slug: slug.split("/")}));
 }

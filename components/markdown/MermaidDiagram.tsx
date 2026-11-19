@@ -8,21 +8,21 @@ interface MermaidDiagramProps {
     content: string;
 }
 
-// Warm palette matched to the site theme tokens in app/globals.css
+// Palette matched to the site theme tokens in app/globals.css
 const MERMAID_PALETTE = {
     light: {
-        bg: "#FBF8F3",
-        surface: "#F3ECE0",
-        border: "#B4471F",
-        line: "#6F6455",
-        text: "#211C16",
+        bg: "#F8F2E8",
+        surface: "#F0E6D8",
+        border: "#854925",
+        line: "#685245",
+        text: "#2B1C15",
     },
     dark: {
-        bg: "#221E19",
-        surface: "#302A22",
-        border: "#E08A4F",
-        line: "#A99D8B",
-        text: "#ECE4D8",
+        bg: "#181B25",
+        surface: "#242837",
+        border: "#A9B5FF",
+        line: "#A9B0C2",
+        text: "#E8ECF4",
     },
 } as const;
 

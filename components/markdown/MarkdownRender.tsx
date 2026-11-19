@@ -12,10 +12,9 @@ import MermaidDiagram from "@/components/markdown/MermaidDiagram";
 
 interface MarkdownRenderProps {
     content: string;
-    className?: string;
 }
 
-export default function MarkdownRender({content, className}: MarkdownRenderProps) {
+export default function MarkdownRender({content}: MarkdownRenderProps) {
     const getNodeText = (node: React.ReactNode): string => {
         if (typeof node === "string") return node;
         if (typeof node === "number") return String(node);
@@ -132,17 +131,17 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
         },
         h1({children}) {
             const id = slugify(getNodeText(children));
-            return <h1 id={id} className="font-serif text-3xl font-normal text-foreground mb-6">{children}</h1>;
+            return <h1 id={id} className="font-sans text-3xl font-semibold text-foreground mb-6">{children}</h1>;
         },
         h2({children}) {
             const id = slugify(getNodeText(children));
             return <h2
                 id={id}
-                className="font-serif text-2xl font-normal text-foreground mb-4 pb-2 border-b border-border">{children}</h2>;
+                className="font-sans text-2xl font-semibold text-foreground mb-4 pb-2 border-b border-border">{children}</h2>;
         },
         h3({children}) {
             const id = slugify(getNodeText(children));
-            return <h3 id={id} className="font-serif text-xl font-normal text-foreground mb-3">{children}</h3>;
+            return <h3 id={id} className="font-sans text-xl font-semibold text-foreground mb-3">{children}</h3>;
         },
         h4({children}) {
             const id = slugify(getNodeText(children));
@@ -166,14 +165,12 @@ export default function MarkdownRender({content, className}: MarkdownRenderProps
     };
 
     return (
-        <div className={`prose prose-stone prose-lg dark:prose-invert max-w-none ${className || ''}`}>
-            <ReactMarkdown
-                remarkPlugins={[remarkGfm, remarkMath]}
-                rehypePlugins={[rehypeKatex, rehypeRaw]}
-                components={components}
-            >
-                {content}
-            </ReactMarkdown>
-        </div>
+        <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex, rehypeRaw]}
+            components={components}
+        >
+            {content}
+        </ReactMarkdown>
     );
 }

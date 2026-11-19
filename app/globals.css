@@ -5,39 +5,22 @@
 
 @theme inline {
     --color-background: var(--background);
+    --color-rule: var(--border);
     --color-foreground: var(--foreground);
     --color-brand: var(--brand);
     --color-brand-foreground: var(--brand-foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
-    --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
     --color-ring: var(--ring);
     --color-input: var(--input);
     --color-border: var(--border);
-    --color-destructive: var(--destructive);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent: var(--accent);
     --color-muted-foreground: var(--muted-foreground);
     --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
     --color-secondary: var(--secondary);
     --color-primary-foreground: var(--primary-foreground);
     --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
     --color-card-foreground: var(--card-foreground);
     --color-card: var(--card);
     --radius-sm: calc(var(--radius) - 4px);
@@ -47,86 +30,55 @@
 }
 
 :root {
+    color-scheme: light;
     --radius: 0.3rem;
-    /* Warm ivory light theme — inspired by sequoiacap.com */
-    --background: #FBF8F3;
-    --foreground: #211C16;
-    --particle-color: oklch(0.25 0.006 50); /* Darker grey for light mode particles */
-    --card: #FFFFFF;
-    --card-foreground: #211C16;
-    --popover: #FFFFFF;
-    --popover-foreground: #211C16;
-    --primary: #26201A;
-    --primary-foreground: #FBF8F3;
-    --secondary: #EFE7D9;
-    --secondary-foreground: #26201A;
-    --muted: #F3ECE0;
-    --muted-foreground: #6F6455;
-    --accent: #EFE7D9;
-    --accent-foreground: #26201A;
-    --brand: #B4471F;
-    --brand-foreground: #FBF8F3;
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: #E6DDCE;
-    --input: #E6DDCE;
-    --ring: #C6753F;
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: #FBF8F3;
-    --sidebar-foreground: #211C16;
-    --sidebar-primary: #26201A;
-    --sidebar-primary-foreground: #FBF8F3;
-    --sidebar-accent: #EFE7D9;
-    --sidebar-accent-foreground: #26201A;
-    --sidebar-border: #E6DDCE;
-    --sidebar-ring: #C6753F;
+    --background: #F8F2E8;
+    --foreground: #2B1C15;
+    --card: #FFFAF2;
+    --card-foreground: #2B1C15;
+    --primary: #3A271D;
+    --primary-foreground: #F8F2E8;
+    --secondary: #EDE0CF;
+    --muted: #F0E6D8;
+    --muted-foreground: #685245;
+    --accent: #EDE0CF;
+    --accent-foreground: #3A271D;
+    --brand: #854925;
+    --brand-foreground: #F8F2E8;
+    --border: #DDCEBB;
+    --input: #A58B76;
+    --ring: #94613E;
 }
 
 .dark {
-    /* Warm espresso dark theme */
-    --background: #1A1714;
-    --foreground: #ECE4D8;
-    --particle-color: oklch(0.9 0.001 100); /* Lighter grey for dark mode particles */
-    --card: #221E19;
-    --card-foreground: #ECE4D8;
-    --popover: #221E19;
-    --popover-foreground: #ECE4D8;
-    --primary: #ECE4D8;
-    --primary-foreground: #1A1714;
-    --secondary: #302A22;
-    --secondary-foreground: #ECE4D8;
-    --muted: #2C2720;
-    --muted-foreground: #A99D8B;
-    --accent: #302A22;
-    --accent-foreground: #ECE4D8;
-    --brand: #E08A4F;
-    --brand-foreground: #1A1714;
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: #38322A;
-    --input: #38322A;
-    --ring: #D2703A;
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: #221E19;
-    --sidebar-foreground: #ECE4D8;
-    --sidebar-primary: #ECE4D8;
-    --sidebar-primary-foreground: #1A1714;
-    --sidebar-accent: #302A22;
-    --sidebar-accent-foreground: #ECE4D8;
-    --sidebar-border: #38322A;
-    --sidebar-ring: #D2703A;
+    color-scheme: dark;
+    --background: #11131A;
+    --foreground: #E8ECF4;
+    --card: #181B25;
+    --card-foreground: #E8ECF4;
+    --primary: #E8ECF4;
+    --primary-foreground: #11131A;
+    --secondary: #242837;
+    --muted: #1D202C;
+    --muted-foreground: #A9B0C2;
+    --accent: #242837;
+    --accent-foreground: #E8ECF4;
+    --brand: #A9B5FF;
+    --brand-foreground: #11131A;
+    --border: #2C3141;
+    --input: #2C3141;
+    --ring: #A9B5FF;
 }
 
 @layer base {
     * {
         border: var(--border);
         outline: var(--ring);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 4px;
     }
 
     html {
@@ -140,250 +92,105 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: no-preference) {
     html {
-        scroll-behavior: auto;
+        scroll-behavior: smooth;
     }
 }
 
-/* Apply a base font and color to the container if needed */
-.markdown-container {
-    font-family: var(--font-geist-sans), sans-serif;
-    color: var(--foreground);
-    line-height: 1.6;
-}
-
-/* Headings (Subtitles) */
-.markdown-container h1 {
-    font-size: 2.2em; /* Example size */
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-    font-weight: bold;
-    border-bottom: 1px solid var(--border); /* Optional separator */
-    padding-bottom: 0.3em;
-}
-
-.markdown-container h2 {
-    font-size: 1.8em; /* Example size */
-    margin-top: 1.5em; /* More space before H2 */
-    margin-bottom: 0.5em;
-    font-weight: bold;
-    border-bottom: 1px solid var(--border); /* Optional separator */
-    padding-bottom: 0.3em;
-}
-
-.markdown-container h3 {
-    font-size: 1.5em; /* Example size */
-    margin-top: 1.2em;
-    margin-bottom: 0.4em;
-    font-weight: bold;
-}
-
-.markdown-container h4 {
-    font-size: 1.2em; /* Example size */
-    margin-top: 1em;
-    margin-bottom: 0.3em;
-    font-weight: bold;
-}
-
-.markdown-container h5 {
-    font-size: 1em; /* Example size */
-    margin-top: 1em;
-    margin-bottom: 0.3em;
-    font-weight: bold;
-}
-
-.markdown-container h6 {
-    font-size: 0.9em; /* Example size */
-    margin-top: 1em;
-    margin-bottom: 0.3em;
-    font-weight: bold;
-    color: var(--muted-foreground);
-}
-
-/* Paragraphs */
-.markdown-container p {
-    margin-bottom: 1em;
-}
-
-/* Lists - Standard CSS, ensuring visibility with Tailwind Preflight */
-.markdown-container ul,
-.markdown-container ol {
-    margin-bottom: 1em;
-    padding-left: 2em; /* Crucial for visibility of markers */
-}
-
-.markdown-container ul {
-    list-style-type: disc;
-}
-
-.markdown-container ol {
-    list-style-type: decimal;
-}
-
-.markdown-container li {
-    margin-bottom: 0.5em; /* Spacing for list items */
-}
-
-/* Nested Lists */
-.markdown-container ul ul,
-.markdown-container ol ul {
-    list-style-type: disc;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    padding-left: 2em; /* Ensure nested lists also have padding */
-}
-
-.markdown-container ul ol,
-.markdown-container ol ol {
-    list-style-type: decimal;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    padding-left: 2em; /* Ensure nested lists also have padding */
-}
-
-.markdown-container li > p {
-    /* If paragraphs are inside list items, adjust their margin */
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-}
-
-/* Tables */
-.markdown-container table {
-    width: 100%;
-    border-collapse: collapse; /* Ensures borders are neat */
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border: 1px solid var(--border, #ddd); /* Use theme border or fallback */
-    font-size: 0.95em;
-}
-
-.markdown-container th,
-.markdown-container td {
-    border: 1px solid var(--border, #ddd);
-    padding: 0.6em 0.8em; /* Padding inside cells */
-    text-align: left;
-}
-
-.markdown-container th {
-    background-color: var(--secondary, #f7f7f7); /* Light background for headers, use theme or fallback */
-    font-weight: 600; /* Bolder text for headers */
-    color: var(--secondary-foreground, #333);
-}
-
-.markdown-container tr:nth-child(even) {
-    /* Optional: zebra striping for table rows for readability */
-    /* background-color: var(--muted, #f9f9f9); */
-}
-
-.markdown-container caption {
-    caption-side: bottom;
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    color: var(--muted-foreground, #777);
-    text-align: center;
-}
-
-/* Blockquotes */
-.markdown-container blockquote {
-    margin: 1.5em 0;
-    padding: 0.5em 1.5em;
-    color: var(--muted-foreground);
-    border-left: 0.25em solid var(--brand);
-    background-color: var(--muted); /* Light background for emphasis */
-}
-
-.markdown-container blockquote p {
-    margin-bottom: 0.5em; /* Adjust paragraph spacing within blockquotes */
-}
-
-/* Horizontal Rules */
-.markdown-container hr {
-    height: 1px;
-    padding: 0;
-    margin: 2em 0; /* More spacing around HRs */
-    background-color: var(--border);
-    border: 0;
-}
-
-/* Links (already partially handled by your component, but for general styling) */
-.markdown-container a {
-    color: var(--brand);
-    text-decoration: none;
-}
-
-.markdown-container a:hover {
-    text-decoration: underline;
-}
-
-/* Inline Code (already handled by your component, but for styling the default) */
-.markdown-container code {
-    font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
-    monospace;
-    background-color: var(--muted);
-    padding: 0.2em 0.4em;
-    margin: 0;
-    font-size: 85%;
-    border-radius: 3px;
-}
-
-/* Preformatted text / Code blocks (your MarkdownCodeBlock will handle its internal styling) */
-/* This is if you wanted to style the <pre> tag that react-markdown might wrap around your custom component */
-.markdown-container pre {
-    margin-bottom: 1em;
-}
-
-@keyframes shine {
-    0% {
-        transform: translateX(-100%) rotate(45deg);
+@layer components {
+    .site-shell,
+    .wide-shell,
+    .project-shell {
+        width: min(100% - 2rem, 52rem);
+        margin-inline: auto;
     }
-    100% {
-        transform: translateX(100%) rotate(45deg);
+
+    .wide-shell {
+        width: min(100% - clamp(2rem, 6vw, 6rem), 80rem);
+    }
+
+    .project-shell {
+        width: min(100% - 2rem, 62rem);
+    }
+
+    @media (width >= 48rem) {
+        .home-hero {
+            min-height: min(60svh, 34rem);
+        }
+    }
+
+    .article-shell {
+        width: min(100% - 2rem, 66rem);
+    }
+
+    .page-spacing {
+        padding-block: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .page-title {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        letter-spacing: -.045em;
+        line-height: 1.15;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: -.025em;
+    }
+
+    .section-heading {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: .5rem 1rem;
+        margin-bottom: .75rem;
+    }
+
+    .meta-text {
+        font-family: var(--font-geist-mono), monospace;
+        font-size: .8125rem;
+        color: var(--muted-foreground);
+    }
+
+    .text-link {
+        width: fit-content;
+        color: var(--brand);
+        font-size: .875rem;
+        font-weight: 500;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: .25em;
+    }
+
+    .text-link:hover {
+        text-decoration-color: currentColor;
     }
 }
 
-@layer utilities {
-    .animate-shine {
-        animation: shine 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+@media (prefers-reduced-motion: no-preference) {
+    .hero-portrait {
+        animation: portrait-in 420ms ease-out both;
+    }
+
+    @supports (animation-timeline: view()) {
+        .home-reveal {
+            animation: section-in linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 80%;
+        }
     }
 }
-/* Mermaid Diagram Styles */
-.mermaid {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
+
+@keyframes portrait-in {
+    from { opacity: .6; translate: 0 8px; }
+    to { opacity: 1; translate: 0 0; }
 }
 
-.mermaid svg {
-    max-width: 85%;
-    width: auto;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* GSAP ScrollSmoother Styles
-   ScrollSmoother sets wrapper to position:fixed; top:0; height:100% via inline styles,
-   so content must clear the fixed header with padding — not by offsetting the wrapper. */
-#smooth-wrapper {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-}
-
-#smooth-content {
-    width: 100%;
-    position: relative;
-    will-change: transform;
-    /* Match header h-14 so pages don't render under the navbar */
-    padding-top: 3.5rem;
-}
-
-/* Prevent layout shift during smooth scrolling */
-html.gsap-scrollbar-hidden {
-    overflow-y: scroll;
+@keyframes section-in {
+    from { opacity: .65; translate: 0 14px; }
+    to { opacity: 1; translate: 0 0; }
 }

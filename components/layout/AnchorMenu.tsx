@@ -1,135 +1,72 @@
 "use client";
 
-import React, { useEffect, useState, useSyncExternalStore } from "react";
-import { createPortal } from "react-dom";
-import { cn } from "@/lib/utils";
+import {useEffect, useState} from "react";
 
 interface AnchorSection {
-  id: string;
-  label: string;
+    id: string;
+    label: string;
 }
 
-interface AnchorMenuProps {
-  sections?: AnchorSection[];
-  position?: "fixed" | "sticky";
-  className?: string;
-}
+export default function AnchorMenu({sections}: {sections: AnchorSection[]}) {
+    const [activeSection, setActiveSection] = useState(sections[0]?.id);
 
-export default function AnchorMenu({
-  sections = [],
-  position = "sticky",
-  className,
-}: AnchorMenuProps) {
-  const [activeSection, setActiveSection] = useState<string>("");
-  const isClient = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
+    useEffect(() => {
+        const targets = sections
+            .map(({id}) => document.getElementById(id))
+            .filter((target): target is HTMLElement => target !== null);
+        if (targets.length === 0) return;
 
-  useEffect(() => {
-    if (sections.length === 0) return;
+        let frame: number | undefined;
+        const update = () => {
+            frame = undefined;
+            const scrollRoot = document.documentElement;
+            const activationLine = Math.min(160, window.innerHeight / 3);
+            let current = targets[0];
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-50% 0px -50% 0px",
-      threshold: 0,
-    };
+            for (const target of targets) {
+                if (target.getBoundingClientRect().top > activationLine) break;
+                current = target;
+            }
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
+            if (scrollRoot.scrollHeight > window.innerHeight && scrollRoot.scrollHeight - window.scrollY <= window.innerHeight + 2) {
+                const linkedSection = targets.find((target) =>
+                    `#${target.id}` === window.location.hash &&
+                    target.getBoundingClientRect().bottom > activationLine,
+                );
+                current = linkedSection ?? targets[targets.length - 1];
+            }
+            setActiveSection(current.id);
+        };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions,
+        const scheduleUpdate = () => {
+            if (frame === undefined) frame = requestAnimationFrame(update);
+        };
+
+        scheduleUpdate();
+        window.addEventListener("scroll", scheduleUpdate, {passive: true});
+        window.addEventListener("resize", scheduleUpdate);
+        window.addEventListener("hashchange", scheduleUpdate);
+        return () => {
+            if (frame !== undefined) cancelAnimationFrame(frame);
+            window.removeEventListener("scroll", scheduleUpdate);
+            window.removeEventListener("resize", scheduleUpdate);
+            window.removeEventListener("hashchange", scheduleUpdate);
+        };
+    }, [sections]);
+
+    return (
+        <nav aria-label="On this page" className="xl:sticky xl:top-24">
+            <p className="meta-text mb-2 hidden xl:block">On this page</p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-1 pb-2 xl:flex-col xl:gap-1 xl:pb-0">
+                {sections.map(({id, label}) => (
+                    <li key={id}>
+                        <a href={`#${id}`} aria-current={activeSection === id ? "location" : undefined}
+                           className="block rounded-sm py-1.5 text-sm text-muted-foreground hover:text-brand aria-[current=location]:font-semibold aria-[current=location]:text-brand xl:border-l xl:border-rule xl:pl-3 xl:aria-[current=location]:border-brand">
+                            {label}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
     );
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
-    };
-  }, [sections]);
-
-  const handleClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const smoother = (
-        window as unknown as {
-          __smoother?: {
-            scrollTo: (
-              target: string | Element,
-              smooth?: boolean,
-              position?: string,
-            ) => void;
-          };
-        }
-      ).__smoother;
-      if (smoother) {
-        smoother.scrollTo(element, true, "center center");
-        return;
-      }
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  if (sections.length === 0) {
-    return null;
-  }
-
-  const menu = (
-    <nav
-      className={cn(
-        position === "fixed"
-          ? "fixed left-4 top-20 z-40"
-          : "sticky top-24 z-30",
-        "max-w-xs",
-        className,
-      )}
-    >
-      <div
-        className="flex flex-col gap-2"
-        onWheel={(event) => event.stopPropagation()}
-      >
-        <div className="space-y-1">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => handleClick(section.id)}
-              className={cn(
-                "block text-sm px-3 py-1.5 rounded-md transition-all duration-200",
-                "text-muted-foreground hover:text-foreground hover:bg-accent",
-                activeSection === section.id &&
-                  "text-foreground font-semibold bg-accent",
-              )}
-            >
-              {section.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    </nav>
-  );
-
-  if (position === "fixed") {
-    if (!isClient) return null;
-    return createPortal(menu, document.body);
-  }
-
-  return menu;
 }

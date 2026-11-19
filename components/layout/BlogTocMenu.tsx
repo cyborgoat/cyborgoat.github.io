@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface TocItem {
@@ -10,20 +9,12 @@ interface TocItem {
   level: number;
 }
 
-interface BlogTocMenuProps {
-  containerSelector?: string;
-  className?: string;
-}
-
-export default function BlogTocMenu({
-  containerSelector = "#post-content",
-  className,
-}: BlogTocMenuProps) {
+export default function BlogTocMenu() {
   const [activeId, setActiveId] = useState<string>("");
   const [items, setItems] = useState<TocItem[]>([]);
 
   useEffect(() => {
-    const container = document.querySelector(containerSelector);
+    const container = document.getElementById("post-content");
     if (!container) return;
 
     const updateItems = () => {
@@ -67,7 +58,7 @@ export default function BlogTocMenu({
       cancelAnimationFrame(frame);
       observer.disconnect();
     };
-  }, [containerSelector]);
+  }, []);
 
   useEffect(() => {
     if (items.length === 0) return;
@@ -91,69 +82,26 @@ export default function BlogTocMenu({
     return () => observer.disconnect();
   }, [items]);
 
-  const handleClick = (id: string) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    const smoother = (
-      window as unknown as {
-        __smoother?: {
-          scrollTo: (
-            target: string | Element,
-            smooth?: boolean,
-            position?: string,
-          ) => void;
-        };
-      }
-    ).__smoother;
-    if (smoother) {
-      smoother.scrollTo(element, true, "top top");
-      return;
-    }
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  if (items.length === 0) return null;
 
-  const menu = useMemo(() => {
-    if (items.length === 0) return null;
-    return (
-      <nav
-        aria-label="On this page"
-        className={cn(
-          "fixed left-6 top-24 z-40 hidden xl:block",
-          "max-w-xs",
-          className,
-        )}
-      >
-        <div
-          className="flex flex-col gap-2 rounded-lg border border-border/60 bg-background/80 p-3 backdrop-blur"
-          onWheel={(event) => event.stopPropagation()}
-        >
-          <div className="text-xs font-semibold text-muted-foreground">
-            On this page
-          </div>
-          <div className="space-y-1 max-h-[60vh] overflow-y-auto pr-1">
-            {items.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleClick(item.id)}
-                className={cn(
-                  "block w-full text-left text-sm px-2 py-1.5 rounded-md transition-all",
-                  "text-muted-foreground hover:text-foreground hover:bg-accent",
-                  activeId === item.id &&
-                    "text-foreground font-semibold bg-accent",
-                  item.level === 3 && "pl-4",
-                  item.level === 4 && "pl-6",
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
-    );
-  }, [items, activeId, className]);
-
-  if (!menu) return null;
-
-  return createPortal(menu, document.body);
+  return (
+    <nav aria-label="On this page" className="sticky top-20 max-h-[calc(100dvh-9rem)] overflow-y-auto border-l border-rule pl-4 pr-2">
+      <p className="meta-text mb-3">On this page</p>
+      <ul className="space-y-2">
+        {items.map((item) => (
+          <li key={item.id}>
+            <a href={`#${encodeURIComponent(item.id)}`}
+               aria-current={activeId === item.id ? "location" : undefined}
+               className={cn(
+                 "block break-words text-sm text-muted-foreground hover:text-brand aria-[current=location]:font-semibold aria-[current=location]:text-brand",
+                 item.level === 3 && "pl-3",
+                 item.level === 4 && "pl-5",
+               )}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }

@@ -1,110 +1,57 @@
-// /components/layout/header.tsx
 "use client";
 
-import Link from 'next/link';
+import {profile} from "@/data/site";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
+import {Menu} from "lucide-react";
 import {Button} from "@/components/ui/button";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import {Menu} from 'lucide-react'; // Or your preferred icons
-import {usePathname} from 'next/navigation';
-import {cn} from "@/lib/utils";
+import {Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import {ThemeToggleButton} from "@/components/theme-toggle-button";
 import {GitHubIcon} from "@/components/social-icons";
 
-export default function Header() {
-    const pathname = usePathname();
+const links = [
+    {href: "/", label: "Home"},
+    {href: "/project", label: "Projects"},
+    {href: "/blog", label: "Blog"},
+];
 
-    const navLinks = [
-        {href: "/", label: "Home"},
-        {href: "/project", label: "Projects"},
-        {href: "/blog", label: "Blogs"},
-        // { href: "/contact", label: "Contact" }, // Example
-    ];
+export default function Header() {
+    const path = usePathname();
+    const current = (href: string) => path === href || (href !== "/" && path.startsWith(href + "/"));
 
     return (
-        <header
-            className="fixed top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-            <div className="container flex h-14 items-center px-4 md:px-6 mx-auto">
-                {/* Logo/Site Name */}
-                <Link
-                    href="/"
-                    className="mr-6 flex items-center"
-                    prefetch={false}
-                >
-          <span className="font-serif text-lg tracking-[-0.01em] text-foreground">Junxiao&nbsp;Guo</span>
+        <header className="sticky top-0 z-50 border-b border-rule bg-background/95 backdrop-blur-sm">
+            <a className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-10 focus:bg-background focus:p-3" href="#main-content">Skip to content</a>
+            <div className="wide-shell flex h-14 items-center justify-between gap-2 md:grid md:grid-cols-[1fr_auto_1fr]">
+                <Link href="/" className="w-fit shrink-0 text-sm font-semibold tracking-tight sm:text-base">
+                    {profile.name}
                 </Link>
-
-                {/* Centered Desktop Navigation Wrapper */}
-                <div className="hidden md:flex flex-1 justify-center">
-                    <NavigationMenu>
-                        <NavigationMenuList>
-                            {navLinks.map((link) => (
-                                <NavigationMenuItem key={link.href}>
-                                    <NavigationMenuLink
-                                        asChild
-                                        className={cn(
-                                            "group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                                            "bg-transparent",
-                                            pathname !== link.href &&
-                                            "hover:text-foreground focus:bg-transparent focus:text-foreground focus:outline-none",
-                                            pathname === link.href
-                                                ? "text-foreground font-semibold underline decoration-brand underline-offset-[6px]"
-                                                : "text-muted-foreground",
-                                            "disabled:pointer-events-none disabled:opacity-50"
-                                        )}
-                                    >
-                                        <Link href={link.href} prefetch={false}>
-                                            {link.label}
-                                        </Link>
-                                    </NavigationMenuLink>
-                                </NavigationMenuItem>
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
-
-                {/* Right-aligned items: GitHub, theme toggle, and mobile menu */}
-                <div className="flex items-center gap-1 ml-auto">
+                <nav aria-label="Main navigation" className="hidden items-center gap-8 md:flex">
+                    {links.map(({href, label}) => (
+                        <Link key={href} href={href} aria-current={current(href) ? "page" : undefined}
+                              className={current(href) ? "text-sm font-semibold text-brand" : "text-sm font-medium text-muted-foreground hover:text-foreground"}>{label}</Link>
+                    ))}
+                </nav>
+                <div className="flex items-center gap-0.5 justify-self-end">
                     <Button variant="ghost" size="icon" asChild>
-                        <a href="https://github.com/cyborgoat" target="_blank" rel="noopener noreferrer"
-                           aria-label="GitHub (opens in a new tab)">
-                            <GitHubIcon className="h-4 w-4"/>
+                        <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
+                            <GitHubIcon className="size-[1.15rem]"/>
                         </a>
                     </Button>
                     <ThemeToggleButton/>
-                    {/* Mobile Navigation Trigger */}
                     <div className="md:hidden">
                         <Sheet>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon">
-                                    <Menu className="h-5 w-5"/>
-                                    <span className="sr-only">Toggle Menu</span>
-                                </Button>
+                                <Button variant="ghost" size="icon" aria-label="Open menu"><Menu className="size-5"/></Button>
                             </SheetTrigger>
-                            <SheetContent side="right">
-                                {/* You can add a SheetHeader/Title if needed */}
-                                <nav className="grid gap-6 text-lg font-medium mt-6">
-                                    <Link
-                                        href="/"
-                                        className="font-serif text-lg tracking-[-0.01em]"
-                                        prefetch={false}
-                                    >
-                                        Junxiao Guo
-                                    </Link>
-                                    {navLinks.map((link) => (
-                                        <Link
-                                            key={link.href}
-                                            href={link.href}
-                                            className="text-muted-foreground hover:text-foreground"
-                                            prefetch={false}
-                                        >
-                                            {link.label}
-                                        </Link>
+                            <SheetContent aria-describedby={undefined} className="p-6 motion-reduce:animate-none motion-reduce:transition-none">
+                                <SheetTitle className="meta-text">Menu</SheetTitle>
+                                <nav aria-label="Main navigation" className="grid">
+                                    {links.map(({href, label}) => (
+                                        <SheetClose key={href} asChild>
+                                            <Link href={href} aria-current={current(href) ? "page" : undefined}
+                                                  className="border-b border-rule py-4 text-lg font-medium aria-[current=page]:text-brand">{label}</Link>
+                                        </SheetClose>
                                     ))}
                                 </nav>
                             </SheetContent>

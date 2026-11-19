@@ -1,117 +1,65 @@
-// lib/posts.ts
-import matter from 'gray-matter';
-import path from 'path';
-import fs from 'fs';
-import { Post, PostMetadata } from '@/types/post';
+import fs from "node:fs";
+import path from "node:path";
+import matter from "gray-matter";
+import type {Post, PostMetadata} from "@/types/post";
 
-// Define the directory where your posts are stored
-const postsDirectory = path.join(process.cwd(), 'data', 'posts');
+const postsDirectory = path.join(process.cwd(), "data", "posts");
 
-// Recursively collect all markdown file paths under postsDirectory
-function getPostFiles(): string[] {
-  const files: string[] = [];
-  function walk(relativeDir = '') {
-    const currentDir = path.join(postsDirectory, relativeDir);
-    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
-    for (const entry of entries) {
-      const relativePath = path.join(relativeDir, entry.name);
-      const fullPath = path.join(postsDirectory, relativePath);
-      if (entry.isDirectory()) {
-        walk(relativePath);
-      } else if (entry.isFile() && entry.name.endsWith('.md')) { // Only .md files
-        files.push(fullPath);
-      }
-    }
-  }
-  walk();
-  return files;
+function findSlugs(directory = postsDirectory, prefix = ""): string[] {
+    return fs.readdirSync(directory, {withFileTypes: true}).flatMap((entry) => {
+        const name = prefix + entry.name;
+        if (entry.isDirectory()) {
+            return findSlugs(path.join(directory, entry.name), name + "/");
+        }
+        return entry.isFile() && entry.name.endsWith(".md") ? [name.slice(0, -3)] : [];
+    });
 }
 
-// Helper function to find the full path of a post by slug (slug is relative path from postsDirectory, without .md)
-function findPostPathBySlug(targetSlug: string): string | null {
-  const potentialPath = path.join(postsDirectory, `${targetSlug}.md`);
-  if (fs.existsSync(potentialPath)) {
-    return potentialPath;
-  }
-  // Fallback for cases where the direct construction might miss due to casing or other subtle issues.
-  // This part is less likely to be hit if targetSlug is correctly formed.
-  const allFiles = getPostFiles();
-  for (const filePath of allFiles) {
-    const slugFromFile = path.relative(postsDirectory, filePath).replace(/\.md$/, '');
-    if (slugFromFile === targetSlug) {
-      return filePath;
+function readPost(slug: string): Post {
+    const {data, content} = matter(fs.readFileSync(path.join(postsDirectory, `${slug}.md`), "utf8"));
+    return {
+        metadata: {
+            ...data,
+            slug,
+            tags: Array.isArray(data.tags) ? data.tags : [],
+        } as PostMetadata,
+        content,
+    };
+}
+
+export function getAllPostSlugs(): string[] {
+    try {
+        return findSlugs();
+    } catch (error) {
+        console.error("Error reading post slugs:", error);
+        return [];
     }
-  }
-  return null;
 }
 
 export function getAllPosts(): Post[] {
-  try {
-    const filePaths = getPostFiles();
-    const posts = filePaths.map((filePath) => {
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const { data, content } = matter(fileContents);
-      
-      const actualSlug = path.relative(postsDirectory, filePath).replace(/\.md$/, '');
-
-      const tags = Array.isArray(data.tags) ? data.tags : [];
-      return {
-        metadata: {
-          ...data,
-          slug: actualSlug, // Use actual slug for metadata
-          tags,
-        } as PostMetadata,
-        content,
-      } as Post;
-    });
-
-    return posts.sort((a, b) => {
-      const dateA = new Date(a.metadata.date || '2000-01-01');
-      const dateB = new Date(b.metadata.date || '2000-01-01');
-      return dateB.getTime() - dateA.getTime();
-    });
-  } catch (error) {
-    console.error('Error reading posts:', error);
-    return [];
-  }
-}
-
-export function getAllPostSlugs(): { slug: string }[] {
-  try {
-    const filePaths = getPostFiles();
-    return filePaths.map((filePath) => {
-      const slug = path.relative(postsDirectory, filePath).replace(/\.md$/, '');
-      return { slug };
-    });
-  } catch (error) {
-    console.error('Error reading post slugs:', error);
-    return [];
-  }
+    try {
+        return findSlugs().map(readPost).sort((a, b) => {
+            const dateA = new Date(a.metadata.date || "2000-01-01");
+            const dateB = new Date(b.metadata.date || "2000-01-01");
+            return dateB.getTime() - dateA.getTime();
+        });
+    } catch (error) {
+        console.error("Error reading posts:", error);
+        return [];
+    }
 }
 
 export function getPostData(slug: string): Post | null {
-  const postPath = findPostPathBySlug(slug);
+    if (slug.includes("\\") || slug.split("/").some((segment) => !segment || segment === "." || segment === "..")) {
+        return null;
+    }
 
-  if (!postPath) {
-    console.error(`Post file not found for slug "${slug}"`);
-    return null;
-  }
-
-  try {
-    const fileContents = fs.readFileSync(postPath, 'utf8');
-    const matterResult = matter(fileContents);
-    
-    return {
-      metadata: {
-        ...matterResult.data,
-        slug, 
-        tags: Array.isArray(matterResult.data.tags) ? matterResult.data.tags as string[] : [],
-      } as PostMetadata,
-      content: matterResult.content,
-    } as Post;
-
-  } catch (error) {
-    console.error(`Error reading post data for slug "${slug}":`, error);
-    return null;
-  }
+    try {
+        return readPost(slug);
+    } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+            console.error(`Error reading post "${slug}":`, error);
+        }
+        return null;
+    }
 }

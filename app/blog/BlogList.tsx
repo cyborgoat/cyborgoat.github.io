@@ -1,250 +1,77 @@
 "use client";
-import React, {useMemo, useState} from "react";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Badge} from "@/components/ui/badge";
-import Link from "next/link";
-import Image from "next/image";
-import {Post} from "@/types/post";
-import {Button} from "@/components/ui/button";
-import {motion} from "framer-motion";
-import {Check, ChevronsUpDown} from "lucide-react";
-import {cn} from "@/lib/utils";
-import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover";
-import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,} from "@/components/ui/command";
 
-export default function BlogList({posts}: { posts: Post[] }) {
+import {useState} from "react";
+import Link from "next/link";
+import {Search} from "lucide-react";
+import {Button} from "@/components/ui/button";
+import {articlePath, formatPostDate} from "@/lib/post-display";
+import type {PostMetadata} from "@/types/post";
+
+const postsPerPage = 6;
+
+export default function BlogList({posts}: {posts: PostMetadata[]}) {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [selectedTag, setSelectedTag] = useState("");
-    const [openCombobox, setOpenCombobox] = useState(false);
-    const postsPerPage = 5;
-
-    const tagsList = useMemo(() => {
-        const setTags = new Set<string>();
-        posts.forEach(p => p.metadata.tags?.forEach(tag => setTags.add(tag)));
-        return Array.from(setTags).sort();
-    }, [posts]);
-
-    const filteredPosts = useMemo(() => {
-        let filtered = posts;
-        if (selectedTag) {
-            filtered = filtered.filter(post => post.metadata.tags?.includes(selectedTag));
-        }
-        const q = search.trim().toLowerCase();
-        if (!q) return filtered;
-        return filtered.filter((post) => {
-            const {title = "", excerpt = "", tags = []} = post.metadata || {};
-            return (
-                title.toLowerCase().includes(q) ||
-                excerpt.toLowerCase().includes(q) ||
-                (tags &&
-                    tags.some((tag: string) => tag.toLowerCase().includes(q)))
-            );
-        });
-    }, [search, selectedTag, posts]);
-
-    const pageCount = Math.ceil(filteredPosts.length / postsPerPage);
-    const safePage = pageCount === 0 ? 1 : Math.min(page, pageCount);
-    const paginatedPosts = useMemo(
-        () =>
-            filteredPosts.slice((safePage - 1) * postsPerPage, safePage * postsPerPage),
-        [filteredPosts, safePage]
-    );
+    const tags = [...new Set(posts.flatMap((post) => post.tags ?? []))].sort();
+    const query = search.trim().toLowerCase();
+    const filtered = posts.filter((post) => {
+        if (selectedTag && !post.tags?.includes(selectedTag)) return false;
+        return !query || [post.title, post.excerpt, post.description, ...(post.tags ?? [])]
+            .some((value) => value?.toLowerCase().includes(query));
+    });
+    const pageCount = Math.ceil(filtered.length / postsPerPage);
+    const visible = filtered.slice((page - 1) * postsPerPage, page * postsPerPage);
 
     return (
-        <section className="container max-w-3xl py-16 md:py-24 mx-auto px-4">
-            <header className="mb-10">
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-brand">
-                    Writing
-                </p>
-                <h1 className="mt-4 font-serif text-4xl font-normal tracking-[-0.02em] text-foreground sm:text-5xl">
-                    Notes &amp; essays
-                </h1>
-            </header>
-            <div className="mb-6 flex flex-col items-center space-y-4">
-                <input
-                    type="text"
-                    placeholder="Search blogs..."
-                    value={search}
-                    onChange={(e) => {
-                        setSearch(e.target.value);
-                        setPage(1);
-                    }}
-                    className="w-full max-w-sm px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60 transition bg-background text-foreground placeholder:text-muted-foreground"
-                />
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                    <Button
-                        size="sm"
-                        variant={selectedTag === "" ? "default" : "outline"}
-                        onClick={() => {
-                            setSelectedTag("");
-                            setPage(1);
-                        }}
-                        className="transition-all"
-                    >
-                        All Tags
-                    </Button>
-                    <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant="outline"
-                                role="combobox"
-                                aria-expanded={openCombobox}
-                                className="w-[200px] justify-between transition-all"
-                                size="sm"
-                            >
-                                {selectedTag
-                                    ? tagsList.find((tag) => tag.toLowerCase() === selectedTag.toLowerCase())
-                                    : "Select a tag..."}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-[200px] p-0">
-                            <Command>
-                                <CommandInput placeholder="Search tag..."/>
-                                <CommandList>
-                                    <CommandEmpty>No tag found.</CommandEmpty>
-                                    <CommandGroup>
-                                        {tagsList.map((tag) => (
-                                            <CommandItem
-                                                key={tag}
-                                                value={tag}
-                                                onSelect={(currentValue: string) => {
-                                                    setSelectedTag(currentValue.toLowerCase() === selectedTag.toLowerCase() ? "" : currentValue);
-                                                    setOpenCombobox(false);
-                                                    setPage(1);
-                                                }}
-                                            >
-                                                <Check
-                                                    className={cn(
-                                                        "mr-2 h-4 w-4",
-                                                        selectedTag.toLowerCase() === tag.toLowerCase() ? "opacity-100" : "opacity-0"
-                                                    )}
-                                                />
-                                                {tag}
-                                            </CommandItem>
-                                        ))}
-                                    </CommandGroup>
-                                </CommandList>
-                            </Command>
-                        </PopoverContent>
-                    </Popover>
-                </div>
+        <section aria-labelledby="blog-archive" className="min-w-0">
+            <h2 id="blog-archive" className="sr-only">Archive</h2>
+            <div className="grid gap-3 sm:grid-cols-[minmax(0,22rem)_minmax(0,14rem)]">
+                <label className="relative block">
+                    <span className="sr-only">Search articles</span>
+                    <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-3.5 size-4 text-muted-foreground"/>
+                    <input type="search" placeholder="Search articles" value={search}
+                           className="h-11 w-full rounded-md border border-rule bg-background pl-9 pr-3 text-foreground placeholder:text-muted-foreground"
+                           onChange={(event) => { setSearch(event.target.value); setPage(1); }}/>
+                </label>
+                <label>
+                    <span className="sr-only">Filter by topic</span>
+                    <select value={selectedTag} className="h-11 w-full rounded-md border border-rule bg-background px-3 text-foreground"
+                            onChange={(event) => { setSelectedTag(event.target.value); setPage(1); }}>
+                        <option value="">All topics</option>
+                        {tags.map((tag) => <option key={tag}>{tag}</option>)}
+                    </select>
+                </label>
             </div>
-            <ul className="space-y-8">
-                {paginatedPosts.map((post) => (
-                    <motion.li
-                        key={post.metadata.slug}
-                        className="group rounded-[--radius] border border-border p-6 transition-colors duration-200 hover:border-foreground/30 hover:bg-accent/40"
-                        initial={{opacity: 0, y: 16}}
-                        animate={{opacity: 1, y: 0}}
-                        transition={{duration: 0.4}}
-                    >
-                        <Link href={`/blog/${post.metadata.slug}`} className="block focus:outline-none">
-                            {post.metadata.thumbnail && (
-                                <div className="mb-4 overflow-hidden rounded-[--radius]">
-                                    <Image
-                                        src={post.metadata.thumbnail!}
-                                        alt={
-                                            post.metadata.title
-                                                ? `${post.metadata.title} thumbnail`
-                                                : "Blog post thumbnail"
-                                        }
-                                        width={1080}
-                                        height={480}
-                                        className="w-full h-48 object-cover rounded-[--radius]"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            )}
-                            <div className="flex flex-col items-left mb-2">
-                                <h2 className="font-serif text-xl font-normal text-foreground group-hover:underline underline-offset-4">
-                                    {post.metadata.title}
-                                </h2>
-                                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                                    <Avatar className="h-6 w-6">
-                                        <AvatarImage
-                                            src={post.metadata.authorImage}
-                                            alt={post.metadata.author ?? "Author"}
-                                        />
-                                        <AvatarFallback>
-                                            {post.metadata.author
-                                                ?.slice(0, 1)
-                                                .toUpperCase() ?? "A"}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                    <span>
-                                        {post.metadata.author ?? "Anonymous"}
-                                    </span>
-                                    <span>·</span>
-                                    <time dateTime={post.metadata.date}>
-                                        {post.metadata.date
-                                            ? new Date(
-                                                post.metadata.date
-                                            ).toLocaleDateString("en-US", {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                            })
-                                            : "No date"}
-                                    </time>
-                                </div>
-                            </div>
-                            <p className="mb-3 text-muted-foreground">
-                                {post.metadata.excerpt}
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                                {post.metadata.tags?.map((tag: string) => (
-                                    <Badge key={tag} variant="secondary">
-                                        {tag}
-                                    </Badge>
-                                ))}
+            <p className="my-4 text-sm text-muted-foreground" role="status">
+                {filtered.length === 0 ? "No articles match your filters." : `${filtered.length} ${filtered.length === 1 ? "article" : "articles"}`}
+            </p>
+            <ul className="border-t border-rule">
+                {visible.map((post) => (
+                    <li key={post.slug} className="border-b border-rule">
+                        <Link href={articlePath(post)} className="group grid gap-2 rounded-sm py-4 sm:grid-cols-[8rem_1fr] sm:gap-4">
+                            <time className="meta-text sm:pt-1" dateTime={post.date}>{formatPostDate(post.date)}</time>
+                            <div>
+                                <h3 className="font-semibold leading-snug group-hover:text-brand">{post.title ?? post.slug}</h3>
+                                <p className="mt-1 max-w-2xl leading-relaxed text-muted-foreground">{post.excerpt ?? post.description}</p>
+                                {post.tags && post.tags.length > 0 && (
+                                    <p className="mt-2 break-words font-mono text-xs text-muted-foreground">{post.tags.join(" · ")}</p>
+                                )}
                             </div>
                         </Link>
-                    </motion.li>
+                    </li>
                 ))}
             </ul>
-            {/* Pagination */}
             {pageCount > 1 && (
-                <div className="flex justify-center mt-8 gap-2">
-                    <button
-                        className="px-3 py-1 rounded-md border bg-background hover:bg-muted text-sm disabled:opacity-50"
-                        onClick={() => setPage(page - 1)}
-                        disabled={safePage === 1}
-                    >
-                        Previous
-                    </button>
-                    {Array.from({length: pageCount}, (_, i) => (
-                        <button
-                            key={i}
-                            className={`px-3 py-1 rounded-md border text-sm ${
-                                safePage === i + 1
-                                    ? "bg-primary text-primary-foreground"
-                                    : "bg-background hover:bg-muted"
-                            }`}
-                            onClick={() => setPage(i + 1)}
-                        >
-                            {i + 1}
-                        </button>
+                <nav aria-label="Archive pagination" className="mt-6 flex flex-wrap items-center gap-2">
+                    <Button variant="outline" onClick={() => setPage(page - 1)} disabled={page === 1}>Previous</Button>
+                    {Array.from({length: pageCount}, (_, index) => (
+                        <Button key={index} variant={page === index + 1 ? "default" : "outline"}
+                                aria-label={`Page ${index + 1}`} aria-current={page === index + 1 ? "page" : undefined}
+                                onClick={() => setPage(index + 1)}>{index + 1}</Button>
                     ))}
-                    <button
-                        className="px-3 py-1 rounded-md border bg-background hover:bg-muted text-sm disabled:opacity-50"
-                        onClick={() => setPage(Math.min(pageCount, safePage + 1))}
-                        disabled={safePage === pageCount}
-                    >
-                        Next
-                    </button>
-                </div>
-            )}
-            {filteredPosts.length === 0 && !search && (
-                <div className="text-center text-muted-foreground mt-12">
-                    No blogs found.
-                </div>
-            )}
-            {filteredPosts.length === 0 && search && (
-                <div className="text-center text-muted-foreground mt-12">
-                    No blogs match your search.
-                </div>
+                    <Button variant="outline" onClick={() => setPage(page + 1)} disabled={page === pageCount}>Next</Button>
+                </nav>
             )}
         </section>
     );
