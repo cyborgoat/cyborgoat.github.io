@@ -116,7 +116,7 @@
 
     @media (width >= 48rem) {
         .home-hero {
-            min-height: min(60svh, 34rem);
+            min-height: min(58svh, 32rem);
         }
     }
 

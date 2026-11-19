@@ -61,7 +61,7 @@ export default function AnchorMenu({sections}: {sections: AnchorSection[]}) {
                 {sections.map(({id, label}) => (
                     <li key={id}>
                         <a href={`#${id}`} aria-current={activeSection === id ? "location" : undefined}
-                           className="block rounded-sm py-1.5 text-sm text-muted-foreground hover:text-brand aria-[current=location]:font-semibold aria-[current=location]:text-brand xl:border-l xl:border-rule xl:pl-3 xl:aria-[current=location]:border-brand">
+                           className="flex min-h-11 items-center rounded-sm text-sm xl:min-h-9 text-muted-foreground hover:text-brand aria-[current=location]:font-semibold aria-[current=location]:text-brand xl:border-l xl:border-rule xl:pl-3 xl:aria-[current=location]:border-brand">
                             {label}
                         </a>
                     </li>

@@ -19,7 +19,7 @@ export default function HomePage() {
     ];
 
     return (
-        <div className="wide-shell grid gap-y-5 pb-16 pt-6 sm:pt-9 xl:grid-cols-[9rem_minmax(0,1fr)] xl:gap-x-12">
+        <div className="wide-shell grid gap-y-5 pb-16 pt-4 sm:pt-7 xl:grid-cols-[9rem_minmax(0,1fr)] xl:gap-x-12">
             <div className="min-w-0 xl:col-start-2 xl:row-start-1"><Hero/></div>
             <aside className="min-w-0 xl:col-start-1 xl:row-span-2 xl:row-start-1 xl:pt-6">
                 <AnchorMenu sections={sections}/>
@@ -33,7 +33,7 @@ export default function HomePage() {
                     <ProjectGrid projects={selectedProjects} appearance="plain"/>
                 </section>
                 {posts.length > 0 && (
-                    <section id="writing" className="home-reveal pt-14 sm:pt-20">
+                    <section id="writing" className="home-reveal pt-12 sm:pt-16 lg:pt-20">
                         <div className="section-heading">
                             <h2 className="section-title">Recent writing</h2>
                             <Link className="text-link" href="/blog">All writing</Link>
@@ -41,7 +41,7 @@ export default function HomePage() {
                         <ul className="space-y-2">
                             {posts.map(({metadata}) => (
                                 <li key={metadata.slug}>
-                                    <Link href={articlePath(metadata)} className="group grid gap-1.5 rounded-sm py-2 sm:grid-cols-[8rem_1fr] sm:gap-4">
+                                    <Link href={articlePath(metadata)} className="group grid gap-1.5 rounded-sm py-2.5 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-4">
                                         <time className="meta-text sm:pt-0.5" dateTime={metadata.date}>{formatPostDate(metadata.date)}</time>
                                         <span className="font-medium group-hover:text-brand">{metadata.title ?? metadata.slug}</span>
                                     </Link>
@@ -50,7 +50,7 @@ export default function HomePage() {
                         </ul>
                     </section>
                 )}
-                <section id="about" className="home-reveal pt-14 sm:pt-20" aria-labelledby="about-title">
+                <section id="about" className="home-reveal pt-12 sm:pt-16 lg:pt-20" aria-labelledby="about-title">
                     <h2 id="about-title" className="section-title">About</h2>
                     <p className="mt-3 max-w-[70ch] leading-relaxed text-muted-foreground">
                         I’m an AI developer and software engineer, and I lead a team working on language models and AI agents. My work includes building agent frameworks and optimizing models. I’m especially interested in the engineering that makes AI useful in everyday tools, from how an agent runs a workflow to how a local app retrieves the right information.

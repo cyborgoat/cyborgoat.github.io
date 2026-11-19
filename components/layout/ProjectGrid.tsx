@@ -1,4 +1,7 @@
 import Image from "next/image";
+import {Globe} from "lucide-react";
+import {Badge} from "@/components/ui/badge";
+import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card";
 import {GitHubIcon} from "@/components/social-icons";
 import type {CatalogProject} from "@/data/projects";
 
@@ -9,34 +12,58 @@ interface ProjectGridProps {
 
 export default function ProjectGrid({projects, appearance = "cards"}: ProjectGridProps) {
     const cards = appearance === "cards";
+    const Surface = cards ? Card : "div";
+    const Header = cards ? CardHeader : "div";
+    const Content = cards ? CardContent : "div";
+    const Footer = cards ? CardFooter : "div";
+
     return (
-        <ul className={`grid sm:grid-cols-2 lg:grid-cols-3 ${cards ? "gap-3" : "gap-x-8 gap-y-6 lg:gap-x-12"}`}>
+        <ul className={`grid sm:grid-cols-2 lg:grid-cols-3 ${cards ? "gap-4 lg:gap-5" : "gap-x-8 gap-y-7 lg:gap-x-12"}`}>
             {projects.map(({title, excerpt, link, tags, logo}) => (
                 <li key={link} className="min-w-0">
                     <a href={link} target="_blank" rel="noopener noreferrer"
-                       className={`group flex h-full flex-col motion-safe:duration-200 ${cards
-                           ? "rounded-xl border border-rule bg-card p-4 hover:border-brand/55 hover:bg-accent/45 motion-safe:transition-[background-color,border-color,translate] motion-safe:hover:-translate-y-0.5"
-                           : "py-1"}`}>
-                        <div className="flex items-center justify-between gap-3">
-                            <div className="flex min-w-0 items-center gap-2.5">
-                                {logo && <ProjectLogo logo={logo}/>}
-                                <h3 className={`font-semibold leading-snug group-hover:text-brand ${cards ? "" : "text-lg group-hover:underline group-hover:underline-offset-4"}`}>{title}</h3>
-                            </div>
-                            <GitHubIcon className="mt-0.5 size-[1.1rem] shrink-0 text-muted-foreground group-hover:text-brand"/>
-                            <span className="sr-only">GitHub repository (opens in a new tab)</span>
-                        </div>
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{excerpt}</p>
-                        {tags.length > 0 && (
-                            <ul aria-label="Project topics" className={`mt-auto flex flex-wrap pt-3 ${cards ? "gap-1.5" : "gap-x-3 gap-y-1"}`}>
-                                {tags.map((tag) => (
-                                    <li key={tag} className={`font-mono text-xs text-muted-foreground ${cards ? "rounded-sm bg-muted px-1.5 py-0.5" : ""}`}>{tag}</li>
-                                ))}
-                            </ul>
-                        )}
+                       className={`group block h-full ${cards ? "rounded-xl" : "rounded-sm"}`}>
+                        <Surface className={cards
+                            ? "h-full group-hover:border-brand/50 group-hover:bg-accent/25 motion-safe:transition-colors"
+                            : "flex h-full flex-col gap-2.5 py-1"}>
+                            <Header className="flex min-h-10 items-center justify-between gap-3">
+                                <div className="flex min-w-0 items-center gap-2.5">
+                                    {logo && <ProjectLogo logo={logo}/>}
+                                    <h3 className={`min-w-0 wrap-break-word font-semibold leading-snug group-hover:text-brand ${cards ? "" : "text-lg group-hover:underline group-hover:underline-offset-4"}`}>{title}</h3>
+                                </div>
+                                <ProjectDestination link={link}/>
+                            </Header>
+                            <Content>
+                                <p className="text-sm leading-relaxed text-muted-foreground">{excerpt}</p>
+                            </Content>
+                            {tags.length > 0 && (
+                                <Footer className="mt-auto pt-1">
+                                    <ul aria-label="Project topics" className={`flex flex-wrap ${cards ? "gap-1.5" : "gap-x-3 gap-y-1"}`}>
+                                        {tags.map((tag) => (
+                                            <li key={tag} className="font-mono text-xs text-muted-foreground">
+                                                {cards ? <Badge>{tag}</Badge> : tag}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Footer>
+                            )}
+                        </Surface>
                     </a>
                 </li>
             ))}
         </ul>
+    );
+}
+
+function ProjectDestination({link}: {link: string}) {
+    const isRepository = new URL(link).hostname === "github.com";
+    const Icon = isRepository ? GitHubIcon : Globe;
+
+    return (
+        <>
+            <Icon aria-hidden="true" className="size-[1.1rem] shrink-0 text-muted-foreground group-hover:text-brand"/>
+            <span className="sr-only">{isRepository ? "GitHub repository" : "Project website"} (opens in a new tab)</span>
+        </>
     );
 }
 

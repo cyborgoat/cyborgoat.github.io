@@ -20,9 +20,9 @@ export default async function BlogDetailPage({params}: {params: Promise<{slug: s
 
     return (
         <article className="site-shell page-spacing article-shell">
-            <header className="mb-7 border-b border-rule pb-6 md:mb-8">
+            <header className="mb-6 border-b border-rule pb-6 md:mb-9">
                 <Link href="/blog" className="text-link">Blog archive</Link>
-                <h1 className="mt-4 max-w-[28ch] text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                <h1 className="mt-4 max-w-[30ch] text-3xl font-semibold leading-tight tracking-tight text-pretty sm:text-4xl">
                     {metadata.title ?? "Untitled article"}
                 </h1>
                 {(metadata.excerpt ?? metadata.description) && (
@@ -40,8 +40,11 @@ export default async function BlogDetailPage({params}: {params: Promise<{slug: s
                     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{metadata.tags.join(" · ")}</p>
                 )}
             </header>
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_12rem]">
-                <div className="mx-auto w-full min-w-0 max-w-[46rem]">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-10">
+                <aside className="empty:hidden lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1 lg:self-start">
+                    <BlogTocMenu key={metadata.slug}/>
+                </aside>
+                <div className="mx-auto w-full min-w-0 max-w-[46rem] lg:col-start-1 lg:row-start-1">
                     <div id="post-content" className="break-words">
                         {metadata.video && <MarkdownMedia src={metadata.video} alt={metadata.title ?? "Post video"}/>}
                         <MarkdownRender content={content}/>
@@ -49,9 +52,6 @@ export default async function BlogDetailPage({params}: {params: Promise<{slug: s
                     <div className="mt-10 border-t border-rule pt-6">
                         <Link href="/blog" className="text-link">Back to the blog</Link>
                     </div>
-                </div>
-                <div className="hidden lg:block">
-                    <BlogTocMenu/>
                 </div>
             </div>
         </article>

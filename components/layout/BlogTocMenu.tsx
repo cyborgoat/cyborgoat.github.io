@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {ChevronDown} from "lucide-react";
+import {Button} from "@/components/ui/button";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 
 interface TocItem {
@@ -84,9 +87,7 @@ export default function BlogTocMenu() {
 
   if (items.length === 0) return null;
 
-  return (
-    <nav aria-label="On this page" className="sticky top-20 max-h-[calc(100dvh-9rem)] overflow-y-auto border-l border-rule pl-4 pr-2">
-      <p className="meta-text mb-3">On this page</p>
+  const links = (
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.id}>
@@ -102,6 +103,27 @@ export default function BlogTocMenu() {
           </li>
         ))}
       </ul>
-    </nav>
+  );
+
+  return (
+    <>
+      <nav aria-label="On this page" className="hidden max-h-[calc(100dvh-8rem)] overflow-y-auto border-l border-rule pl-4 pr-2 lg:block">
+        <p className="meta-text mb-3">On this page</p>
+        {links}
+      </nav>
+      <Collapsible className="border-y border-rule lg:hidden">
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" className="group w-full justify-between px-2">
+            On this page
+            <ChevronDown aria-hidden="true" className="size-4 motion-safe:transition-transform group-data-[state=open]:rotate-180"/>
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <nav aria-label="On this page" className="px-2 pt-1 pb-4">
+            {links}
+          </nav>
+        </CollapsibleContent>
+      </Collapsible>
+    </>
   );
 }

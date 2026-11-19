@@ -22,14 +22,14 @@ export default function Header() {
     return (
         <header className="sticky top-0 z-50 border-b border-rule bg-background/95 backdrop-blur-sm">
             <a className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-10 focus:bg-background focus:p-3" href="#main-content">Skip to content</a>
-            <div className="wide-shell flex h-14 items-center justify-between gap-2 md:grid md:grid-cols-[1fr_auto_1fr]">
+            <div className="wide-shell flex h-16 items-center justify-between gap-2 md:grid md:grid-cols-[1fr_auto_1fr]">
                 <Link href="/" className="w-fit shrink-0 text-sm font-semibold tracking-tight sm:text-base">
                     {profile.name}
                 </Link>
-                <nav aria-label="Main navigation" className="hidden items-center gap-8 md:flex">
+                <nav aria-label="Main navigation" className="hidden items-center gap-2 md:flex">
                     {links.map(({href, label}) => (
                         <Link key={href} href={href} aria-current={current(href) ? "page" : undefined}
-                              className={current(href) ? "text-sm font-semibold text-brand" : "text-sm font-medium text-muted-foreground hover:text-foreground"}>{label}</Link>
+                              className="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground aria-[current=page]:font-semibold aria-[current=page]:text-brand">{label}</Link>
                     ))}
                 </nav>
                 <div className="flex items-center gap-0.5 justify-self-end">
@@ -50,7 +50,7 @@ export default function Header() {
                                     {links.map(({href, label}) => (
                                         <SheetClose key={href} asChild>
                                             <Link href={href} aria-current={current(href) ? "page" : undefined}
-                                                  className="border-b border-rule py-4 text-lg font-medium aria-[current=page]:text-brand">{label}</Link>
+                                                  className="flex min-h-11 items-center rounded-md px-3 py-2 text-base font-medium hover:bg-accent aria-[current=page]:bg-accent aria-[current=page]:text-brand">{label}</Link>
                                         </SheetClose>
                                     ))}
                                 </nav>
