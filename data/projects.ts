@@ -15,7 +15,7 @@ export const projects: CatalogProject[] = [
     {
         title: "Weekly Frontier",
         excerpt: "A weekly reading companion covering AI, technology, politics, finance, science, and business. Collects publisher feeds daily into concise, source-linked briefings, with topic browsing and Atom/RSS subscriptions.",
-        link: "https://github.com/cyborgoat/weekly-frontier",
+        link: "https://www.cyborgoat.com/weekly-frontier/",
         tags: ["News", "Automation", "RSS", "Markdown"],
         featuredExcerpt: "Source-linked weekly briefings on AI, technology, and more, with RSS and Atom feeds.",
         logo: {
